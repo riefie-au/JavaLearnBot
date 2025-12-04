@@ -10,10 +10,16 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+
+        //ChatPageUI
+        FXMLLoader chatPage = new FXMLLoader(HelloApplication.class.getResource("chatPage.fxml"));
+        Scene scene = new Scene(chatPage.load(), 320, 240);
+        stage.setTitle("Chat Page");
         stage.setScene(scene);
+
+        //Document Page
+        FXMLLoader documentPage = new FXMLLoader(HelloApplication.class.getResource("documentPage.fxml"));
+
         stage.show();
         //testtest
 
