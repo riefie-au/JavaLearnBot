@@ -23,7 +23,7 @@ public class HelloApplication extends Application {
         stage.show();
         //testtest
 
-    } HELOOOO  BANANA MINION, 
+    }
 
     public static void main(String[] args) {
         launch();
