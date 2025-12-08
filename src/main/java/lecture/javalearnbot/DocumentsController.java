@@ -14,7 +14,14 @@ public class DocumentsController extends BaseController
 
     @FXML public void initialize()
     {
-        
+        docSearchField.setOnKeyPressed(e -> applyDocFilter());
+        categoryComboBox.setOnAction(e -> applyDocFilter());
+        statusComboBox.setOnAction(e -> applyDocFilter());
+    }
+
+    private void applyDocFilter()
+    {
+        System.out.println("Filter applied.");
     }
 
 }
