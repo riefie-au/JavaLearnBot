@@ -7,18 +7,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class JavaLearnBot extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
         //ChatPageUI
-        FXMLLoader chatPage = new FXMLLoader(HelloApplication.class.getResource("chatPage.fxml"));
+        FXMLLoader chatPage = new FXMLLoader(JavaLearnBot.class.getResource("chatPage.fxml"));
         Scene scene = new Scene(chatPage.load(), 320, 240);
         stage.setTitle("Chat Page");
         stage.setScene(scene);
 
         //Document Page
-        FXMLLoader documentPage = new FXMLLoader(HelloApplication.class.getResource("documentPage.fxml"));
+        FXMLLoader documentPage = new FXMLLoader(JavaLearnBot.class.getResource("documentPage.fxml"));
 
         stage.show();
         //testtest
