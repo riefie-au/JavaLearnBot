@@ -8,7 +8,7 @@ public class Document {
     private final String path;
     private final long timestamp;
 
-    public Document(String DocumentID,String title, String category, String source, String path, long timestamp) {
+    public Document(String title, String category, String source, String path, long timestamp) {
         this.documentID = generateDocumentId(title,timestamp);
         this.title = title;
         this.category = category;

@@ -69,13 +69,27 @@ public class ChunkStorage {
 
 
     //helper class to keep data about chunks that have been scored
-    private static class ScoredChunk {
+    public static class ScoredChunk {
         DocumentChunk chunk;
         double score;
         ScoredChunk(DocumentChunk chunk, double score) {
             this.chunk = chunk;
             this.score = score;
         }
+    }
+
+    public int getChunkCountForDocument(Document doc) {
+        int count = 0;
+        for (DocumentChunk c : documentChunks) {
+            if (c.getParent().equals(doc)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public void add(DocumentChunk chunk) {
+        documentChunks.add(chunk);
     }
 
 }
