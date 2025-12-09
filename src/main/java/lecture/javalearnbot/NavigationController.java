@@ -4,30 +4,31 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class NavigationController
+public class NavigationController // Handles navigation between different FXML pages in JavaLearnBot. All controllers use this class to switch scenes.
 {
     private Stage stage;
-    public NavigationController(Stage stage)
+    public NavigationController(Stage stage) // Constructor that receives the primary stage used throughout the whole application.
     {
         this.stage = stage;
     }
     public void goTo(String fxmlName, String title) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlName));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlName)); // load FXML layout
             Scene scene = new Scene(loader.load());
-            stage.setTitle(title);
+            stage.setTitle(title); // Set stage title and show new scene
             stage.setScene(scene);
 
-            Object controller = loader.getController();
-            if (controller instanceof BaseController) {
+            Object controller = loader.getController(); //To retrieve controller associated with FXML
+            if (controller instanceof BaseController) { // If page controller inherits from BaseController, will link this NavigationController to enable page switching.
                 ((BaseController) controller).setNavigationController(this);
 
             }
-        } catch (Exception e) {
+        } catch (Exception e) { // Prints error if an FXML file fails to load
             e.printStackTrace();
         }
     }
 
+    //Predefined navigation shortcuts for each pages
     public void toLogin() { goTo("loginPage.fxml", "Login"); }
     public void toRegister() { goTo("registerPage.fxml", "Register"); }
     public void toHome() { goTo("homePage.fxml", "Home"); }
