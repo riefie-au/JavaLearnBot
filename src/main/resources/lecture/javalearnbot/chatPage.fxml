@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="TOP_CENTER" centerShape="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="488.0" prefWidth="608.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lecture.javalearnbot.JavaLearnBotController">
-  <padding>
-    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-  </padding>
+<VBox alignment="TOP_CENTER" centerShape="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="488.0" prefWidth="608.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lecture.javalearnbot.JavaLearnBotController">
    <children>
-      <MenuBar centerShape="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="12.0" prefWidth="568.0" scaleShape="false">
+      <MenuBar centerShape="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="28.0" prefWidth="568.0" scaleShape="false">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu fx:id="adminPage" mnemonicParsing="false" text="Admin Settings">
             <items>
               <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
+            <Menu fx:id="evaluationDashboardPage" mnemonicParsing="false" text="Evaluation Dashboard">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Close" />
+               </items>
+            </Menu>
+            <Menu fx:id="documentPage" mnemonicParsing="false" text="Documents">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Close" />
+               </items>
+            </Menu>
+            <Menu fx:id="chatPage" mnemonicParsing="false" text="Chat">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Close" />
+               </items>
+            </Menu>
+            <Menu fx:id="homePage" mnemonicParsing="false" text="Home">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Close" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
    </children>
