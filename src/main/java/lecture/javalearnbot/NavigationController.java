@@ -1,12 +1,27 @@
 package lecture.javalearnbot;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.awt.event.ActionEvent;
 
 public class NavigationController // Handles navigation between different FXML pages in JavaLearnBot. All controllers use this class to switch scenes.
 {
     private Stage stage;
+
+    //Constructor
+    public NavigationController() {
+    }
+    //Helper to find Stage if it's missing
+    private void setStageFromEvent(ActionEvent event) {
+        if (this.stage == null && event != null) {
+            Node source = (Node) event.getSource();
+            this.stage = (Stage) source.getScene().getWindow();
+        }
+    }
+
     public NavigationController(Stage stage) // Constructor that receives the primary stage used throughout the whole application.
     {
         this.stage = stage;
