@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="802.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lecture.javalearnbot.NavigationController">
+   <top>
+      <AnchorPane prefHeight="53.0" prefWidth="802.0" BorderPane.alignment="CENTER">
+         <children>
+                <TextField layoutX="9.0" layoutY="7.0" nodeOrientation="LEFT_TO_RIGHT" promptText="Search" />
+            <HBox layoutX="291.0" layoutY="-1.0" prefHeight="38.0" prefWidth="511.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="108.0" text="Admin Settings" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="154.0" text="Evaluation Dashboard" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="96.0" text="Documents" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="77.0" text="Chat" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="74.0" text="Home" />
+               </children>
+            </HBox>
+            <Separator layoutX="-3.0" layoutY="38.0" prefHeight="6.0" prefWidth="802.0" />
+         </children>
+      </AnchorPane>
+   </top>
+
+</BorderPane>
