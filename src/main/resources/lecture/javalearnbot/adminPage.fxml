@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="802.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <fx:include source="navigationBar.fxml" />
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" BorderPane.alignment="CENTER">
+            <content>
+                <AnchorPane prefHeight="1100.0" prefWidth="714.0">
+                    <children>
+
+                        <Label layoutX="35.0" layoutY="25.0" text="Admin Settings">
+                            <font>
+                                <Font size="32.0" />
+                            </font>
+                        </Label>
+
+                        <Label layoutX="35.0" layoutY="85.0" text="Add a file into knowledge base">
+                            <font>
+                                <Font size="22.0" />
+                            </font>
+                        </Label>
+
+                        <Label layoutX="35.0" layoutY="130.0" text="Select a file to add into knowledge base:">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+
+                        <Button layoutX="35.0" layoutY="155.0" mnemonicParsing="false" text="📄 Choose File" />
+                        <Label layoutX="140.0" layoutY="160.0" text="File selected:" textFill="#666666" />
+
+                        <Label layoutX="35.0" layoutY="200.0" text="Document preview:" />
+                        <AnchorPane layoutX="35.0" layoutY="225.0" prefHeight="150.0" prefWidth="716.0" style="-fx-border-color: #999999; -fx-background-color: #f4f4f4;" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="40.0" />
+
+                        <Label layoutX="35.0" layoutY="390.0" text="Enter title of document:">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <TextField layoutX="35.0" layoutY="415.0" prefWidth="350.0" promptText="Enter document title" />
+
+                        <Label layoutX="35.0" layoutY="455.0" text="Select category of file:">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <ComboBox layoutX="35.0" layoutY="480.0" prefWidth="200.0" promptText="Select category" />
+
+                        <Label layoutX="35.0" layoutY="530.0" text="Process and Ingest">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <Button layoutX="35.0" layoutY="555.0" mnemonicParsing="false" text="⏩ Process and Ingest selected file" />
+
+                        <Label layoutX="35.0" layoutY="600.0" text="Completion Status:">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+
+                        <Separator layoutX="35.0" layoutY="640.0" prefWidth="716.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="40.0" />
+
+                        <Label layoutX="35.0" layoutY="660.0" text="Manage Content">
+                            <font>
+                                <Font size="22.0" />
+                            </font>
+                        </Label>
+
+                        <Label layoutX="35.0" layoutY="710.0" text="Search documents" />
+                        <TextField layoutX="170.0" layoutY="707.0" prefWidth="250.0" promptText="document name" />
+
+                        <Label layoutX="35.0" layoutY="750.0" text="Filter by category:" />
+                        <ComboBox layoutX="170.0" layoutY="747.0" prefWidth="250.0" promptText="Select category" />
+
+                        <Label layoutX="35.0" layoutY="790.0" text="Filter by status:" />
+                        <ComboBox layoutX="170.0" layoutY="787.0" prefWidth="250.0" promptText="Select status" />
+
+                        <TableView layoutX="35.0" layoutY="830.0" prefHeight="180.0" prefWidth="716.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="40.0">
+                            <columns>
+                                <TableColumn prefWidth="250.0" text="Document Name" />
+                                <TableColumn prefWidth="120.0" text="Category" />
+                                <TableColumn prefWidth="120.0" text="Date Added" />
+                                <TableColumn prefWidth="80.0" text="Chunks" />
+                                <TableColumn prefWidth="120.0" text="Status" />
+                            </columns>
+                            <columnResizePolicy>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                            </columnResizePolicy>
+                        </TableView>
+
+                        <Button layoutX="35.0" layoutY="1030.0" mnemonicParsing="false" text="📝 Edit Metadata" />
+                        <Button layoutX="160.0" layoutY="1030.0" mnemonicParsing="false" text="🗑 Delete Document" />
+
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>
