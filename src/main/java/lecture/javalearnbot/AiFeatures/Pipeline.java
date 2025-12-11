@@ -34,7 +34,7 @@ public class Pipeline {
 
 
     public Pipeline() {
-        String OPENAI_API_KEY = "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";
+        String OPENAI_API_KEY = "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";
 
         chat = OpenAiChatModel.builder()
                 .apiKey(OPENAI_API_KEY) // .apiKey(System.getenv("OPENAI_API_KEY"))

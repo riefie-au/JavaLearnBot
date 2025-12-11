@@ -21,7 +21,7 @@ public class JavaLearnBot extends Application {
         FXMLLoader documentPage = new FXMLLoader(JavaLearnBot.class.getResource("documentPage.fxml"));
 
         stage.show();
-        
+
 
     }
 

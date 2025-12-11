@@ -7,7 +7,8 @@ module lecture.javalearnbot {
     requires org.apache.logging.log4j; // must add log4j references
     requires org.slf4j; // must add slf4j
     requires java.net.http; // needed if HttpTimeoutException occurs
-    requires com.fasterxml.jackson.core; // needed if assistant is null
+    requires com.fasterxml.jackson.core;
+    requires java.desktop; // needed if assistant is null
 
     opens lecture.javalearnbot to javafx.fxml;
     exports lecture.javalearnbot;
