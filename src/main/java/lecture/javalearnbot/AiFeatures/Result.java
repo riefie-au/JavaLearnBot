@@ -27,7 +27,7 @@ public class Result {
         return hits;
     }
 
-    public List<String> getRewrites() {
+    public  List<String> getRewrites() {
         return rewrites;
     }
 }

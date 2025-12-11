@@ -14,7 +14,7 @@ public class Hit {
     }
 
     public String getHitSource() {return hitSource;}
-    public String path() { return path; }
-    public String snippet() { return snippet; }
-    public double score() { return score; }
+    public String getPath() { return path; }
+    public String getSnippet() { return snippet; }
+    public double getScore() { return score; }
 }

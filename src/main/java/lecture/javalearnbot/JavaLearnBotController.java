@@ -7,7 +7,8 @@ import javafx.scene.control.Menu;
 public class JavaLearnBotController {
     @FXML
     private Label documentPage;
-    private Menu documentPage;
+
+    private Menu documentPageMenu;
     @FXML
     private Label chatPage;
     @FXML

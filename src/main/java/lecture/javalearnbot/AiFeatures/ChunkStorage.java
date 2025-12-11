@@ -19,6 +19,7 @@ public class ChunkStorage {
             this.parent = parent;
             this.text = text;
             this.vector = vector;
+
         }
 
         public String getChunkId() {return chunkId;}
@@ -31,7 +32,9 @@ public class ChunkStorage {
     }
 
     private final List<DocumentChunk> documentChunks = new ArrayList<DocumentChunk>(); //holds every chunk processed in the system so far
-
+    public List<DocumentChunk> getDocumentChunks() {
+        return documentChunks;
+    }
 
     public List<ScoredChunk> findRelevantChunks (float[] questionVector, int topK) {
         List<ScoredChunk> scoredList = new ArrayList<>();
