@@ -13,7 +13,7 @@ public class JavaLearnBot extends Application {
 
         //ChatPageUI
         FXMLLoader chatPage = new FXMLLoader(JavaLearnBot.class.getResource("chatPage.fxml"));
-        Scene scene = new Scene(chatPage.load(), 320, 240);
+        Scene scene = new Scene(chatPage.load(), 800, 900);
         stage.setTitle("Chat Page");
         stage.setScene(scene);
 

@@ -2,13 +2,12 @@ package lecture.javalearnbot.AiFeatures;
 
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.model.openai.OpenAiEmbeddingModel;
+import lecture.javalearnbot.ChatController;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
+
 
 
 //Main Pipeline class where main methods are stored. pom.xml dependencies for open,ai and langchain have to be added
@@ -28,7 +27,7 @@ public class Pipeline {
     private final Properties cfg = new Properties();
     private final OpenAiChatModel chat;
     private final OpenAiEmbeddingModel embeddings;
-    private final int topK = 3;
+    private final int topK = 5;
     private final ChunkStorage chunkStore = new ChunkStorage();
     private final Segmenter segmenter = new Segmenter(800, 80);
 
@@ -62,8 +61,10 @@ public class Pipeline {
         float[] questionVector = embeddings.embed(question).content().vector();
         List<Hit> hits = toHits(chunkStore.findRelevantChunks(questionVector,topK)); //finds the topK most relevant chunks and stores it an a list as Hit Objects
 
-        String answer = GenerateAnswer(question, hits, rewrites); //sends the original question, along with the hits and the list of rewrites to the prompt generator then to the AI,
-        return new Result (hits, answer, rewrites);
+        //List<Hit> rerankedHits = rerankAndDiversify(hits);
+        List<Hit> rerankedHits = rerank(hits);
+        String answer = GenerateAnswer(question, rerankedHits, rewrites); //sends the original question, along with the hits and the list of rewrites to the prompt generator then to the AI,
+        return new Result (rerankedHits, answer, rewrites);
     }
 
     public String GenerateAnswer (String question, List<Hit> hits, List<String> rewrites) {
@@ -71,8 +72,8 @@ public class Pipeline {
     int i = 1;
         for (Hit hit : hits) {
             // Add metadata about where the chunk came from
-            ctx.append("[")
-                    .append(i++)
+            ctx.append("Index: = [")
+                    .append(hit.getIndex())
                     .append("] Parent Document: =")
                     .append(hit.getHitSource())
                     .append(" | Path=")
@@ -88,7 +89,8 @@ public class Pipeline {
                 You are a helpful and accurate Java Learning Assistant for the application JavaLearnBot
                 Using only information obtained from CONTEXT, answer the QUESTION
                 If the answer is unsure or missing from the context, say you are unsure
-                Cite context sources using bracket numbers like [1], [2], matching the context items.
+                Cite context sources using bracket numbers from the index [1], [2], matching the context items, these bracket numbers
+                should be included within the text from portions of text that you are deriving context from.
             
                 CONTEXT:
                  %s
@@ -99,8 +101,12 @@ public class Pipeline {
                 %s
                 """.formatted(ctx, question, String.join("\n", rewrites)) ;//string.join joins a list of strings into 1 string, putting a newline between each item
 
-        return chat.generate(prompt);
+        String answer = chat.generate(prompt);
+
+
+        return answer;
     }
+
 
     public List<String> rewriteQuestion(String question, int numberOfRewrites) {
         String prompt = """
@@ -122,10 +128,12 @@ Return only the questions. No numbering, no extra text.
     //Creates and list of Hit objects after finding topK relevant chunks
     private List<Hit> toHits(List<ChunkStorage.ScoredChunk> scoredChunks) {
         List<Hit> hits = new ArrayList<>();
+        int index = 1;
         for (ChunkStorage.ScoredChunk scoredChunk : scoredChunks) {
             ChunkStorage.DocumentChunk chunk = scoredChunk.chunk;
 
             hits.add(new Hit(
+                    index++,
                     chunk.getParent().getTitle(), //created the hit class and returns the list of hits
                     chunk.getParent().getPath(),
                     chunk.getText(),
@@ -174,6 +182,31 @@ Return only the questions. No numbering, no extra text.
             throw new RuntimeException(e);
         }
     }
+
+    public List<Hit> rerank (List<Hit> hits) {
+        if (hits == null || hits.isEmpty()) return hits; //check if list is empty
+        hits.sort(new Comparator<Hit>(){ //call sort method on hits, create new comparator class, compare method compares two hits as the same time
+            @Override
+            public int compare(Hit o1, Hit o2) {
+                return Double.compare(o2.getScore(), o1.getScore());
+            }
+        });
+        return hits;
+    }
+
+
+
+
+
+
+//    public <ListHit> rerankAndDiversify(List<Hit> hits) {
+//        if (hits == null || hits.isEmpty()) {
+//            hits.sort((a,b) -> Double.compare(a.getScore(), b.getScore())); //sort hitlist by highest score.
+//        }
+//    }
+
+
+
 
     public ChunkStorage getChunkStore() {
         return chunkStore;
