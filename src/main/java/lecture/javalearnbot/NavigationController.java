@@ -3,85 +3,54 @@ package lecture.javalearnbot;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.event.ActionEvent;
 
-import java.awt.event.ActionEvent;
 
-public class NavigationController // Handles navigation between different FXML pages in JavaLearnBot. All controllers use this class to switch scenes.
-{
-    private Stage stage;
 
-    //Constructor
-    public NavigationController() {
-    }
-    //Helper to find Stage if it's missing
-    private void setStageFromEvent(ActionEvent event) {
-        if (this.stage == null && event != null) {
-            Node source = (Node) event.getSource();
-            this.stage = (Stage) source.getScene().getWindow();
-        }
-    }
-
-    public NavigationController(Stage stage) // Constructor that receives the primary stage used throughout the whole application.
-    {
-        this.stage = stage;
-    }
-    public void goTo(String fxmlName, String title) {
+public class NavigationController {
+    @FXML
+    private BorderPane mainLayout;
+    // Handles navigation between different FXML pages in JavaLearnBot. All controllers use this class to switch scenes.
+    public void goTo(String fxmlName) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlName)); // load FXML layout
-            Scene scene = new Scene(loader.load());
-            stage.setTitle(title); // Set stage title and show new scene
-            stage.setScene(scene);
+            Parent view = loader.load();
 
             Object controller = loader.getController(); //To retrieve controller associated with FXML
             if (controller instanceof BaseController) { // If page controller inherits from BaseController, will link this NavigationController to enable page switching.
                 ((BaseController) controller).setNavigationController(this);
-
             }
-        } catch (Exception e) { // Prints error if an FXML file fails to load
+            mainLayout.setCenter(view);
+
+        }
+        catch (Exception e) { // Prints error if an FXML file fails to load
+            System.err.println("Error loading FXML: " + fxmlName);
             e.printStackTrace();
         }
     }
+    @FXML public void toHome(ActionEvent event) { toHome(); }
+    public void toHome() { goTo("homePage.fxml"); }
 
+    @FXML public void toChatBot(ActionEvent event) { toChatBot(); }
+    public void toChatBot() { goTo("chatPage.fxml"); }
+
+    @FXML public void toDocuments(ActionEvent event) { toDocuments(); }
+    public void toDocuments() { goTo("documentPage.fxml"); }
+
+    @FXML public void toEvaluationDashboard(ActionEvent event) { toEvaluationDashboard(); }
+    public void toEvaluationDashboard() { goTo("evaluationDashboardPage.fxml"); }
+
+    @FXML public void toAdmin(ActionEvent event) { toAdmin(); }
+    public void toAdmin() { goTo("adminPage.fxml"); }
+
+    public void toRegister() {
+    }
+
+    public void toLogin() {
+    }
     //Predefined navigation shortcuts for each pages
-    public void toLogin() { goTo("loginPage.fxml", "Login"); }
-    public void toRegister() { goTo("registerPage.fxml", "Register"); }
-    @FXML
-    public void toHome(ActionEvent event) {
-        setStageFromEvent(event);
-        toHome();
-    }
-    public void toHome() { goTo("homePage.fxml", "Home"); }
-
-    @FXML
-    public void toChatBot(ActionEvent event) {
-        setStageFromEvent(event);
-        toChatBot();
-    }
-    public void toChatBot() { goTo("chatPage.fxml", "Chat Bot"); }
-
-    @FXML
-    public void toDocuments(ActionEvent event) {
-        setStageFromEvent(event);
-        toDocuments();
-    }
-    public void toDocuments() { goTo("documentPage.fxml", "Documents"); }
-
-    @FXML
-    public void toEvaluationDashboard(ActionEvent event) {
-        setStageFromEvent(event);
-        toEvaluationDashboard();
-    }
-    public void toEvaluationDashboard() { goTo("evaluationDashboardPage.fxml", "Evaluation dashboard"); }
-
-    @FXML
-    public void toAdmin(ActionEvent event) {
-        setStageFromEvent(event);
-        toAdmin();
-    }
-    public void toAdmin() { goTo("adminPage.fxml", "Admin"); }
 }
-
-
-

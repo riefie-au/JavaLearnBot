@@ -1,13 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
-<VBox alignment="CENTER" prefHeight="488.0" prefWidth="737.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="lecture.javalearnbot.JavaLearnBotController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
+<VBox alignment="CENTER" prefHeight="744.0" prefWidth="803.0" style="-fx-background-color: #f9f9f9;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lecture.javalearnbot.HomeController">
+    <children>
 
-    <Label fx:id="homePage" />
+        <VBox alignment="CENTER" spacing="20.0" VBox.vgrow="ALWAYS">
+            <children>
+                <Label text="JavaLearnBot" textFill="#1a1a1a">
+                    <font>
+                        <Font name="System Bold" size="64.0" />
+                    </font>
+                </Label>
+                <Button fx:id="beginChatButton" mnemonicParsing="false" onAction="#onBeginChatClick" style="-fx-background-color: #333333; -fx-text-fill: white; -fx-background-radius: 5; -fx-padding: 10 30;" text="Begin Chat">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+            </children>
+        </VBox>
+
+        <Separator prefWidth="200.0" />
+
+        <GridPane hgap="30.0" vgap="20.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="SOMETIMES" />
+            </rowConstraints>
+            <padding>
+                <Insets bottom="40.0" left="40.0" right="40.0" top="30.0" />
+            </padding>
+            <children>
+
+                <VBox spacing="10.0">
+                    <children>
+                        <Label text="References">
+                            <font> <Font name="System Bold" size="16.0" /> </font>
+                        </Label>
+                        <TextFlow>
+                            <children>
+                                <Text fill="#555555" strokeType="OUTSIDE" strokeWidth="0.0" text="Java SE Specifications. (2025, September 16). Retrieved from https://docs.oracle.com/javase/specs/" />
+                            </children>
+                        </TextFlow>
+                        <TextFlow>
+                            <children>
+                                <Text fill="#555555" strokeType="OUTSIDE" strokeWidth="0.0" text="Alexandre, J. (2024, August 12). LangChain 101: the beginner’s guide to chains, agents, tools &amp; more. Retrieved from https://skillcrush.com" />
+                            </children>
+                        </TextFlow>
+                    </children>
+                </VBox>
+
+                <VBox spacing="10.0" GridPane.columnIndex="1">
+                    <children>
+                        <Label text="Group Members">
+                            <font> <Font name="System Bold" size="16.0" /> </font>
+                        </Label>
+                        <Label text="Member Name 1" textFill="#555555" />
+                        <Label text="Member Name 2" textFill="#555555" />
+                        <Label text="Member Name 3" textFill="#555555" />
+                    </children>
+                </VBox>
+
+            </children>
+        </GridPane>
+
+    </children>
 </VBox>
