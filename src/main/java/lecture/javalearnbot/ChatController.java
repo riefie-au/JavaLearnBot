@@ -44,7 +44,7 @@ public class ChatController extends BaseController // Controller for Chat page, 
 
     @FXML
     private void initialize(){
-        pipeline.indexDocs();
+        //pipeline.indexDocs();
         timestampCol.setCellValueFactory(new PropertyValueFactory<>("timestamp")); //tels the column which property of log entry to display
         questionCol.setCellValueFactory(new PropertyValueFactory<>("question"));
         answerCol.setCellValueFactory(new PropertyValueFactory<>("answer"));
@@ -53,6 +53,15 @@ public class ChatController extends BaseController // Controller for Chat page, 
         //logData.addAll(logManager.getLogs());
         // Bind ObservableList to TableView to make it so whenever that list is updated the table updates
         logTable.setItems(logData);
+
+        // Run indexing in a background thread
+        new Thread(() -> {
+            try {
+                pipeline.indexDocs();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     @FXML

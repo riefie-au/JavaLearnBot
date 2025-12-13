@@ -10,7 +10,8 @@ module lecture.javalearnbot {
     requires com.fasterxml.jackson.core;
     requires java.desktop;
     requires com.google.gson;
-    requires com.opencsv; // needed if assistant is null
+    requires com.opencsv;
+    requires io.github.cdimascio.dotenv.java; // needed if assistant is null
 
 
     opens lecture.javalearnbot to javafx.fxml;

@@ -1,21 +1,25 @@
 package lecture.javalearnbot.AiFeatures;
 
+
 public class TestFeatures {
     public static void main(String[] args) {
 
-        Pipeline pipeline = new Pipeline();
 
-        pipeline.indexDocs();
-        String question = "What is python programming";
-        Result result = pipeline.run(question);
-
-        System.out.println("Original Question: " + question);
-
-        System.out.println("\nRewritten Questions:");
-        result.getRewrites().forEach(q -> System.out.println("- " + q));
-
-        System.out.println("\nGenerated Answers:");
-        System.out.println(result.getAnswer());
+       // String key = ApiKeyLoader.getApiKey(); // <-- load key from key.env
+      //  System.out.println(key);
+//        Pipeline pipeline = new Pipeline();
+//
+//        pipeline.indexDocs();
+//        String question = "What is python programming";
+//        Result result = pipeline.run(question);
+//
+//        System.out.println("Original Question: " + question);
+//
+//        System.out.println("\nRewritten Questions:");
+//        result.getRewrites().forEach(q -> System.out.println("- " + q));
+//
+//        System.out.println("\nGenerated Answers:");
+//        System.out.println(result.getAnswer());
 
 
 ////        String question = "What is polymorphism in Java?";
