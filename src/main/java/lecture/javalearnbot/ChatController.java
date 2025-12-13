@@ -111,7 +111,6 @@ public class ChatController extends BaseController // Controller for Chat page, 
         //logManager.addLog(query,answer);
         LogEntry entry = new LogEntry(query,answer);
         logData.add(entry);
-
         logStore.add(entry);
         logStore.saveToCSV();
     }
@@ -135,6 +134,4 @@ public class ChatController extends BaseController // Controller for Chat page, 
                 notes));
         evaluationStore.exportAsCSV();
 }
-
-
 }

@@ -21,7 +21,6 @@ public class JavaLearnBot extends Application {
         stage.setTitle("Chat Page");
         stage.setScene(scene);
         stage.show();
-        
 
     }
 
