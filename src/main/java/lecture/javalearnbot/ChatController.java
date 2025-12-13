@@ -1,11 +1,16 @@
 package lecture.javalearnbot;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import lecture.javalearnbot.AiFeatures.Pipeline;
-import lecture.javalearnbot.AiFeatures.Result;
+import javafx.scene.control.cell.PropertyValueFactory;
+import lecture.javalearnbot.AiFeatures.*;
 
+import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 public class ChatController extends BaseController // Controller for Chat page, handles AI query submission, clearing results, and exception handling.
@@ -16,29 +21,38 @@ public class ChatController extends BaseController // Controller for Chat page, 
     private TextArea resultArea; // Field where AI response is displayed.
     @FXML
     private TextArea rewriteArea; // Field where AI response is displayed.
+    @FXML
+    private TextArea retrievedDocs;
+
+    @FXML
+    private TableView<LogEntry> logTable; //table that displays rows of logEntry Objects
+    @FXML
+    private TableColumn<LogEntry, String> timestampCol;  //LogEntry is the type of row object as its one object per row, String is the type of value displayed in the column
+    @FXML
+    private TableColumn<LogEntry, String> questionCol;
+    @FXML
+    private TableColumn<LogEntry, String> answerCol;
+
+    private final ObservableList<LogEntry> logData = FXCollections.observableArrayList();
+    //special list from javafx, that changes the list automatically, so when u do something like logData.add it automatically updates
+
 
     private final Pipeline pipeline = new Pipeline();
+    private final EvaluationStore evaluationStore = new EvaluationStore();
+    private final LogStore logStore = new LogStore();
+    //private final LogManager logManager = new LogManager();
 
-    //@FXML
-    //private void initialize(){
-    //    pipeline.indexDocs();
-    //}
+    @FXML
+    private void initialize(){
+        pipeline.indexDocs();
+        timestampCol.setCellValueFactory(new PropertyValueFactory<>("timestamp")); //tels the column which property of log entry to display
+        questionCol.setCellValueFactory(new PropertyValueFactory<>("question"));
+        answerCol.setCellValueFactory(new PropertyValueFactory<>("answer"));
 
-    @FXML //rie's temporary fix
-    private void initialize() {
-        try {
-            // Attempt to connect to OpenAI
-            pipeline.indexDocs();
-        } catch (Exception e) {
-            // If it fails (bad API key, no internet), print error but DO NOT crash the app
-            System.err.println("CRITICAL WARNING: Failed to initialize AI Pipeline. Check API Key.");
-            e.printStackTrace();
-
-            // Optional: Tell the user in the UI if possible
-            if (resultArea != null) {
-                resultArea.setText("Warning: AI System failed to initialize. Please check API Key configuration.");
-            }
-        }
+        logData.addAll(logStore.loadFromCSV()); //adds all data from the CSV file that stores previous answers and questions
+        //logData.addAll(logManager.getLogs());
+        // Bind ObservableList to TableView to make it so whenever that list is updated the table updates
+        logTable.setItems(logData);
     }
 
     @FXML
@@ -78,5 +92,49 @@ public class ChatController extends BaseController // Controller for Chat page, 
             rewritesText.append("- ").append(r).append("\n");
         }
         rewriteArea.setText(rewritesText.toString());
+
+        StringBuilder retrievedDocsText = new StringBuilder();
+        for (Hit hit : result.getHits()) {
+        retrievedDocsText.append("Index: [")
+                .append(hit.getIndex())
+                .append("] Source: ")
+                .append(hit.getHitSource())
+                .append(" | Score: ")
+                .append(String.format("%.2f", hit.getScore()))
+                .append("\nChunk: ")
+                .append(hit.getSnippet())
+                .append("\n\n");
     }
+        retrievedDocs.setText(retrievedDocsText.toString());
+
+        //
+        //logManager.addLog(query,answer);
+        LogEntry entry = new LogEntry(query,answer);
+        logData.add(entry);
+
+        logStore.add(entry);
+        logStore.saveToCSV();
+    }
+
+    @FXML
+    private void onExport() {
+        String query = queryField.getText();
+        String answer = resultArea.getText();
+        List<String> rewrites = List.of(rewriteArea.getText().split("\n"));
+        double score = 8.1;
+        String label = "correct";
+        String notes = "mostly correct but with flaws";
+
+
+        evaluationStore.add(new EvaluationRecord(
+                query,
+                answer,
+                rewrites,
+                score,
+                label,
+                notes));
+        evaluationStore.exportAsCSV();
+}
+
+
 }

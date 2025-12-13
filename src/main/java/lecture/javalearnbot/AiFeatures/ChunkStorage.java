@@ -18,9 +18,7 @@ public class ChunkStorage {
             this.chunkId = parent.getDocumentID() + index; //uses parentID and an index to create a unique value "intro_to_oop_1733680200333_chunk_0"
             this.parent = parent;
             this.text = text;
-            this.vector = vector;
-
-        }
+            this.vector = vector;}
 
         public String getChunkId() {return chunkId;}
         public Document getParent() {return parent;}
