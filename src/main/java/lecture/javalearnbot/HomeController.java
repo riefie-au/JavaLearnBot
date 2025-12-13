@@ -1,40 +1,41 @@
 package lecture.javalearnbot;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
-public class HomeController extends BaseController // Controller for the Home Page.
-{
-    // Top navigation menu options
-    @FXML private MenuItem homeMenuItem;
-    @FXML private MenuItem chatMenuItem;
-    @FXML private MenuItem documentsMenuItem;
-    @FXML private MenuItem evaluationMenuItem;
-    @FXML private MenuItem adminMenuItem;
-    @FXML private TextField globalSearchField; // Search bar input field.
+import java.io.IOException;
+
+public class HomeController {
 
     @FXML
-    public void initialize()
-    {
-        homeMenuItem.setOnAction(e -> nav.toHome()); // Home navigation menu action
-        chatMenuItem.setOnAction(e -> nav.toChatBot()); // Navigation to Chatbot page
-        documentsMenuItem.setOnAction(e -> nav.toDocuments()); // Navigation to Documents page.
-        evaluationMenuItem.setOnAction(e -> nav.toEvaluationDashboard()); // Navigation to Evaluation Dashboard.
-        adminMenuItem.setOnAction(e-> nav.toAdmin()); // Navigation to Admin dashboard.
+    private Button beginChatButton;
 
-        // Trigger global search when enter is pressed in search bar.
-        globalSearchField.setOnAction( e->
-                globalSearch(globalSearchField.getText())
-        );
+    @FXML
+    public void initialize() {
+        System.out.println("Home Page Initialized");
     }
 
-    private void globalSearch(String keyword)
-    {
-        if (keyword == null || keyword.isBlank()){  // Validation: Checks if search field is empty.
-            showError("Search", "Please enter a search term.");
-            return;
+    @FXML
+    void onBeginChatClick(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("chatpage.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+            System.out.println("Switched to chatpage.fxml");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error: Could not load chatpage.fxml. Check the file path.");
         }
-        showAlert("Search", "You searched: " + keyword); // Displays search term back to user
     }
 }

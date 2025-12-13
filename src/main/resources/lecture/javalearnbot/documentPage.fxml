@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lecture.javalearnbot.DocumentsController">
     <top>
         <fx:include source="navigationBar.fxml" />
     </top>
@@ -41,11 +41,11 @@
 
                 <TableView layoutX="35.0" layoutY="220.0" prefHeight="200.0" prefWidth="716.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="40.0">
                     <columns>
-                        <TableColumn prefWidth="250.0" text="Document Name" />
-                        <TableColumn prefWidth="150.0" text="Category" />
-                        <TableColumn prefWidth="150.0" text="Date Added" />
-                        <TableColumn prefWidth="100.0" text="Chunks" />
-                        <TableColumn prefWidth="150.0" text="Status" />
+                        <TableColumn fx:id="colName" prefWidth="250.0" text="Document Name" />
+                        <TableColumn fx:id="colCategory" prefWidth="150.0" text="Category" />
+                        <TableColumn fx:id="colDate" prefWidth="150.0" text="Date Added" />
+                        <TableColumn fx:id="colChunks" prefWidth="100.0" text="Chunks" />
+                        <TableColumn fx:id="colStatus" prefWidth="150.0" text="Status" />
                     </columns>
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -59,7 +59,7 @@
                 </Label>
 
                 <Separator layoutX="35.0" layoutY="430.0" prefWidth="954.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" />
-            <ListView layoutX="35.0" layoutY="472.0" prefHeight="157.0" prefWidth="724.0" />
+            <ListView fx:id="previewListView" layoutX="35.0" layoutY="472.0" prefHeight="157.0" prefWidth="724.0" />
             <Separator layoutY="2.0" prefHeight="0.0" prefWidth="791.0" />
 
             </children>

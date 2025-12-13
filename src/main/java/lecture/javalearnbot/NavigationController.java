@@ -6,7 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
+import javafx.event.ActionEvent;
 
 public class NavigationController // Handles navigation between different FXML pages in JavaLearnBot. All controllers use this class to switch scenes.
 {
@@ -19,7 +19,9 @@ public class NavigationController // Handles navigation between different FXML p
     private void setStageFromEvent(ActionEvent event) {
         if (this.stage == null && event != null) {
             Node source = (Node) event.getSource();
-            this.stage = (Stage) source.getScene().getWindow();
+            if (source.getScene() != null) {
+                this.stage = (Stage) source.getScene().getWindow();
+            }
         }
     }
 
@@ -27,19 +29,30 @@ public class NavigationController // Handles navigation between different FXML p
     {
         this.stage = stage;
     }
+
+
     public void goTo(String fxmlName, String title) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlName)); // load FXML layout
             Scene scene = new Scene(loader.load());
-            stage.setTitle(title); // Set stage title and show new scene
-            stage.setScene(scene);
 
             Object controller = loader.getController(); //To retrieve controller associated with FXML
             if (controller instanceof BaseController) { // If page controller inherits from BaseController, will link this NavigationController to enable page switching.
                 ((BaseController) controller).setNavigationController(this);
-
             }
-        } catch (Exception e) { // Prints error if an FXML file fails to load
+
+            if (stage != null) {
+                stage.setTitle(title); // Set stage title and show new scene
+                stage.setScene(scene);
+                stage.show();
+            }
+            else {
+                System.out.println("ERROR: Stage is null. Cannot navigate.");
+            }
+
+        }
+        catch (Exception e) { // Prints error if an FXML file fails to load
+            System.err.println("Error loading FXML: " + fxmlName);
             e.printStackTrace();
         }
     }
@@ -81,7 +94,12 @@ public class NavigationController // Handles navigation between different FXML p
         toAdmin();
     }
     public void toAdmin() { goTo("adminPage.fxml", "Admin"); }
+
+
 }
+
+
+
 
 
 

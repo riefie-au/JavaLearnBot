@@ -12,7 +12,7 @@ public class JavaLearnBot extends Application {
     public void start(Stage stage) throws IOException {
 
         //ChatPageUI
-        FXMLLoader chatPage = new FXMLLoader(JavaLearnBot.class.getResource("chatPage.fxml"));
+        FXMLLoader chatPage = new FXMLLoader(JavaLearnBot.class.getResource("homePage.fxml"));
         Scene scene = new Scene(chatPage.load());
         stage.setTitle("Chat Page");
         stage.setScene(scene);

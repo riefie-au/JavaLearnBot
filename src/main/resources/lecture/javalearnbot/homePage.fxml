@@ -1,13 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="488.0" prefWidth="737.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="lecture.javalearnbot.JavaLearnBotController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="803.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lecture.javalearnbot.HomeController">
+    <top>
+        <fx:include source="navigationBar.fxml" />
+    </top>
+    <center>
+        <AnchorPane prefHeight="630.0" prefWidth="803.0" style="-fx-background-color: #f9f9f9;" BorderPane.alignment="CENTER">
+            <children>
 
-    <Label fx:id="homePage" />
-</VBox>
+                <VBox alignment="CENTER" layoutX="206.0" layoutY="100.0" prefHeight="200.0" prefWidth="415.0" spacing="20.0" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="182.0">
+                    <children>
+                        <Label prefHeight="94.0" prefWidth="545.0" text="JavaLearnBot" textFill="#1a1a1a">
+                            <font>
+                                <Font name="System Bold" size="64.0" />
+                            </font>
+                        </Label>
+                        <Button fx:id="beginChatButton" mnemonicParsing="false" onAction="#onBeginChatClick" style="-fx-background-color: #333333; -fx-text-fill: white; -fx-background-radius: 5; -fx-padding: 10 30;" text="Begin Chat">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                    </children>
+                </VBox>
+
+                <Separator layoutX="35.0" layoutY="400.0" prefWidth="954.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" />
+
+                <VBox layoutX="50.0" layoutY="430.0" prefWidth="350.0" spacing="10.0">
+                    <children>
+                        <Label text="References">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                        <TextFlow prefWidth="350.0">
+                            <children>
+                                <Text fill="#555555" strokeType="OUTSIDE" strokeWidth="0.0" text="Java SE Specifications. (2025, September 16). Retrieved from https://docs.oracle.com/javase/specs/" />
+                            </children>
+                        </TextFlow>
+                        <TextFlow prefWidth="350.0">
+                            <children>
+                                <Text fill="#555555" strokeType="OUTSIDE" strokeWidth="0.0" text="Alexandre, J. (2024, August 12). LangChain 101: the beginner’s guide to chains, agents, tools &amp; more. Retrieved from https://skillcrush.com" />
+                            </children>
+                        </TextFlow>
+                    </children>
+                </VBox>
+
+                <VBox layoutX="500.0" layoutY="430.0" spacing="10.0">
+                    <children>
+                        <Label text="Group Members">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                        <Label text="Member Name 1" textFill="#555555" />
+                        <Label text="Member Name 2" textFill="#555555" />
+                        <Label text="Member Name 3" textFill="#555555" />
+                    </children>
+                </VBox>
+
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>
