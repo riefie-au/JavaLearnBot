@@ -54,6 +54,11 @@ public class ChatController extends BaseController // Controller for Chat page, 
         // Bind ObservableList to TableView to make it so whenever that list is updated the table updates
         logTable.setItems(logData);
 
+        logTable.getSelectionModel()// returns selection manager for the tableView
+                .selectedItemProperty() //represents currently selected item, and returns an observable property
+                .addListener((observable, oldValue, newValue) -> { //attaches a listener that automatically runs when a user clicks a row
+                    displayLogEntry(newValue);
+                });
         // Run indexing in a background thread
         new Thread(() -> {
             try {
@@ -63,6 +68,14 @@ public class ChatController extends BaseController // Controller for Chat page, 
             }
         }).start();
     }
+
+    private void displayLogEntry(LogEntry entry) {
+        queryField.setText(entry.getQuestion());
+        resultArea.setText(entry.getAnswer());
+        rewriteArea.setText(entry.getRewrites());
+        retrievedDocs.setText(entry.getRetrievedChunks());
+    }
+
 
     @FXML
     private void onSearchCLick() // Triggered when user clicks the search button and wraps AI search handling in exception blocks.
@@ -87,41 +100,50 @@ public class ChatController extends BaseController // Controller for Chat page, 
     @FXML
     private void handleSearch(String query) throws Exception // Processes search logic. This would send query to AI model.
     {
-        if (query.isBlank()){ // Prevents sending empty queries
+        if (query.isBlank()) { // Prevents sending empty queries
             resultArea.setText("Please enter a query.");
             return;
         }
+        resultArea.setText("Searching for an answer..."); //while the answer is being generated set text "searching for an answer in the resultArea"
 
-        Result result = pipeline.run(query);
-        String answer = result.getAnswer();
-        resultArea.setText(answer);
+        new Thread(() -> {
+            try {
+                Result result = pipeline.run(query); // pass the query to the pipeline
+                String answer = result.getAnswer(); //obtain an answer from the result object
+                resultArea.setText(answer); //sets the answer in the result area
 
-        StringBuilder rewritesText = new StringBuilder();
-        for (String r : result.getRewrites()){
-            rewritesText.append("- ").append(r).append("\n");
-        }
-        rewriteArea.setText(rewritesText.toString());
+                StringBuilder rewritesBuilder = new StringBuilder(); //create a string builder for rewrites
+                for (String r : result.getRewrites()) {
+                    rewritesBuilder.append("- ").append(r).append("\n");
+                }
+                rewriteArea.setText(rewritesBuilder.toString());
+                String rewrittenText = rewritesBuilder.toString(); //keeps rewritten text as a String to keep in the logs csv
 
-        StringBuilder retrievedDocsText = new StringBuilder();
-        for (Hit hit : result.getHits()) {
-        retrievedDocsText.append("Index: [")
-                .append(hit.getIndex())
-                .append("] Source: ")
-                .append(hit.getHitSource())
-                .append(" | Score: ")
-                .append(String.format("%.2f", hit.getScore()))
-                .append("\nChunk: ")
-                .append(hit.getSnippet())
-                .append("\n\n");
-    }
-        retrievedDocs.setText(retrievedDocsText.toString());
-
-        //
-        //logManager.addLog(query,answer);
-        LogEntry entry = new LogEntry(query,answer);
-        logData.add(entry);
-        logStore.add(entry);
-        logStore.saveToCSV();
+                StringBuilder retrievedDocsBuilder = new StringBuilder();
+                for (Hit hit : result.getHits()) {
+                    retrievedDocsBuilder.append("Index: [")
+                            .append(hit.getIndex())
+                            .append("] Source: ")
+                            .append(hit.getHitSource())
+                            .append(" | Score: ")
+                            .append(String.format("%.2f", hit.getScore()))
+                            .append("\nChunk: ")
+                            .append(hit.getSnippet())
+                            .append("\n\n");
+                }
+                retrievedDocs.setText(retrievedDocsBuilder.toString());
+                String retrievedDocsText = retrievedDocsBuilder.toString();
+                //
+                //logManager.addLog(query,answer);
+                LogEntry entry = new LogEntry(query, answer, rewrittenText, retrievedDocsText); //create a new logEntry object
+                logData.add(entry);  //add it to the observable list, this updates the table view
+                logStore.add(entry); //add it to the buffer in LogStore
+                logStore.saveToCSV(); //save whatever is in the buffer to the CSV logs.
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } //end of thread
+        ).start(); //starts the thread
     }
 
     @FXML
