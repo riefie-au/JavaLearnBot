@@ -155,7 +155,6 @@ public class ChatController extends BaseController // Controller for Chat page, 
         String label = "correct";
         String notes = "mostly correct but with flaws";
 
-
         evaluationStore.add(new EvaluationRecord(
                 query,
                 answer,
