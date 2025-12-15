@@ -1,20 +1,26 @@
 package lecture.javalearnbot.AiFeatures;
 
 public class Document {
-    private final String documentID;
-    private final String title;
-    private final String category;
-    private final String source;
-    private final String path;
-    private final long timestamp;
+    private String documentID;
+    private String title;
+    private String category;
+    private String source;
+    private String path;
+    private long timestamp;
+    private String description;
 
-    public Document(String title, String category, String source, String path, long timestamp) {
+    public Document(){
+
+    }
+
+    public Document(String title, String category, String source, String path, long timestamp, String description) {
         this.documentID = generateDocumentId(title,timestamp);
         this.title = title;
         this.category = category;
         this.source = source;
         this.path = path;
         this.timestamp = timestamp;
+        this.description = description;
     }
 
     public String getDocumentID() {
@@ -45,5 +51,9 @@ public class Document {
     private String generateDocumentId (String title, long timestamp) {
         String trimmedTitle = title.trim().toLowerCase().replaceAll("\\s","_");
         return trimmedTitle+ "_" + timestamp;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

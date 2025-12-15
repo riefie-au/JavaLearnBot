@@ -8,17 +8,18 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.layout.Region?>
-<AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lecture.javalearnbot.AdminController">
+<AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lecture.javalearnbot.AdminController">
     <children>
         <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
@@ -40,7 +41,7 @@
 
                                 <HBox alignment="CENTER_LEFT" spacing="15.0">
                                     <children>
-                                        <Button text="📄 Choose File" />
+                                        <Button onAction="#onChooseFile" text="📄 Choose File" />
                                         <Label text="No file selected" textFill="#666666" />
                                     </children>
                                 </HBox>
@@ -51,16 +52,19 @@
                                     <rowConstraints>
                                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
                                         <Label text="Document Title:" />
-                                        <TextField promptText="Enter title" GridPane.columnIndex="1" />
+                                        <TextField fx:id="titleField" promptText="Enter title" GridPane.columnIndex="1" />
                                         <Label text="Category:" GridPane.rowIndex="1" />
-                                        <ComboBox maxWidth="1.7976931348623157E308" promptText="Select Category" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <ComboBox fx:id="categoryComboBox" maxWidth="1.7976931348623157E308" promptText="Select Category" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label text="Description" GridPane.rowIndex="2" />
+                              <TextArea fx:id="descriptionField" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     </children>
                                 </GridPane>
 
-                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #2196f3; -fx-text-fill: white;" text="⏩ Process and Ingest" />
+                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onProcessAndIngest" style="-fx-background-color: #2196f3; -fx-text-fill: white;" text="⏩ Process and Ingest" />
                             </children>
                         </VBox>
 
@@ -78,12 +82,12 @@
                             </children>
                         </HBox>
 
-                        <TableView minHeight="300.0" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="adminTable" minHeight="300.0" VBox.vgrow="ALWAYS">
                             <columns>
-                                <TableColumn prefWidth="75.0" text="Name" />
-                                <TableColumn prefWidth="75.0" text="Category" />
-                                <TableColumn prefWidth="75.0" text="Date" />
-                                <TableColumn prefWidth="75.0" text="Status" />
+                                <TableColumn fx:id="titleColumn" prefWidth="75.0" text="Document Title" />
+                                <TableColumn fx:id="categoryColumn" prefWidth="75.0" text="Category" />
+                                <TableColumn fx:id="descriptionColumn" prefWidth="75.0" text="Description" />
+                                <TableColumn fx:id="lastModifiedColumn" prefWidth="75.0" text="Last Modified" />
                             </columns>
                             <columnResizePolicy>
                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
