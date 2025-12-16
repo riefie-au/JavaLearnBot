@@ -1,0 +1,60 @@
+Object-Oriented Programming (OOP) is a programming paradigm that uses objects and classes to design and organize software. It emphasizes modularity, reusability, and abstraction, allowing developers to model real-world entities and relationships in code. OOP has become a foundational approach in modern software development and is widely used in languages such as Java, C++, Python, C#, and Kotlin. This document provides a detailed explanation of the fundamental principles of OOP, including encapsulation, inheritance, polymorphism, and abstraction, along with supporting concepts like classes, objects, methods, and design best practices.
+
+1. Classes and Objects
+
+At the core of OOP are classes and objects.
+
+A class is a blueprint or template that defines the attributes (data) and behaviors (methods) that objects created from the class will have. It represents a concept or category in the program. For example, a class called Car might define attributes like color, make, and model, and methods such as startEngine() and drive().
+
+An object is an instance of a class. It represents a specific entity in the program with concrete values for its attributes. For instance, a Car object could be a red Toyota Corolla with a certain year of manufacture. Multiple objects can be created from the same class, each with unique data.
+
+The distinction between class and object is essential. A class is the abstract definition, while an object is the actual realization of that definition in memory during program execution.
+
+2. Encapsulation
+
+Encapsulation is the principle of bundling data and methods that operate on that data within a single unit, typically a class. It also involves restricting direct access to some of an object’s components to prevent unauthorized or unintended modification.
+
+Key points of encapsulation:
+
+Access Modifiers: Encapsulation is often implemented using access modifiers like private, protected, and public to control visibility. Private attributes are accessible only within the class, ensuring controlled access through getter and setter methods.
+
+Getters and Setters: Methods known as getters (to retrieve data) and setters (to modify data) provide a controlled interface for accessing private data. This ensures validation and consistency when data changes.
+
+Example in Java:
+
+public class BankAccount {
+    private double balance;
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void deposit(double amount) {
+        if(amount > 0) {
+            balance += amount;
+        }
+    }
+
+    public void withdraw(double amount) {
+        if(amount > 0 && amount <= balance) {
+            balance -= amount;
+        }
+    }
+}
+
+
+Encapsulation promotes data security, maintainability, and modularity, as internal implementation can change without affecting code that uses the class.
+
+3. Inheritance
+
+Inheritance is the mechanism by which one class (called a subclass or child class) can inherit fields and methods from another class (called a superclass or parent class). This promotes code reuse and establishes a natural hierarchy between classes.
+
+Key points of inheritance:
+
+Single Inheritance: A subclass inherits from one superclass. Example: Sedan class inherits from Car.
+
+Multilevel Inheritance: A class inherits from a subclass, forming a chain. Example: ElectricSedan inherits from Sedan, which inherits from Car.
+
+Hierarchical Inheritance: Multiple subclasses inherit from the same superclass. Example: Sedan and SUV inherit from Car.
+
+Multiple Inheritance (via interfaces): Some languages like Java support multiple inheritance through interfaces to avoid ambiguity issues present in direct multiple inheritance.

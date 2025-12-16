@@ -1,0 +1,280 @@
+Subclasses and Superclasses in Object-Oriented Programming (OOP)
+
+Object-Oriented Programming (OOP) is a programming paradigm that models real-world entities as objects. These objects are instances of classes, which define their structure and behavior. Among the fundamental concepts in OOP are superclasses and subclasses, which are central to the principle of inheritance. This document provides a comprehensive explanation of superclasses and subclasses, their usage, benefits, practical examples, and best practices in software development.
+
+1. Understanding Classes
+
+Before diving into superclasses and subclasses, it is important to understand the concept of a class.
+
+A class is a blueprint or template that defines the attributes (properties or fields) and behaviors (methods or functions) that objects of that class will have.
+
+Classes provide a way to encapsulate data and behavior together, enabling code modularity and reusability.
+
+Example in Java:
+
+public class Vehicle {
+    String brand;
+    int wheels;
+
+    public void start() {
+        System.out.println("Vehicle started");
+    }
+
+    public void stop() {
+        System.out.println("Vehicle stopped");
+    }
+}
+
+
+Here, Vehicle is a class that defines attributes (brand, wheels) and behaviors (start(), stop()). Objects created from this class will inherit these properties.
+
+2. Superclasses
+
+A superclass (also called a parent class or base class) is a class that is extended by one or more other classes. It represents a general concept, and it may contain:
+
+Attributes and methods common to multiple subclasses.
+
+Shared behaviors that subclasses can use or override.
+
+Abstract methods (in abstract classes) that must be implemented by subclasses.
+
+Superclasses allow code reuse and hierarchical organization in OOP.
+
+Example:
+
+public class Vehicle { // Superclass
+    String brand;
+    int wheels;
+
+    public void start() {
+        System.out.println("Vehicle started");
+    }
+
+    public void stop() {
+        System.out.println("Vehicle stopped");
+    }
+}
+
+
+In this example, Vehicle can serve as a superclass for various types of vehicles such as Car, Bike, or Truck.
+
+3. Subclasses
+
+A subclass (also called a child class or derived class) is a class that inherits attributes and methods from a superclass. Subclasses can:
+
+Inherit properties and methods of the superclass.
+
+Add new properties and methods specific to themselves.
+
+Override superclass methods to provide specialized behavior.
+
+Subclasses allow specialization of general concepts represented by superclasses.
+
+Example:
+
+public class Car extends Vehicle { // Subclass
+    int doors;
+
+    public void honk() {
+        System.out.println("Car honk!");
+    }
+
+    @Override
+    public void start() {
+        System.out.println("Car started");
+    }
+}
+
+
+Here, Car inherits brand and wheels from Vehicle, adds a new attribute doors, and overrides the start() method to provide a behavior specific to cars.
+
+4. Inheritance: Connecting Superclass and Subclass
+
+Inheritance is the mechanism by which a subclass acquires the properties and behaviors of its superclass. It is implemented using the keyword extends in Java.
+
+Example:
+
+Car myCar = new Car();
+myCar.brand = "Toyota";
+myCar.wheels = 4;
+myCar.doors = 4;
+myCar.start(); // Calls overridden start method in Car
+myCar.honk();  // Calls method defined in Car
+myCar.stop();  // Calls method inherited from Vehicle
+
+
+In this example, the Car object has access to attributes and methods from Vehicle, demonstrating the benefits of inheritance.
+
+5. Types of Inheritance
+
+Inheritance can be categorized in several ways:
+
+Single Inheritance: A subclass inherits from one superclass.
+
+class Car extends Vehicle {}
+
+
+Multilevel Inheritance: A chain of inheritance where a subclass inherits from another subclass.
+
+class ElectricCar extends Car {}
+
+
+Hierarchical Inheritance: Multiple subclasses inherit from the same superclass.
+
+class Bike extends Vehicle {}
+class Truck extends Vehicle {}
+
+
+Multiple Inheritance (via interfaces in Java): Achieved through interfaces, since Java does not support multiple class inheritance.
+
+interface Electric {}
+class ElectricCar extends Car implements Electric {}
+
+6. Method Overriding
+
+Subclasses can override methods from their superclass to provide specific behavior. Method overriding ensures that when a method is called on a subclass object, the subclass’s version is executed.
+
+Rules for overriding:
+
+The method must have the same name, return type, and parameters.
+
+The access level of the overridden method cannot be more restrictive.
+
+Subclasses can use the @Override annotation for clarity.
+
+Example:
+
+class Bike extends Vehicle {
+    @Override
+    public void start() {
+        System.out.println("Bike started");
+    }
+}
+
+
+Here, Bike overrides the start() method of Vehicle. Calling start() on a Bike object executes the overridden method.
+
+7. The super Keyword
+
+The super keyword in Java is used to:
+
+Call a superclass constructor from a subclass.
+
+Access methods or attributes of the superclass that are hidden by the subclass.
+
+Example of calling superclass constructor:
+
+class Car extends Vehicle {
+    int doors;
+
+    public Car(String brand, int wheels, int doors) {
+        super.brand = brand;
+        super.wheels = wheels; // Call superclass attributes
+        this.doors = doors;
+    }
+}
+
+
+Example of calling superclass method:
+
+class Car extends Vehicle {
+    @Override
+    public void start() {
+        super.start(); // Call Vehicle's start
+        System.out.println("Car specific start logic");
+    }
+}
+
+
+Using super allows subclasses to extend functionality while retaining access to the superclass behavior.
+
+8. Constructors in Subclasses
+
+Subclasses can have their own constructors.
+
+The first statement in a subclass constructor can call a superclass constructor using super(...).
+
+If super() is not explicitly called, the default no-argument constructor of the superclass is invoked automatically.
+
+Example:
+
+class Vehicle {
+    String brand;
+
+    public Vehicle(String brand) {
+        this.brand = brand;
+    }
+}
+
+class Car extends Vehicle {
+    int doors;
+
+    public Car(String brand, int doors) {
+        super(brand); // Calls Vehicle constructor
+        this.doors = doors;
+    }
+}
+
+
+This ensures proper initialization of both superclass and subclass attributes.
+
+9. Access Modifiers and Inheritance
+
+Access modifiers affect visibility of superclass members:
+
+private: Not accessible in subclass.
+
+protected: Accessible in subclass and package.
+
+public: Accessible everywhere.
+
+default (package-private): Accessible within the same package.
+
+Example:
+
+class Vehicle {
+    private int engineNumber;
+    protected String brand;
+    public int wheels;
+}
+
+class Car extends Vehicle {
+    public void display() {
+        // engineNumber is not accessible
+        System.out.println(brand); // Accessible
+        System.out.println(wheels); // Accessible
+    }
+}
+
+
+Understanding access levels is critical when designing subclasses and superclasses.
+
+10. Abstract Superclasses
+
+A superclass can be abstract, meaning it cannot be instantiated on its own. Abstract classes can contain:
+
+Abstract methods (without body) that must be implemented in subclasses.
+
+Concrete methods (with body) that can be used or overridden by subclasses.
+
+Example:
+
+abstract class Vehicle {
+    String brand;
+
+    public abstract void start(); // Must be implemented by subclass
+
+    public void stop() {
+        System.out.println("Vehicle stopped");
+    }
+}
+
+class Car extends Vehicle {
+    @Override
+    public void start() {
+        System.out.println("Car started");
+    }
+}
+
+
+Abstract superclasses enforce a contract for subclasses while allowing shared implementation.
