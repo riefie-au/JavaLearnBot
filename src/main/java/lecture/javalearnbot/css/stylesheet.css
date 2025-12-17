@@ -1,0 +1,34 @@
+/* Main Top Bar styling */
+.top-bar {
+    -fx-background-color: #161616;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 0 15 0 15;
+}
+
+/* Search Bar styling */
+.search-field {
+    -fx-background-color: #161616;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #b0b0b0;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-color: white;
+
+}
+
+/* Navigation Button styling */
+.nav-btn {
+
+    -fx-background-color: #202022;
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-font-weight: bold;
+    -fx-max-height: 10px;
+}
+
+.nav-btn:hover {
+    -fx-background-color: white;
+    -fx-text-fill: #161616;
+}

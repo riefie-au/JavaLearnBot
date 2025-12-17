@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -14,6 +15,10 @@ import javafx.event.ActionEvent;
 public class NavigationController {
     @FXML
     private BorderPane mainLayout;
+
+    @FXML
+    private TextField globalSearch;
+
     // Handles navigation between different FXML pages in JavaLearnBot. All controllers use this class to switch scenes.
     public void goTo(String fxmlName) {
         try {
@@ -32,6 +37,7 @@ public class NavigationController {
             e.printStackTrace();
         }
     }
+
     @FXML public void toHome(ActionEvent event) { toHome(); }
     public void toHome() { goTo("homePage.fxml"); }
 
@@ -53,4 +59,28 @@ public class NavigationController {
     public void toLogin() {
     }
     //Predefined navigation shortcuts for each pages
+
+    @FXML
+    public void globalSearch(ActionEvent event) {
+        String query = globalSearch.getText().trim().toLowerCase();
+
+        if (query.isEmpty()) {
+            return;
+        }
+
+        // Search logic to map keywords to your existing navigation methods
+        if (query.contains("home") || query.contains("main")) {
+            toHome();
+        } else if (query.contains("chat") || query.contains("bot")) {
+            toChatBot();
+        } else if (query.contains("doc") || query.contains("file")) {
+            toDocuments();
+        } else if (query.contains("eval") || query.contains("dash")) {
+            toEvaluationDashboard();
+        } else if (query.contains("admin") || query.contains("setting")) {
+            toAdmin();
+        } else {
+            System.out.println("No page found for: " + query);
+        }
+    }
 }
