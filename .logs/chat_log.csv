@@ -473,3 +473,283 @@ The super keyword in Java is used to:
 Call a superclass constructor
 
 "
+"2025-12-15T23:49:53.335056900","give me the details of polymorphism in java","I'm unsure. The provided context does not contain information about polymorphism in Java.","- What are the different types of polymorphism in Java and how do they differ?
+- Can you explain how polymorphism is implemented in Java with examples?
+- What role does polymorphism play in object-oriented programming within Java?
+","Index: [1] Source: Inheritance.txt | Score: 0.49
+Chunk: ing the benefits of inheritance.
+
+5. Types of Inheritance
+
+Inheritance can be categorized in several ways:
+
+Single Inheritance: A subclass inherits from one superclass.
+
+class Car extends Vehicle {}
+
+
+Multilevel Inheritance: A chain of inheritance where a subclass inherits from another subclass.
+
+class ElectricCar extends Car {}
+
+
+Hierarchical Inheritance: Multiple subclasses inherit from the same superclass.
+
+class Bike extends Vehicle {}
+class Truck extends Vehicle {}
+
+
+Multiple Inheritance (via interfaces in Java): Achieved through interfaces, since Java does not support multiple class inheritance.
+
+interface Electric {}
+class ElectricCar extends Car implements Electric {}
+
+6. Method Overriding
+
+Subclasses can override methods from their superclass to provid
+
+Index: [2] Source: Inheritance.txt | Score: 0.44
+Chunk: od Overriding
+
+Subclasses can override methods from their superclass to provide specific behavior. Method overriding ensures that when a method is called on a subclass object, the subclass’s version is executed.
+
+Rules for overriding:
+
+The method must have the same name, return type, and parameters.
+
+The access level of the overridden method cannot be more restrictive.
+
+Subclasses can use the @Override annotation for clarity.
+
+Example:
+
+class Bike extends Vehicle {
+    @Override
+    public void start() {
+        System.out.println(""Bike started"");
+    }
+}
+
+
+Here, Bike overrides the start() method of Vehicle. Calling start() on a Bike object executes the overridden method.
+
+7. The super Keyword
+
+The super keyword in Java is used to:
+
+Call a superclass constructor
+
+Index: [3] Source: Inheritance.txt | Score: 0.44
+Chunk: nitialization of both superclass and subclass attributes.
+
+9. Access Modifiers and Inheritance
+
+Access modifiers affect visibility of superclass members:
+
+private: Not accessible in subclass.
+
+protected: Accessible in subclass and package.
+
+public: Accessible everywhere.
+
+default (package-private): Accessible within the same package.
+
+Example:
+
+class Vehicle {
+    private int engineNumber;
+    protected String brand;
+    public int wheels;
+}
+
+class Car extends Vehicle {
+    public void display() {
+        // engineNumber is not accessible
+        System.out.println(brand); // Accessible
+        System.out.println(wheels); // Accessible
+    }
+}
+
+
+Understanding access levels is critical when designing subclasses and superclasses.
+
+10. Abstract Superclasses
+
+
+Index: [4] Source: Inheritance.txt | Score: 0.42
+Chunk: e, Car inherits brand and wheels from Vehicle, adds a new attribute doors, and overrides the start() method to provide a behavior specific to cars.
+
+4. Inheritance: Connecting Superclass and Subclass
+
+Inheritance is the mechanism by which a subclass acquires the properties and behaviors of its superclass. It is implemented using the keyword extends in Java.
+
+Example:
+
+Car myCar = new Car();
+myCar.brand = ""Toyota"";
+myCar.wheels = 4;
+myCar.doors = 4;
+myCar.start(); // Calls overridden start method in Car
+myCar.honk();  // Calls method defined in Car
+myCar.stop();  // Calls method inherited from Vehicle
+
+
+In this example, the Car object has access to attributes and methods from Vehicle, demonstrating the benefits of inheritance.
+
+5. Types of Inheritance
+
+Inheritance can b
+
+Index: [5] Source: Inheritance.txt | Score: 0.41
+Chunk: classes to extend functionality while retaining access to the superclass behavior.
+
+8. Constructors in Subclasses
+
+Subclasses can have their own constructors.
+
+The first statement in a subclass constructor can call a superclass constructor using super(...).
+
+If super() is not explicitly called, the default no-argument constructor of the superclass is invoked automatically.
+
+Example:
+
+class Vehicle {
+    String brand;
+
+    public Vehicle(String brand) {
+        this.brand = brand;
+    }
+}
+
+class Car extends Vehicle {
+    int doors;
+
+    public Car(String brand, int doors) {
+        super(brand); // Calls Vehicle constructor
+        this.doors = doors;
+    }
+}
+
+
+This ensures proper initialization of both superclass and subclass attributes.
+
+9. Access Modifiers
+
+"
+"2025-12-15T23:50:08.410659900","what is inheritance in java, keep it short","Inheritance in Java is a mechanism that allows a subclass (child class) to inherit fields and methods from a superclass (parent class), promoting code reuse and establishing a natural hierarchy between classes. It is implemented using the keyword `extends` [2].","- What are the key features of inheritance in Java?
+- How does inheritance promote code reusability in Java?
+- Can you explain the difference between single and multiple inheritance in Java?
+","Index: [1] Source: Inheritance.txt | Score: 0.62
+Chunk: ing the benefits of inheritance.
+
+5. Types of Inheritance
+
+Inheritance can be categorized in several ways:
+
+Single Inheritance: A subclass inherits from one superclass.
+
+class Car extends Vehicle {}
+
+
+Multilevel Inheritance: A chain of inheritance where a subclass inherits from another subclass.
+
+class ElectricCar extends Car {}
+
+
+Hierarchical Inheritance: Multiple subclasses inherit from the same superclass.
+
+class Bike extends Vehicle {}
+class Truck extends Vehicle {}
+
+
+Multiple Inheritance (via interfaces in Java): Achieved through interfaces, since Java does not support multiple class inheritance.
+
+interface Electric {}
+class ElectricCar extends Car implements Electric {}
+
+6. Method Overriding
+
+Subclasses can override methods from their superclass to provid
+
+Index: [2] Source: OOP principles.txt | Score: 0.59
+Chunk: ass.
+
+3. Inheritance
+
+Inheritance is the mechanism by which one class (called a subclass or child class) can inherit fields and methods from another class (called a superclass or parent class). This promotes code reuse and establishes a natural hierarchy between classes.
+
+Key points of inheritance:
+
+Single Inheritance: A subclass inherits from one superclass. Example: Sedan class inherits from Car.
+
+Multilevel Inheritance: A class inherits from a subclass, forming a chain. Example: ElectricSedan inherits from Sedan, which inherits from Car.
+
+Hierarchical Inheritance: Multiple subclasses inherit from the same superclass. Example: Sedan and SUV inherit from Car.
+
+Multiple Inheritance (via interfaces): Some languages like Java support multiple inheritance through interfaces to a
+
+Index: [3] Source: OOP principles.txt | Score: 0.54
+Chunk: ): Some languages like Java support multiple inheritance through interfaces to avoid ambiguity issues present in direct multiple inheritance.
+
+Index: [4] Source: Inheritance.txt | Score: 0.50
+Chunk: e, Car inherits brand and wheels from Vehicle, adds a new attribute doors, and overrides the start() method to provide a behavior specific to cars.
+
+4. Inheritance: Connecting Superclass and Subclass
+
+Inheritance is the mechanism by which a subclass acquires the properties and behaviors of its superclass. It is implemented using the keyword extends in Java.
+
+Example:
+
+Car myCar = new Car();
+myCar.brand = ""Toyota"";
+myCar.wheels = 4;
+myCar.doors = 4;
+myCar.start(); // Calls overridden start method in Car
+myCar.honk();  // Calls method defined in Car
+myCar.stop();  // Calls method inherited from Vehicle
+
+
+In this example, the Car object has access to attributes and methods from Vehicle, demonstrating the benefits of inheritance.
+
+5. Types of Inheritance
+
+Inheritance can b
+
+Index: [5] Source: Inheritance.txt | Score: 0.43
+Chunk: nitialization of both superclass and subclass attributes.
+
+9. Access Modifiers and Inheritance
+
+Access modifiers affect visibility of superclass members:
+
+private: Not accessible in subclass.
+
+protected: Accessible in subclass and package.
+
+public: Accessible everywhere.
+
+default (package-private): Accessible within the same package.
+
+Example:
+
+class Vehicle {
+    private int engineNumber;
+    protected String brand;
+    public int wheels;
+}
+
+class Car extends Vehicle {
+    public void display() {
+        // engineNumber is not accessible
+        System.out.println(brand); // Accessible
+        System.out.println(wheels); // Accessible
+    }
+}
+
+
+Understanding access levels is critical when designing subclasses and superclasses.
+
+10. Abstract Superclasses
+
+
+"

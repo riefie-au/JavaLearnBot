@@ -155,8 +155,8 @@ public class AdminController extends BaseController // Controller for Admin sett
                         meta.category,
                         meta.source,
                         meta.path,
+                        meta.description,
                         meta.timestamp
-
                 );
                 adminData.add(doc);
             } catch (IOException e) {

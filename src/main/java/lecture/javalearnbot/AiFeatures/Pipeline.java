@@ -184,9 +184,9 @@ Return only the questions. No numbering, no extra text.
                         title, //document title
                         category,      //category placeholder
                         "local",        //source
-                        file.getPath(), //path reference
+                        file.getPath(),//path reference
+                        description,
                         file.lastModified() //timestamp
-
                 );
 
                 int index = 0;

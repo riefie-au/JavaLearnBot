@@ -67,10 +67,10 @@ public class DocumentsController extends BaseController {
     // ----------------------------
     private void loadDummyData() {
         masterData.addAll(
-                new Document("Java Basics", "Core", "Upload", "/docs/java_basics.pdf", System.currentTimeMillis()),
-                new Document("OOP Guide", "OOP", "Indexed", "/docs/oop_guide.pdf", System.currentTimeMillis()),
-                new Document("JavaFX Layouts", "UI", "Upload", "/docs/javafx_layouts.pdf", System.currentTimeMillis()),
-                new Document("Spring Boot Intro", "Frameworks", "Processing", "/docs/spring_boot.pdf", System.currentTimeMillis())
+                new Document("Java Basics", "Core", "Upload", "/docs/java_basics.pdf", "basic description", System.currentTimeMillis()),
+                new Document("OOP Guide", "OOP", "Indexed", "/docs/oop_guide.pdf","basic description", System.currentTimeMillis()),
+                new Document("JavaFX Layouts", "UI", "Upload", "/docs/javafx_layouts.pdf", "basic description",System.currentTimeMillis()),
+                new Document("Spring Boot Intro", "Frameworks", "Processing", "/docs/spring_boot.pdf", "basic description",System.currentTimeMillis())
         );
 
         categoryComboBox.setItems(
@@ -150,6 +150,7 @@ public class DocumentsController extends BaseController {
                 "Category: " + doc.getCategory(),
                 "Source: " + doc.getSource(),
                 "Path: " + doc.getPath(),
+                "Description " + doc.getDescription(),
                 "Timestamp: " + doc.getTimestamp(),
                 "",
                 "Preview content goes here..."
