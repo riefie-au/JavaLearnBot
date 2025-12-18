@@ -1,15 +1,14 @@
 package lecture.javalearnbot;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lecture.javalearnbot.AiFeatures.*;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
@@ -25,41 +24,66 @@ public class ChatController extends BaseController // Controller for Chat page, 
     private TextArea retrievedDocs;
 
     @FXML
-    private TableView<LogEntry> logTable; //table that displays rows of logEntry Objects
+    private TableView<ChatLogEntry> logTable; //table that displays rows of logEntry Objects
     @FXML
-    private TableColumn<LogEntry, String> timestampCol;  //LogEntry is the type of row object as its one object per row, String is the type of value displayed in the column
+    private TableColumn<ChatLogEntry, String> timestampCol;  //LogEntry is the type of row object as its one object per row, String is the type of value displayed in the column
     @FXML
-    private TableColumn<LogEntry, String> questionCol;
+    private TableColumn<ChatLogEntry, String> questionCol;
     @FXML
-    private TableColumn<LogEntry, String> answerCol;
+    private TableColumn<ChatLogEntry, String> answerCol;
+    @FXML
+    private ComboBox<Integer> scoreBox;
+    @FXML
+    private ComboBox<String> labelBox;
+    private final String[] labelOptions = {"Correct", "Incorrect", "Needs Review"};
+    private final Integer[] scoreOptions = {1,2,3,4,5,6,7,8,9,10};
 
-    private final ObservableList<LogEntry> logData = FXCollections.observableArrayList();
+
+    private final ObservableList<ChatLogEntry> logData = FXCollections.observableArrayList();
     //special list from javafx, that changes the list automatically, so when u do something like logData.add it automatically updates
 
 
     private final Pipeline pipeline = new Pipeline();
     private final EvaluationStore evaluationStore = new EvaluationStore();
     private final LogStore logStore = new LogStore();
-    //private final LogManager logManager = new LogManager();
+    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @FXML
     private void initialize(){
-        //pipeline.indexDocs();
-        timestampCol.setCellValueFactory(new PropertyValueFactory<>("timestamp")); //tels the column which property of log entry to display
-        questionCol.setCellValueFactory(new PropertyValueFactory<>("question"));
-        answerCol.setCellValueFactory(new PropertyValueFactory<>("answer"));
+        setupTableColumns();
+        loadTableData();
+        setupRowSelectionListener();
+        startIndexingThread();
+        populateBoxes();
+    }
 
-        logData.addAll(logStore.loadFromCSV()); //adds all data from the CSV file that stores previous answers and questions
-        //logData.addAll(logManager.getLogs());
-        // Bind ObservableList to TableView to make it so whenever that list is updated the table updates
+    private void setupTableColumns() {
+        timestampCol.setCellValueFactory(d ->
+                new SimpleStringProperty(d.getValue().getTimestamp().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+        );
+        questionCol.setCellValueFactory(d ->
+                new SimpleStringProperty(d.getValue().getQuestion())
+        );
+        answerCol.setCellValueFactory(d ->
+                new SimpleStringProperty(d.getValue().getAnswer())
+        );
+
+        logTable.setFixedCellSize(50); //set fixed size to 50 due to answers being potentially too long
+    }
+
+    private void loadTableData(){
+        logData.addAll(logStore.loadFromCSV());
         logTable.setItems(logData);
+    }
 
-        logTable.getSelectionModel()// returns selection manager for the tableView
-                .selectedItemProperty() //represents currently selected item, and returns an observable property
-                .addListener((observable, oldValue, newValue) -> { //attaches a listener that automatically runs when a user clicks a row
+    private void setupRowSelectionListener() {
+        logTable.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
                     displayLogEntry(newValue);
                 });
-        // Run indexing in a background thread
+    }
+
+    private void startIndexingThread(){
         new Thread(() -> {
             try {
                 pipeline.indexDocs();
@@ -69,7 +93,8 @@ public class ChatController extends BaseController // Controller for Chat page, 
         }).start();
     }
 
-    private void displayLogEntry(LogEntry entry) {
+
+    private void displayLogEntry(ChatLogEntry entry) {
         queryField.setText(entry.getQuestion());
         resultArea.setText(entry.getAnswer());
         rewriteArea.setText(entry.getRewrites());
@@ -95,6 +120,8 @@ public class ChatController extends BaseController // Controller for Chat page, 
     {
         queryField.clear();
         resultArea.clear();
+        rewriteArea.clear();
+        retrievedDocs.clear();
     }
 
     @FXML
@@ -135,7 +162,7 @@ public class ChatController extends BaseController // Controller for Chat page, 
                 String retrievedDocsText = retrievedDocsBuilder.toString();
                 //
                 //logManager.addLog(query,answer);
-                LogEntry entry = new LogEntry(query, answer, rewrittenText, retrievedDocsText); //create a new logEntry object
+                ChatLogEntry entry = new ChatLogEntry(query, answer, rewrittenText, retrievedDocsText); //create a new logEntry object
                 logData.add(entry);  //add it to the observable list, this updates the table view
                 logStore.add(entry); //add it to the buffer in LogStore
                 logStore.saveToCSV(); //save whatever is in the buffer to the CSV logs.
@@ -147,21 +174,75 @@ public class ChatController extends BaseController // Controller for Chat page, 
     }
 
     @FXML
-    private void onExport() {
-        String query = queryField.getText();
-        String answer = resultArea.getText();
-        List<String> rewrites = List.of(rewriteArea.getText().split("\n"));
-        double score = 8.1;
-        String label = "correct";
-        String notes = "mostly correct but with flaws";
+    private void onExportButtonClick() {
+        String question = queryField.getText().trim();
+        String answer = resultArea.getText().trim();
+        if (question.isEmpty() || answer.isEmpty()) {
+            Alert questionEmptyAlert = new Alert(Alert.AlertType.WARNING);
+            questionEmptyAlert.setTitle("Export error");
+            questionEmptyAlert.setHeaderText("Missing data");
+            questionEmptyAlert.setContentText("Please enter a query and get a result before exporting.");
+            questionEmptyAlert.showAndWait();
+            return;
+        }
 
-        evaluationStore.add(new EvaluationRecord(
-                query,
-                answer,
-                rewrites,
-                score,
-                label,
-                notes));
-        evaluationStore.exportAsCSV();
-}
-}
+        //obtain value from ComboBoxes
+        Integer score = scoreBox.getValue();
+        String label = labelBox.getValue();
+        if (score == null || label == null) {
+            Alert scoreLabelAlert = new Alert(Alert.AlertType.WARNING);
+            scoreLabelAlert.setTitle("Export Error");
+            scoreLabelAlert.setHeaderText("Invalid Selection");
+            scoreLabelAlert.setContentText("Please select both a score and a label before exporting.");
+            scoreLabelAlert.showAndWait();
+            return;
+        }
+
+        try{
+            EvaluationLogEntry chatEval = new EvaluationLogEntry(question,answer);
+            chatEval.evaluate(label,score);
+            EvaluationStore.saveEvaluation(chatEval);
+            Alert evalStatus = new Alert(Alert.AlertType.INFORMATION);
+            evalStatus.setTitle("Export Success");
+            evalStatus.setHeaderText("Evaluation Saved");
+            evalStatus.setContentText("The current query and answer have been successfully exported to Evaluation.");
+            evalStatus.showAndWait();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+    public void populateBoxes(){
+        scoreBox.getItems().addAll(1,2,3,4,5,6,7,8,9,10);
+        scoreBox.setValue(1);
+
+        labelBox.getItems().addAll("Correct", "Incorrect", "Needs Review");
+        labelBox.setValue("Needs Review");
+    }
+
+
+
+
+
+//    @FXML
+//    private void onExport() {
+//        String query = queryField.getText();
+//        String answer = resultArea.getText();
+//        List<String> rewrites = List.of(rewriteArea.getText().split("\n"));
+//        double score = 8.1;
+//        String label = "correct";
+//        String notes = "mostly correct but with flaws";
+//
+//        evaluationStore.add(new EvaluationRecord(
+//                query,
+//                answer,
+//                rewrites,
+//                score,
+//                label,
+//                notes));
+//        evaluationStore.exportAsCSV();
+    }
+

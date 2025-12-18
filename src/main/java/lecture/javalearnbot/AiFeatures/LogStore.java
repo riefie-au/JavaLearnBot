@@ -11,14 +11,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class LogStore {
-    private final List<LogEntry> buffer = new ArrayList<>();
-    private final Path logDir = Path.of(".logs"); //creates path objects that points to logs folder
+    private final List<ChatLogEntry> buffer = new ArrayList<>();
+    private final Path logDir =
+            Path.of(System.getProperty("user.home"), ".javalearnbot", "logs");
     private final File csvFile = logDir.resolve("chat_log.csv").toFile(); //makes csvFile point to the directory of LogDir and chat_log.csv
 
     public LogStore() { //constructor that creates a  log directory
@@ -26,7 +24,7 @@ public class LogStore {
         catch (IOException e) { throw new RuntimeException(e); }
     }
 
-    public void add(LogEntry entry) {
+    public void add(ChatLogEntry entry) {
         buffer.add(entry);
     }
 
@@ -40,7 +38,7 @@ public class LogStore {
             if(newFile){
                 writer.writeNext(new String[]{"timestamp", "question","answer","rewrites","retrievedChunks"});
             }
-            for (LogEntry logEntry : buffer) {
+            for (ChatLogEntry logEntry : buffer) {
                 writer.writeNext(new String[] {
                         logEntry.getTimestamp().toString(),
                         logEntry.getQuestion(),
@@ -56,8 +54,8 @@ public class LogStore {
         }
     }
 
-    public List<LogEntry> loadFromCSV() {
-        List<LogEntry> list = new ArrayList<>();
+    public List<ChatLogEntry> loadFromCSV() {
+        List<ChatLogEntry> list = new ArrayList<>();
         if (!csvFile.exists()) {
             return list; // nothing to load
         }
@@ -75,7 +73,7 @@ public class LogStore {
                 String answer    = next[2];
                 String rewrites = next.length > 3 ? next[3] : "";
                 String retrievedDocs = next.length > 4 ? next[4] : "";
-                list.add(new LogEntry(question, answer,rewrites, retrievedDocs));
+                list.add(new ChatLogEntry(question, answer,rewrites, retrievedDocs));
             }
 
         } catch (Exception e) {

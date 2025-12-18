@@ -72,8 +72,8 @@ public class Pipeline {
     }
 
     public String GenerateAnswer (String question, List<Hit> hits, List<String> rewrites) {
-    StringBuilder ctx = new StringBuilder();
-    int i = 1;
+        StringBuilder ctx = new StringBuilder();
+        int i = 1;
         for (Hit hit : hits) {
             // Add metadata about where the chunk came from
             ctx.append("Index: = [")
@@ -268,7 +268,7 @@ Return only the questions. No numbering, no extra text.
 //        }
 
 
-        //load docs folder from projects resources folder and makes it accessible as a file object in java
+    //load docs folder from projects resources folder and makes it accessible as a file object in java
 //    public void loadDocsFolder() {
 //        try{
 //            docs = new File(getClass().getClassLoader().getResource("docs").toURI());
