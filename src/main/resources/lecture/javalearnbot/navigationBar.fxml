@@ -21,11 +21,11 @@
 
             <HBox alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="540.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#toHome" prefHeight="29.0" prefWidth="66.0" styleClass="nav-btn" text="Home" />
-                  <Button mnemonicParsing="false" onAction="#toChatBot" prefHeight="61.0" prefWidth="62.0" styleClass="nav-btn" text="Chat" />
-                  <Button mnemonicParsing="false" onAction="#toDocuments" prefHeight="57.0" prefWidth="140.0" styleClass="nav-btn" text="Documents" />
-                  <Button mnemonicParsing="false" onAction="#toEvaluationDashboard" prefHeight="54.0" prefWidth="115.0" styleClass="nav-btn" text="Evaluation" />
-                  <Button mnemonicParsing="false" onAction="#toAdmin" prefHeight="59.0" prefWidth="119.0" styleClass="nav-btn" text="Admin Settings" />
+                  <Button mnemonicParsing="false" onAction="#toHome" prefHeight="29.0" prefWidth="66.0" styleClass="btn" text="Home" />
+                  <Button mnemonicParsing="false" onAction="#toChatBot" prefHeight="61.0" prefWidth="62.0" styleClass="btn" text="Chat" />
+                  <Button mnemonicParsing="false" onAction="#toDocuments" prefHeight="57.0" prefWidth="140.0" styleClass="btn" text="Documents" />
+                  <Button mnemonicParsing="false" onAction="#toEvaluationDashboard" prefHeight="54.0" prefWidth="115.0" styleClass="btn" text="Evaluation" />
+                  <Button mnemonicParsing="false" onAction="#toAdmin" prefHeight="59.0" prefWidth="119.0" styleClass="btn" text="Admin Settings" />
                </children>
             </HBox>
          </children>
