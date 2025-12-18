@@ -1,0 +1,122 @@
+/* Main Top Bar styling */
+.top-bar {
+    -fx-background-color: #161616;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 0 15 0 15;
+}
+
+/* Search Bar styling */
+.search-field {
+    -fx-background-color: #161616;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #b0b0b0;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-color: white;
+
+}
+
+/* Navigation Button styling */
+.btn {
+
+    -fx-background-color: #202022;
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-font-weight: bold;
+    -fx-max-height: 10px;
+}
+/* Hover on Button styling */
+.btn:hover {
+    -fx-background-color: white;
+    -fx-text-fill: #161616;
+}
+
+/* --- 2. INPUTS (Text Fields & Text Areas) --- */
+/* This handles the main "Result" and "Rewrites" boxes with the requested color */
+.text-area {
+    -fx-background-color: #333339;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #b0b0b0;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: transparent; /* Clean look */
+}
+
+/* Also colour the inner content area of text boxes */
+.text-area .content {
+    -fx-background-color: #333339;
+    -fx-background-radius: 10px;
+}
+
+/* --- 4. TABLE VIEW (Responsive & Colored) --- */
+/* The main table background */
+.table-view {
+    -fx-background-color: #333339; /* Requested color */
+    -fx-base: #333339;
+    -fx-control-inner-background: #333339;
+    -fx-table-cell-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+/* The header row (top of table) */
+.table-view .column-header-background {
+    -fx-background-color: #161616; /* Darker header to distinguish from data */
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #555;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* The data rows */
+.table-row-cell {
+    -fx-background-color: #333339;
+    -fx-border-width: 0 0 1 0; /* Thin line between rows */
+    -fx-border-color: #2b2b30;
+}
+
+/* Clean text inside the table */
+.table-cell {
+    -fx-text-fill: white;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 10 0 10 10; /* Padding creates the "responsive" breathing room */
+}
+
+/* Remove the default empty table placeholder color */
+.table-view .placeholder .label {
+    -fx-text-fill: derive(#333339, 50%);
+}
+
+/* --- 5. SCROLL BARS (Dark Theme Integration) --- */
+/* Essential to make the table and text areas look good in dark mode */
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+.scroll-bar .thumb {
+    -fx-background-color: #555555;
+    -fx-background-radius: 5em;
+}
+.scroll-pane, .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.chat-btn {
+
+    -fx-background-color: white;
+    -fx-text-fill: #161616;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-font-weight: bold;
+    -fx-max-height: 10px;
+}
+/* Hover on Button styling */
+.chat-btn:hover {
+    -fx-background-color: #202022;
+    -fx-text-fill: white;
+}
