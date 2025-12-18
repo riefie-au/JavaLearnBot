@@ -68,7 +68,7 @@
             </content>
         </ScrollPane>
 
-        <VBox prefHeight="214.0" prefWidth="800.0" spacing="5.0">
+        <VBox prefHeight="214.0" prefWidth="800.0" spacing="5.0" VBox.vgrow="ALWAYS">
             <padding>
                 <Insets bottom="15.0" left="20.0" right="20.0" top="5.0" />
             </padding>
@@ -77,24 +77,17 @@
                 <Label text="Logging History" textFill="WHITE">
                     <font> <Font size="16.0" /> </font>
                 </Label>
-                <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0">
-                         <children>
 
-                                <TableView fx:id="logTable" minHeight="250.0" prefHeight="300.0" prefWidth="760.0" VBox.vgrow="ALWAYS">
-                                    <columns>
-                                        <TableColumn fx:id="timestampCol" prefWidth="200.0" text="Timestamp" />
-                                        <TableColumn fx:id="questionCol" prefWidth="200.0" text="Question" />
-                                        <TableColumn fx:id="answerCol" prefWidth="200.79998168945315" text="Answer" />
-                                    </columns>
-                                    <columnResizePolicy>
-                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                    </columnResizePolicy>
-                                </TableView>
-                         </children></AnchorPane>
-                  </content>
-                </ScrollPane>
+                    <TableView fx:id="logTable" minHeight="175.0" prefHeight="175.0" prefWidth="760.0" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="timestampCol" prefWidth="200.0" text="Timestamp" />
+                            <TableColumn fx:id="questionCol" prefWidth="200.0" text="Question" />
+                            <TableColumn fx:id="answerCol" prefWidth="200.79998168945315" text="Answer" />
+                        </columns>
+                        <columnResizePolicy>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                        </columnResizePolicy>
+                    </TableView>
             </children>
         </VBox>
 
