@@ -647,3 +647,346 @@ Understanding access levels is critical when designing subclasses and superclass
 
 
 "
+"2025-12-18T10:17:15.827660500","how juicy is my steak? <3","I am unsure.","- What cooking method did you use for your steak?
+- What cut of steak are you referring to?
+- How long did you let the steak rest after cooking?
+","Index: [1] Source: Inheritance.txt | Score: 0.10
+Chunk: eyword
+
+The super keyword in Java is used to:
+
+Call a superclass constructor from a subclass.
+
+Access methods or attributes of the superclass that are hidden by the subclass.
+
+Example of calling superclass constructor:
+
+class Car extends Vehicle {
+    int doors;
+
+    public Car(String brand, int wheels, int doors) {
+        super.brand = brand;
+        super.wheels = wheels; // Call superclass attributes
+        this.doors = doors;
+    }
+}
+
+
+Example of calling superclass method:
+
+class Car extends Vehicle {
+    @Override
+    public void start() {
+        super.start(); // Call Vehicle's start
+        System.out.println(""Car specific start logic"");
+    }
+}
+
+
+Using super allows subclasses to extend functionality while retaining access to the superclass behavio
+
+Index: [2] Source: Inheritance.txt | Score: 0.07
+Chunk: e, Car inherits brand and wheels from Vehicle, adds a new attribute doors, and overrides the start() method to provide a behavior specific to cars.
+
+4. Inheritance: Connecting Superclass and Subclass
+
+Inheritance is the mechanism by which a subclass acquires the properties and behaviors of its superclass. It is implemented using the keyword extends in Java.
+
+Example:
+
+Car myCar = new Car();
+myCar.brand = ""Toyota"";
+myCar.wheels = 4;
+myCar.doors = 4;
+myCar.start(); // Calls overridden start method in Car
+myCar.honk();  // Calls method defined in Car
+myCar.stop();  // Calls method inherited from Vehicle
+
+
+In this example, the Car object has access to attributes and methods from Vehicle, demonstrating the benefits of inheritance.
+
+5. Types of Inheritance
+
+Inheritance can b
+
+Index: [3] Source: Inheritance.txt | Score: 0.07
+Chunk: ing the benefits of inheritance.
+
+5. Types of Inheritance
+
+Inheritance can be categorized in several ways:
+
+Single Inheritance: A subclass inherits from one superclass.
+
+class Car extends Vehicle {}
+
+
+Multilevel Inheritance: A chain of inheritance where a subclass inherits from another subclass.
+
+class ElectricCar extends Car {}
+
+
+Hierarchical Inheritance: Multiple subclasses inherit from the same superclass.
+
+class Bike extends Vehicle {}
+class Truck extends Vehicle {}
+
+
+Multiple Inheritance (via interfaces in Java): Achieved through interfaces, since Java does not support multiple class inheritance.
+
+interface Electric {}
+class ElectricCar extends Car implements Electric {}
+
+6. Method Overriding
+
+Subclasses can override methods from their superclass to provid
+
+Index: [4] Source: Inheritance.txt | Score: 0.06
+Chunk: od Overriding
+
+Subclasses can override methods from their superclass to provide specific behavior. Method overriding ensures that when a method is called on a subclass object, the subclass’s version is executed.
+
+Rules for overriding:
+
+The method must have the same name, return type, and parameters.
+
+The access level of the overridden method cannot be more restrictive.
+
+Subclasses can use the @Override annotation for clarity.
+
+Example:
+
+class Bike extends Vehicle {
+    @Override
+    public void start() {
+        System.out.println(""Bike started"");
+    }
+}
+
+
+Here, Bike overrides the start() method of Vehicle. Calling start() on a Bike object executes the overridden method.
+
+7. The super Keyword
+
+The super keyword in Java is used to:
+
+Call a superclass constructor
+
+Index: [5] Source: Java_Information_1.txt | Score: 0.06
+Chunk: ), debuggers, logging frameworks, and unit tests to locate the source of bugs. Effective debugging is essential for delivering reliable software.
+
+Version control systems, such as Git, allow programmers to track changes in code over time, collaborate with others, and revert to previous versions if necessary. Platforms like GitHub and GitLab provide cloud-based repositories, issue tracking, and continuous integration tools to streamline development workflows.
+
+Integrated development environments provide a unified interface for writing, testing, and debugging code. IDEs offer syntax highlighting, code completion, refactoring tools, and built-in terminals to improve programmer productivity. Popular IDEs include IntelliJ IDEA for Java, PyCharm for Python, and Visual Studio for C++.
+
+Soft
+
+"
+"2025-12-18T10:17:47.252481400","how old is rienellene","I'm unsure. The context provided does not contain any information about Rienellene's age or birth date.","- What is the birth date of Rienellene?
+- Can you provide information about Rienellene's age?
+- When was Rienellene born?
+","Index: [1] Source: Java_Information_1.txt | Score: 0.09
+Chunk: lease notes, and branching strategies support organized software evolution.
+
+...
+
+
+
+
+Index: [2] Source: Java_Information_1.txt | Score: 0.07
+Chunk:  renaming variables, extracting methods, simplifying conditional statements, and removing duplicated code. Refactoring enhances maintainability, readability, and reduces technical debt.
+
+Software engineering principles guide developers in producing high-quality software. Principles such as DRY (Don't Repeat Yourself), KISS (Keep It Simple, Stupid), YAGNI (You Aren’t Gonna Need It), and SOLID help write efficient, modular, and maintainable code. Adhering to these principles reduces bugs and development time.
+
+Programming paradigms influence how developers think about problem-solving. Imperative programming focuses on describing sequences of commands to change program state, while declarative programming focuses on describing the desired result. Understanding paradigms helps choose the b
+
+Index: [3] Source: Java_Information_1.txt | Score: 0.05
+Chunk: pplications, Android apps, and web servers. Its strong typing, automatic memory management, and comprehensive API contribute to its stability and scalability.
+
+C++ is a statically typed, compiled language that provides low-level memory manipulation capabilities. It supports multiple paradigms, including procedural, object-oriented, and generic programming. C++ is widely used in game development, systems software, and performance-critical applications. The language’s power and complexity require careful management of resources, especially memory.
+
+The history of programming dates back to the early 19th century when Ada Lovelace wrote the first algorithm intended for a machine. Early programming languages, such as Fortran and COBOL, emerged in the 1950s and 1960s to simplify scientific a
+
+Index: [4] Source: OOP principles.txt | Score: 0.04
+Chunk: ass.
+
+3. Inheritance
+
+Inheritance is the mechanism by which one class (called a subclass or child class) can inherit fields and methods from another class (called a superclass or parent class). This promotes code reuse and establishes a natural hierarchy between classes.
+
+Key points of inheritance:
+
+Single Inheritance: A subclass inherits from one superclass. Example: Sedan class inherits from Car.
+
+Multilevel Inheritance: A class inherits from a subclass, forming a chain. Example: ElectricSedan inherits from Sedan, which inherits from Car.
+
+Hierarchical Inheritance: Multiple subclasses inherit from the same superclass. Example: Sedan and SUV inherit from Car.
+
+Multiple Inheritance (via interfaces): Some languages like Java support multiple inheritance through interfaces to a
+
+Index: [5] Source: Java_Information_1.txt | Score: 0.04
+Chunk: d rolling updates.
+
+User interfaces (UI) and user experience (UX) design focus on making software intuitive and enjoyable. Good UI/UX design considers layout, color schemes, accessibility, responsiveness, and feedback mechanisms. Frameworks like JavaFX, React, and Angular provide tools to create modern user interfaces.
+
+Logging and monitoring are essential for observing system behavior and diagnosing issues in production. Tools like Log4j, ELK Stack, Prometheus, and Grafana help collect, analyze, and visualize logs and metrics. Monitoring ensures applications perform reliably under varying conditions.
+
+Refactoring improves code structure without changing its behavior. Common refactoring techniques include renaming variables, extracting methods, simplifying conditional statements, and
+
+"
+"2025-12-18T10:18:10.083580100","do you know rienellene?","I am unsure. The context provided does not contain any information about someone named Rienellene.","- What can you tell me about Rienellene?
+- Have you heard of someone named Rienellene before?
+- Is Rienellene a person you know personally or from social media?
+","Index: [1] Source: Java_Information_1.txt | Score: 0.19
+Chunk: lease notes, and branching strategies support organized software evolution.
+
+...
+
+
+
+
+Index: [2] Source: Java_Information_1.txt | Score: 0.11
+Chunk:  renaming variables, extracting methods, simplifying conditional statements, and removing duplicated code. Refactoring enhances maintainability, readability, and reduces technical debt.
+
+Software engineering principles guide developers in producing high-quality software. Principles such as DRY (Don't Repeat Yourself), KISS (Keep It Simple, Stupid), YAGNI (You Aren’t Gonna Need It), and SOLID help write efficient, modular, and maintainable code. Adhering to these principles reduces bugs and development time.
+
+Programming paradigms influence how developers think about problem-solving. Imperative programming focuses on describing sequences of commands to change program state, while declarative programming focuses on describing the desired result. Understanding paradigms helps choose the b
+
+Index: [3] Source: OOP principles.txt | Score: 0.10
+Chunk: ass.
+
+3. Inheritance
+
+Inheritance is the mechanism by which one class (called a subclass or child class) can inherit fields and methods from another class (called a superclass or parent class). This promotes code reuse and establishes a natural hierarchy between classes.
+
+Key points of inheritance:
+
+Single Inheritance: A subclass inherits from one superclass. Example: Sedan class inherits from Car.
+
+Multilevel Inheritance: A class inherits from a subclass, forming a chain. Example: ElectricSedan inherits from Sedan, which inherits from Car.
+
+Hierarchical Inheritance: Multiple subclasses inherit from the same superclass. Example: Sedan and SUV inherit from Car.
+
+Multiple Inheritance (via interfaces): Some languages like Java support multiple inheritance through interfaces to a
+
+Index: [4] Source: Java_Information_1.txt | Score: 0.09
+Chunk: ch as Fortran and COBOL, emerged in the 1950s and 1960s to simplify scientific and business computations. Over time, languages evolved to include higher-level abstractions, error handling, and modular programming features.
+
+Algorithms are at the heart of programming. They provide a step-by-step procedure to solve specific problems or perform computations. Common algorithms include sorting, searching, dynamic programming, and graph algorithms. Efficient algorithms improve performance, reduce resource usage, and allow software to scale with larger data sets.
+
+Data structures are fundamental concepts that organize and store data efficiently. Arrays, linked lists, stacks, queues, trees, and graphs are common data structures. Choosing the right data structure is essential for optimizing alg
+
+Index: [5] Source: Java_Information_1.txt | Score: 0.09
+Chunk: d rolling updates.
+
+User interfaces (UI) and user experience (UX) design focus on making software intuitive and enjoyable. Good UI/UX design considers layout, color schemes, accessibility, responsiveness, and feedback mechanisms. Frameworks like JavaFX, React, and Angular provide tools to create modern user interfaces.
+
+Logging and monitoring are essential for observing system behavior and diagnosing issues in production. Tools like Log4j, ELK Stack, Prometheus, and Grafana help collect, analyze, and visualize logs and metrics. Monitoring ensures applications perform reliably under varying conditions.
+
+Refactoring improves code structure without changing its behavior. Common refactoring techniques include renaming variables, extracting methods, simplifying conditional statements, and
+
+"
+"2025-12-18T10:20:15.815138900","do you know rienellene?","I am unsure. The context provided does not contain any information about someone named Rienellene.","- What can you tell me about Rienellene?
+- Have you heard any stories or information about someone named Rienellene?
+- Is Rienellene a public figure or someone known in a specific community?
+","Index: [1] Source: Java_Information_1.txt | Score: 0.19
+Chunk: lease notes, and branching strategies support organized software evolution.
+
+...
+
+
+
+
+Index: [2] Source: Java_Information_1.txt | Score: 0.11
+Chunk:  renaming variables, extracting methods, simplifying conditional statements, and removing duplicated code. Refactoring enhances maintainability, readability, and reduces technical debt.
+
+Software engineering principles guide developers in producing high-quality software. Principles such as DRY (Don't Repeat Yourself), KISS (Keep It Simple, Stupid), YAGNI (You Aren’t Gonna Need It), and SOLID help write efficient, modular, and maintainable code. Adhering to these principles reduces bugs and development time.
+
+Programming paradigms influence how developers think about problem-solving. Imperative programming focuses on describing sequences of commands to change program state, while declarative programming focuses on describing the desired result. Understanding paradigms helps choose the b
+
+Index: [3] Source: OOP principles.txt | Score: 0.10
+Chunk: ass.
+
+3. Inheritance
+
+Inheritance is the mechanism by which one class (called a subclass or child class) can inherit fields and methods from another class (called a superclass or parent class). This promotes code reuse and establishes a natural hierarchy between classes.
+
+Key points of inheritance:
+
+Single Inheritance: A subclass inherits from one superclass. Example: Sedan class inherits from Car.
+
+Multilevel Inheritance: A class inherits from a subclass, forming a chain. Example: ElectricSedan inherits from Sedan, which inherits from Car.
+
+Hierarchical Inheritance: Multiple subclasses inherit from the same superclass. Example: Sedan and SUV inherit from Car.
+
+Multiple Inheritance (via interfaces): Some languages like Java support multiple inheritance through interfaces to a
+
+Index: [4] Source: Java_Information_1.txt | Score: 0.09
+Chunk: ch as Fortran and COBOL, emerged in the 1950s and 1960s to simplify scientific and business computations. Over time, languages evolved to include higher-level abstractions, error handling, and modular programming features.
+
+Algorithms are at the heart of programming. They provide a step-by-step procedure to solve specific problems or perform computations. Common algorithms include sorting, searching, dynamic programming, and graph algorithms. Efficient algorithms improve performance, reduce resource usage, and allow software to scale with larger data sets.
+
+Data structures are fundamental concepts that organize and store data efficiently. Arrays, linked lists, stacks, queues, trees, and graphs are common data structures. Choosing the right data structure is essential for optimizing alg
+
+Index: [5] Source: Java_Information_1.txt | Score: 0.09
+Chunk: d rolling updates.
+
+User interfaces (UI) and user experience (UX) design focus on making software intuitive and enjoyable. Good UI/UX design considers layout, color schemes, accessibility, responsiveness, and feedback mechanisms. Frameworks like JavaFX, React, and Angular provide tools to create modern user interfaces.
+
+Logging and monitoring are essential for observing system behavior and diagnosing issues in production. Tools like Log4j, ELK Stack, Prometheus, and Grafana help collect, analyze, and visualize logs and metrics. Monitoring ensures applications perform reliably under varying conditions.
+
+Refactoring improves code structure without changing its behavior. Common refactoring techniques include renaming variables, extracting methods, simplifying conditional statements, and
+
+"
+"2025-12-18T10:21:32.412003800","do you know rienellene?","I am unsure. The context provided does not contain any information about someone named Rienellene.","- What can you tell me about Rienellene?
+- Have you ever met someone named Rienellene?
+- Is Rienellene a common name in your area?
+","Index: [1] Source: Java_Information_1.txt | Score: 0.19
+Chunk: lease notes, and branching strategies support organized software evolution.
+
+...
+
+
+
+
+Index: [2] Source: Java_Information_1.txt | Score: 0.11
+Chunk:  renaming variables, extracting methods, simplifying conditional statements, and removing duplicated code. Refactoring enhances maintainability, readability, and reduces technical debt.
+
+Software engineering principles guide developers in producing high-quality software. Principles such as DRY (Don't Repeat Yourself), KISS (Keep It Simple, Stupid), YAGNI (You Aren’t Gonna Need It), and SOLID help write efficient, modular, and maintainable code. Adhering to these principles reduces bugs and development time.
+
+Programming paradigms influence how developers think about problem-solving. Imperative programming focuses on describing sequences of commands to change program state, while declarative programming focuses on describing the desired result. Understanding paradigms helps choose the b
+
+Index: [3] Source: OOP principles.txt | Score: 0.10
+Chunk: ass.
+
+3. Inheritance
+
+Inheritance is the mechanism by which one class (called a subclass or child class) can inherit fields and methods from another class (called a superclass or parent class). This promotes code reuse and establishes a natural hierarchy between classes.
+
+Key points of inheritance:
+
+Single Inheritance: A subclass inherits from one superclass. Example: Sedan class inherits from Car.
+
+Multilevel Inheritance: A class inherits from a subclass, forming a chain. Example: ElectricSedan inherits from Sedan, which inherits from Car.
+
+Hierarchical Inheritance: Multiple subclasses inherit from the same superclass. Example: Sedan and SUV inherit from Car.
+
+Multiple Inheritance (via interfaces): Some languages like Java support multiple inheritance through interfaces to a
+
+Index: [4] Source: Java_Information_1.txt | Score: 0.09
+Chunk: ch as Fortran and COBOL, emerged in the 1950s and 1960s to simplify scientific and business computations. Over time, languages evolved to include higher-level abstractions, error handling, and modular programming features.
+
+Algorithms are at the heart of programming. They provide a step-by-step procedure to solve specific problems or perform computations. Common algorithms include sorting, searching, dynamic programming, and graph algorithms. Efficient algorithms improve performance, reduce resource usage, and allow software to scale with larger data sets.
+
+Data structures are fundamental concepts that organize and store data efficiently. Arrays, linked lists, stacks, queues, trees, and graphs are common data structures. Choosing the right data structure is essential for optimizing alg
+
+Index: [5] Source: Java_Information_1.txt | Score: 0.09
+Chunk: d rolling updates.
+
+User interfaces (UI) and user experience (UX) design focus on making software intuitive and enjoyable. Good UI/UX design considers layout, color schemes, accessibility, responsiveness, and feedback mechanisms. Frameworks like JavaFX, React, and Angular provide tools to create modern user interfaces.
+
+Logging and monitoring are essential for observing system behavior and diagnosing issues in production. Tools like Log4j, ELK Stack, Prometheus, and Grafana help collect, analyze, and visualize logs and metrics. Monitoring ensures applications perform reliably under varying conditions.
+
+Refactoring improves code structure without changing its behavior. Common refactoring techniques include renaming variables, extracting methods, simplifying conditional statements, and
+
+"
