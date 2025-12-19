@@ -102,9 +102,11 @@
 
                         <HBox spacing="15.0">
                             <children>
-                                <Button styleClass="btn" text="📝 Edit Metadata" />
+                                <Button fx:id="editButton" onAction="#onEditMetadata"
+                                        styleClass="btn" text="📝 Edit Metadata" />
                                 <Region HBox.hgrow="ALWAYS" />
-                                <Button styleClass="btn-danger" text="🗑 Delete Document" />
+                                <Button fx:id="deleteButton" onAction="#onDeleteDocument"
+                                        styleClass="btn-danger" text="🗑 Delete Document" />
                             </children>
                         </HBox>
 
