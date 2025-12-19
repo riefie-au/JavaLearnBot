@@ -55,21 +55,14 @@
 
     <Separator />
 
-    <VBox spacing="10">
+    <VBox spacing="10" VBox.vgrow="SOMETIMES">
         <Label text="Document Preview" textFill="WHITE">
             <font>
                 <Font size="22" />
             </font>
         </Label>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="282.0"  VBox.vgrow="ALWAYS">
-               <children>
-                    <ListView fx:id="previewListView" prefHeight="238.0" minWidth="839.0"  VBox.vgrow="ALWAYS" />
-               </children>
-            </AnchorPane>
-        </content>
-      </ScrollPane>
+
+        <ListView fx:id="previewListView" prefHeight="150.0" VBox.vgrow="ALWAYS" />
     </VBox>
 
 </VBox>

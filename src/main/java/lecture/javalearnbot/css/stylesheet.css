@@ -100,13 +100,13 @@
     -fx-font-weight: bold;
     -fx-cursor: hand;
     -fx-pref-height: 40px;
-    -fx-pref-width: 100px;
+    -fx-pref-width: 150px;
 }
 
 .home-btn:hover {
     -fx-background-color: white;
     -fx-pref-height: 40px;
-    -fx-pref-width: 100px;
+    -fx-pref-width: 150px;
     -fx-background-radius: 8px;
     -fx-font-weight: bold;
 }
