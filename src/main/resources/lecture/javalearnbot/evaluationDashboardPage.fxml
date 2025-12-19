@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="800.0" prefWidth="850.0" style="-fx-background-color: #1b1b1d;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lecture.javalearnbot.EvaluationController">
+<ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="800.0" prefWidth="850.0" style="-fx-background-color: #1b1b1d;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lecture.javalearnbot.Controllers.EvaluationController">
     <content>
         <VBox spacing="20.0" style="-fx-background-color: #1b1b1d;">
             <padding>

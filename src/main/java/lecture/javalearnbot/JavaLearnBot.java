@@ -3,7 +3,6 @@ package lecture.javalearnbot;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -25,7 +24,6 @@ public class JavaLearnBot extends Application {
         stage.setTitle("Chat Page");
         stage.setScene(scene);
         stage.show();
-
     }
 
     public static void main(String[] args) {

@@ -16,6 +16,16 @@ module lecture.javalearnbot {
 
     opens lecture.javalearnbot to javafx.fxml;
     exports lecture.javalearnbot;
-    exports lecture.javalearnbot.AiFeatures;
-    opens lecture.javalearnbot.AiFeatures to javafx.fxml;
+    exports lecture.javalearnbot.RAG;
+    opens lecture.javalearnbot.RAG to javafx.fxml;
+    exports lecture.javalearnbot.Evaluation;
+    opens lecture.javalearnbot.Evaluation to javafx.fxml;
+    exports lecture.javalearnbot.Log;
+    opens lecture.javalearnbot.Log to javafx.fxml;
+    exports lecture.javalearnbot.RAG.RagHelperClasses;
+    opens lecture.javalearnbot.RAG.RagHelperClasses to javafx.fxml;
+    exports lecture.javalearnbot.Utility;
+    opens lecture.javalearnbot.Utility to javafx.fxml;
+    exports lecture.javalearnbot.Controllers;
+    opens lecture.javalearnbot.Controllers to javafx.fxml;
 }

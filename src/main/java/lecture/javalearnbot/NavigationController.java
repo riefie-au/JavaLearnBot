@@ -2,14 +2,11 @@ package lecture.javalearnbot;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-
+import lecture.javalearnbot.Controllers.BaseController;
 
 
 public class NavigationController {

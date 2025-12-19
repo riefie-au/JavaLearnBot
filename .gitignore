@@ -43,6 +43,3 @@ build/
 /.idea/
 /*.iml
 /out/
-
-# Environment variables
-key.env
