@@ -1,0 +1,9 @@
+Exception handling in Java is managed through five keywords: try, catch, finally, throw, and throws.
+
+Checked Exceptions: These are exceptions that are checked at compile-time. The compiler ensures they are either caught or declared in the method signature using the throws keyword. Examples include IOException and SQLException.
+
+Unchecked Exceptions: These are exceptions that are not checked at compile-time. They occur at runtime and are subclasses of RuntimeException. Examples include NullPointerException and ArrayIndexOutOfBoundsException.
+
+Error: These are serious problems that are not meant to be caught by applications. Examples include OutOfMemoryError and StackOverflowError.
+
+Best practices include catching specific exceptions rather than general ones, logging exceptions appropriately, and using try-with-resources for automatic resource management.

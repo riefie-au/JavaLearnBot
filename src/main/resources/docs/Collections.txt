@@ -1,0 +1,11 @@
+The Java Collections Framework provides a set of classes and interfaces for storing and manipulating groups of data as a single unit. It includes several core interfaces:
+
+List: An ordered collection that allows duplicate elements. Common implementations include ArrayList (resizable array) and LinkedList (doubly-linked list).
+
+Set: A collection that cannot contain duplicate elements. Common implementations include HashSet (hash table based) and TreeSet (red-black tree based).
+
+Map: An object that maps keys to values, with no duplicate keys allowed. Common implementations include HashMap and TreeMap.
+
+Queue: A collection designed for holding elements prior to processing, typically following FIFO (First-In-First-Out) order.
+
+All collection classes are part of the java.util package and provide methods for adding, removing, and accessing elements efficiently.

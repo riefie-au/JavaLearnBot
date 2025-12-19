@@ -72,7 +72,7 @@
                 <Font size="22"/>
             </font>
         </Label>
-        <ListView fx:id="previewListView" prefHeight="150"/>
+        <ListView fx:id="previewListView" prefHeight="350"/>
     </VBox>
 
 </VBox>
