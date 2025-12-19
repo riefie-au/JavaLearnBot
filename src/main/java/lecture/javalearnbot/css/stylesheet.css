@@ -21,7 +21,7 @@
     -fx-border-width: 0 0 1 0;
     -fx-padding: 0 15 0 15;
 }
-/* Used for the "Add File" box in Admin page */
+/*used for "add file" box in admins page*/
 .card-pane {
     -fx-background-color: #252529;
     -fx-background-radius: 10px;
@@ -29,7 +29,7 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 5);
 }
 
-/* --- 3. INPUTS (Search, Text Fields, Text Areas, Combo) --- */
+/*text fields and input fields*/
 .text-field, .search-field {
     -fx-background-color: #161616;
     -fx-text-fill: white;
@@ -38,6 +38,8 @@
     -fx-border-radius: 5px;
     -fx-border-color: #555555;
 }
+
+
 .text-area {
     -fx-background-color: #333339;
     -fx-text-fill: white;
@@ -67,9 +69,8 @@
     -fx-background-color: #555555;
 }
 
-/* --- 4. BUTTONS --- */
-/* Standard Navigation/Action Button (Dark) */
-.btn {
+/*buttons*/
+.btn {/*Main buttons and used for navigation bar*/
     -fx-background-color: #202022;
     -fx-text-fill: black;
     -fx-background-radius: 8px;
@@ -80,18 +81,6 @@
     -fx-background-color: white;
 }
 
-/* Highlight/Primary Button (White - like "Begin Chat") */
-.chat-btn {
-    -fx-background-color: white;
-    -fx-text-fill: black;
-    -fx-background-radius: 8px;
-    -fx-font-weight: bold;
-    -fx-cursor: hand;
-}
-.chat-btn:hover {
-    -fx-background-color: black;
-
-}
 
 .home-btn{
     -fx-background-color: #161616;
@@ -111,18 +100,20 @@
     -fx-font-weight: bold;
 }
 
-/* Specific Action Buttons (Admin/Eval) */
+/* styled buttons */
 .btn-success {
-    -fx-background-color: #2ea043; /* Green */
+    -fx-background-color: #2ea043; /* green success button */
     -fx-text-fill: white;
     -fx-background-radius: 8px;
     -fx-font-weight: bold;
     -fx-cursor: hand;
 }
-.btn-success:hover { -fx-background-color: #3fb950; }
+.btn-success:hover {
+    -fx-background-color: #3fb950;
+}
 
-.btn-primary {
-    -fx-background-color: #1f6feb; /* Blue */
+.btn-primary { /* blue default button */
+    -fx-background-color: #1f6feb;
     -fx-text-fill: white;
     -fx-background-radius: 8px;
     -fx-font-weight: bold;
@@ -132,8 +123,8 @@
     -fx-background-color: #388bfd;
 }
 
-.btn-danger {
-    -fx-background-color: #da3633; /* Red */
+.btn-danger { /* red danger button*/
+    -fx-background-color: #da3633;
     -fx-text-fill: white;
     -fx-background-radius: 8px;
     -fx-font-weight: bold;
@@ -144,7 +135,7 @@
 }
 
 
-/* --- 5. DATA TABLES & LISTS --- */
+/* table and listview styling */
 .table-view, .list-view {
     -fx-background-color: #333339;
     -fx-base: #333339;
@@ -179,7 +170,7 @@
     -fx-text-fill: derive(#333339, 50%);
 }
 
-/* --- 6. SCROLLBARS --- */
+/* scrollbar styling */
 .scroll-bar {
     -fx-background-color: transparent;
 }
@@ -191,7 +182,7 @@
     -fx-background-color: transparent;
 }
 
-/* --- 7. CHARTS --- */
+/* chart styling */
 .chart {
     -fx-padding: 10px;
 }
