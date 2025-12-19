@@ -18,21 +18,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="800.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lecture.javalearnbot.EvaluationController">
+<ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="800.0" prefWidth="850.0" style="-fx-background-color: #1b1b1d;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lecture.javalearnbot.EvaluationController">
     <content>
-        <VBox spacing="20.0">
+        <VBox spacing="20.0" style="-fx-background-color: #1b1b1d;">
             <padding>
                 <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
             </padding>
             <children>
 
-                <Label text="Evaluation Dashboard">
+                <Label text="Evaluation Dashboard" textFill="WHITE">
                     <font> <Font size="32.0" /> </font>
                 </Label>
 
                 <VBox spacing="10.0">
                     <children>
-                        <Label text="Evaluations">
+                        <Label text="Evaluations" textFill="WHITE">
                             <font> <Font size="22.0" /> </font>
                         </Label>
 
@@ -50,33 +50,33 @@
                         </TableView>
                     </children>
                 </VBox>
-            <Label text="Chat Logs (Click Evaluate Button To Evaluate)">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
-            <TableView fx:id="chatLogsTable" minHeight="250.0" prefHeight="300.0">
-               <columns>
-                  <TableColumn fx:id="chatTimeCol" prefWidth="120.0" text="Timestamp" />
-                  <TableColumn fx:id="chatQuestionCol" prefWidth="200.0" text="Question" />
-                  <TableColumn fx:id="chatAnswerCol" prefWidth="200.0" text="Answer" />
-                  <TableColumn fx:id="evalButtonCol" prefWidth="75.0" text="Evaluate" />
-               </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
+                <Label text="Chat Logs (Click Evaluate Button To Evaluate)" textFill="WHITE">
+                    <font>
+                        <Font size="22.0" />
+                    </font>
+                </Label>
+                <TableView fx:id="chatLogsTable" minHeight="250.0" prefHeight="300.0">
+                    <columns>
+                        <TableColumn fx:id="chatTimeCol" prefWidth="120.0" text="Timestamp" />
+                        <TableColumn fx:id="chatQuestionCol" prefWidth="200.0" text="Question" />
+                        <TableColumn fx:id="chatAnswerCol" prefWidth="200.0" text="Answer" />
+                        <TableColumn fx:id="evalButtonCol" prefWidth="75.0" text="Evaluate" />
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
 
                 <HBox alignment="CENTER_LEFT" spacing="15.0">
                     <children>
-                        <Label text="Export logging table as csv:">
+                        <Label text="Export logging table as csv:" textFill="WHITE">
                             <font> <Font size="14.0" /> </font>
                         </Label>
-                        <Button mnemonicParsing="false" text="Export CSV" />
+                        <Button mnemonicParsing="false" styleClass="btn" text="Export CSV" />
 
                         <Region HBox.hgrow="ALWAYS" />
 
-                        <Button mnemonicParsing="false" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Save Changes" />
+                        <Button mnemonicParsing="false" styleClass="btn-success" text="Save Changes" />
                     </children>
                 </HBox>
 
@@ -94,17 +94,17 @@
 
                         <VBox spacing="5.0">
                             <children>
-                                <Label text="Distribution of Answers">
+                                <Label text="Distribution of Answers" textFill="WHITE">
                                     <font> <Font size="14.0" /> </font>
                                 </Label>
-                        <BarChart fx:id="evaluationBarChart">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis side="LEFT" />
-                          </yAxis>
-                        </BarChart>
+                                <BarChart fx:id="evaluationBarChart">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" tickLabelFill="WHITE" />
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis side="LEFT" tickLabelFill="WHITE" />
+                                    </yAxis>
+                                </BarChart>
                             </children>
                         </VBox>
 

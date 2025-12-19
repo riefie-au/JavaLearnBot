@@ -1,100 +1,185 @@
-/* Main Top Bar styling */
-.top-bar {
+/*main css layout styling*/
+.root { /*central screen background colour*/
+    -fx-background-color: #1b1b1d; /* Main Dark Background */
+    -fx-font-family: 'Segoe UI', sans-serif;
+}
+.label { /*label colour for titles*/
+    -fx-text-fill: white;
+}
+.text { /*colour for small texts*/
+    -fx-fill: white;
+}
+.separator .line { /*colour */
+    -fx-background-color: #202022;
+    -fx-border-color: transparent;
+}
+
+/*Navigation bar styling*/
+.top-bar { /*background of navigation bar*/
     -fx-background-color: #161616;
-    -fx-border-color: #e0e0e0;
+    -fx-border-color: #202022;
     -fx-border-width: 0 0 1 0;
     -fx-padding: 0 15 0 15;
 }
+/* Used for the "Add File" box in Admin page */
+.card-pane {
+    -fx-background-color: #252529;
+    -fx-background-radius: 10px;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 5);
+}
 
-/* Search Bar styling */
-.search-field {
+/* --- 3. INPUTS (Search, Text Fields, Text Areas, Combo) --- */
+.text-field, .search-field {
     -fx-background-color: #161616;
     -fx-text-fill: white;
     -fx-prompt-text-fill: #b0b0b0;
     -fx-background-radius: 5px;
     -fx-border-radius: 5px;
-    -fx-border-color: white;
-
+    -fx-border-color: #555555;
 }
-
-/* Navigation Button styling */
-.btn {
-
-    -fx-background-color: #202022;
-    -fx-text-fill: white;
-    -fx-background-radius: 10px;
-    -fx-border-radius: 10px;
-    -fx-font-weight: bold;
-    -fx-max-height: 10px;
-}
-/* Hover on Button styling */
-.btn:hover {
-    -fx-background-color: white;
-    -fx-text-fill: #161616;
-}
-
-/* --- 2. INPUTS (Text Fields & Text Areas) --- */
-/* This handles the main "Result" and "Rewrites" boxes with the requested color */
 .text-area {
     -fx-background-color: #333339;
     -fx-text-fill: white;
     -fx-prompt-text-fill: #b0b0b0;
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
-    -fx-border-color: transparent; /* Clean look */
+    -fx-border-color: transparent;
 }
-
-/* Also colour the inner content area of text boxes */
 .text-area .content {
     -fx-background-color: #333339;
     -fx-background-radius: 10px;
 }
+.combo-box {
+    -fx-background-color: #202022;
+    -fx-background-radius: 5px;
+    -fx-border-color: #555555;
+    -fx-border-radius: 5px;
+}
+.combo-box .cell {
+    -fx-text-fill: white;
+}
+.combo-box .list-cell {
+    -fx-background-color: #202022;
+    -fx-text-fill: white;
+}
+.combo-box .list-cell:hover {
+    -fx-background-color: #555555;
+}
 
-/* --- 4. TABLE VIEW (Responsive & Colored) --- */
-/* The main table background */
-.table-view {
-    -fx-background-color: #333339; /* Requested color */
+/* --- 4. BUTTONS --- */
+/* Standard Navigation/Action Button (Dark) */
+.btn {
+    -fx-background-color: #202022;
+    -fx-text-fill: black;
+    -fx-background-radius: 8px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+.btn:hover {
+    -fx-background-color: white;
+}
+
+/* Highlight/Primary Button (White - like "Begin Chat") */
+.chat-btn {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-background-radius: 8px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+.chat-btn:hover {
+    -fx-background-color: black;
+
+}
+
+.home-btn{
+    -fx-background-color: #161616;
+    -fx-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 150px;
+}
+
+.home-btn:hover {
+    -fx-background-color: white;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 150px;
+    -fx-background-radius: 8px;
+    -fx-font-weight: bold;
+}
+
+/* Specific Action Buttons (Admin/Eval) */
+.btn-success {
+    -fx-background-color: #2ea043; /* Green */
+    -fx-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+.btn-success:hover { -fx-background-color: #3fb950; }
+
+.btn-primary {
+    -fx-background-color: #1f6feb; /* Blue */
+    -fx-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+.btn-primary:hover {
+    -fx-background-color: #388bfd;
+}
+
+.btn-danger {
+    -fx-background-color: #da3633; /* Red */
+    -fx-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+.btn-danger:hover {
+    -fx-background-color: #f85149;
+}
+
+
+/* --- 5. DATA TABLES & LISTS --- */
+.table-view, .list-view {
+    -fx-background-color: #333339;
     -fx-base: #333339;
     -fx-control-inner-background: #333339;
     -fx-table-cell-border-color: transparent;
     -fx-background-insets: 0;
     -fx-padding: 0;
 }
-
-/* The header row (top of table) */
 .table-view .column-header-background {
-    -fx-background-color: #161616; /* Darker header to distinguish from data */
+    -fx-background-color: #161616;
     -fx-border-width: 0 0 1 0;
     -fx-border-color: #555;
 }
-
 .table-view .column-header .label {
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-alignment: CENTER_LEFT;
 }
-
-/* The data rows */
-.table-row-cell {
+.table-row-cell, .list-cell {
     -fx-background-color: #333339;
-    -fx-border-width: 0 0 1 0; /* Thin line between rows */
+    -fx-text-fill: white;
+    -fx-border-width: 0 0 1 0;
     -fx-border-color: #2b2b30;
 }
-
-/* Clean text inside the table */
 .table-cell {
     -fx-text-fill: white;
     -fx-alignment: CENTER_LEFT;
-    -fx-padding: 10 0 10 10; /* Padding creates the "responsive" breathing room */
 }
-
-/* Remove the default empty table placeholder color */
+.list-cell:filled:selected, .table-row-cell:filled:selected {
+    -fx-background-color: #44444a;
+}
 .table-view .placeholder .label {
     -fx-text-fill: derive(#333339, 50%);
 }
 
-/* --- 5. SCROLL BARS (Dark Theme Integration) --- */
-/* Essential to make the table and text areas look good in dark mode */
+/* --- 6. SCROLLBARS --- */
 .scroll-bar {
     -fx-background-color: transparent;
 }
@@ -106,17 +191,30 @@
     -fx-background-color: transparent;
 }
 
-.chat-btn {
-
-    -fx-background-color: white;
-    -fx-text-fill: #161616;
-    -fx-background-radius: 10px;
-    -fx-border-radius: 10px;
-    -fx-font-weight: bold;
-    -fx-max-height: 10px;
+/* --- 7. CHARTS --- */
+.chart {
+    -fx-padding: 10px;
 }
-/* Hover on Button styling */
-.chat-btn:hover {
-    -fx-background-color: #202022;
+.chart-content {
+    -fx-padding: 10px;
+}
+.axis {
+    -fx-tick-label-fill: white;
+    -fx-label-tick-fill: white;
+}
+.axis-label {
     -fx-text-fill: white;
 }
+.chart-legend {
+    -fx-background-color: transparent;
+}
+.chart-legend-item {
+    -fx-text-fill: white;
+}
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+.chart-vertical-grid-lines, .chart-horizontal-grid-lines {
+    -fx-stroke: #444444;
+}
+

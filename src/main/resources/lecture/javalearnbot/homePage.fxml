@@ -3,6 +3,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -11,12 +12,17 @@
 
         <VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #252529;" VBox.vgrow="ALWAYS">
             <children>
+                <ImageView fitHeight="126.0" fitWidth="214.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@javalearnbotogo.png" />
+                    </image>
+                </ImageView>
                 <Label text="JavaLearnBot" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="64.0" />
                     </font>
                 </Label>
-                <Button fx:id="beginChatButton" mnemonicParsing="false" onAction="#onBeginChatClick" styleClass="chat-btn" text="Begin Chat">
+                <Button fx:id="beginChatButton" mnemonicParsing="false" onAction="#onBeginChatClick" styleClass="home-btn" text="Begin Chat">
                     <font>
                         <Font size="16.0" />
                     </font>
@@ -65,9 +71,11 @@
                         <Label text="Group Members">
                             <font> <Font name="System Bold" size="16.0" /> </font>
                         </Label>
-                        <Label text="Member Name 1" textFill="#555555" />
-                        <Label text="Member Name 2" textFill="#555555" />
-                        <Label text="Member Name 3" textFill="#555555" />
+                        <Label prefHeight="11.0" prefWidth="347.0" text="Naavinnash Nair A/L Palmanabhan [0382254]" textFill="#555555" />
+                        <Label prefHeight="7.0" prefWidth="351.0" text="Lynette Loh Wen Lyn [0382154]" textFill="#555555" />
+                        <Label prefHeight="0.0" prefWidth="358.0" text="Rienellene Joyce Fieldad [0381260]" textFill="#555555" />
+                  <Label layoutX="10.0" layoutY="102.0" prefHeight="0.0" prefWidth="358.0" text="Kenneth Tan Hou Jian [0369018]" textFill="#555555" />
+                  <Label layoutX="10.0" layoutY="130.0" prefHeight="0.0" prefWidth="358.0" text="Sharveen Harshen A/L Vicnesvaran [0383183]" textFill="#555555" />
                     </children>
                 </VBox>
 
