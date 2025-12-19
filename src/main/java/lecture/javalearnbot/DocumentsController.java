@@ -9,15 +9,6 @@ import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import lecture.javalearnbot.AiFeatures.Document;
-import javafx.scene.control.*;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
 
 public class DocumentsController extends BaseController {
 
@@ -35,17 +26,13 @@ public class DocumentsController extends BaseController {
 
     @FXML private ListView<String> previewListView;
 
-    // --- Constants ---
-    private static final String RESOURCES_PATH = "src/main/resources/docs/";
-    private final Gson gson = new Gson();
-
     // --- Data ---
     private final ObservableList<Document> masterData = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
         setupColumns();
-        loadDocumentsFromResources();
+        loadDummyData();
         setupFilters();
         setupSelectionListener();
     }
@@ -74,117 +61,28 @@ public class DocumentsController extends BaseController {
                 new ReadOnlyLongWrapper(data.getValue().getTimestamp())
         );
     }
+
     // ----------------------------
-    // Load documents from resources/docs/ directory
+    // Dummy data (replace with DB later)
     // ----------------------------
-    private void loadDocumentsFromResources() {
-        try {
-            // Get the resources/docs directory
-            Path resourcesPath = Paths.get(RESOURCES_PATH);
+    private void loadDummyData() {
+        masterData.addAll(
+                new Document("Java Basics", "Core", "Upload", "/docs/java_basics.pdf", "basic description", System.currentTimeMillis()),
+                new Document("OOP Guide", "OOP", "Indexed", "/docs/oop_guide.pdf","basic description", System.currentTimeMillis()),
+                new Document("JavaFX Layouts", "UI", "Upload", "/docs/javafx_layouts.pdf", "basic description",System.currentTimeMillis()),
+                new Document("Spring Boot Intro", "Frameworks", "Processing", "/docs/spring_boot.pdf", "basic description",System.currentTimeMillis())
+        );
 
-            if (!Files.exists(resourcesPath) || !Files.isDirectory(resourcesPath)) {
-                System.err.println("Resources directory not found: " + resourcesPath.toAbsolutePath());
-                return;
-            }
+        categoryComboBox.setItems(
+                FXCollections.observableArrayList("All", "Core", "OOP", "UI", "Frameworks")
+        );
 
-            // Find all .txt files
-            Files.walk(resourcesPath)
-                    .filter(path -> path.toString().endsWith(".txt") && !path.toString().endsWith(".meta.json"))
-                    .forEach(txtPath -> {
-                        try {
-                            // Load the document
-                            Document doc = loadDocumentFromFile(txtPath);
-                            if (doc != null) {
-                                masterData.add(doc);
-                            }
-                        } catch (IOException e) {
-                            System.err.println("Error loading document: " + txtPath);
-                            e.printStackTrace();
-                        }
-                    });
+        statusComboBox.setItems(
+                FXCollections.observableArrayList("All", "Upload", "Indexed", "Processing")
+        );
 
-            // Extract unique categories and sources for combo boxes
-            Set<String> categories = new HashSet<>();
-            Set<String> sources = new HashSet<>();
-
-            for (Document doc : masterData) {
-                categories.add(doc.getCategory());
-                sources.add(doc.getSource());
-            }
-
-            // Setup combo boxes
-            List<String> categoryList = new ArrayList<>(categories);
-            categoryList.sort(String::compareTo);
-            categoryList.add(0, "All");
-
-            List<String> sourceList = new ArrayList<>(sources);
-            sourceList.sort(String::compareTo);
-            sourceList.add(0, "All");
-
-            categoryComboBox.setItems(FXCollections.observableArrayList(categoryList));
-            statusComboBox.setItems(FXCollections.observableArrayList(sourceList));
-
-            categoryComboBox.getSelectionModel().select("All");
-            statusComboBox.getSelectionModel().select("All");
-
-            System.out.println("Loaded " + masterData.size() + " documents from resources");
-
-        } catch (IOException e) {
-            System.err.println("Error walking through resources directory");
-            e.printStackTrace();
-        }
-    }
-
-    private Document loadDocumentFromFile(Path txtPath) throws IOException {
-        // Get metadata file path
-        Path metaPath = Paths.get(txtPath.toString() + ".meta.json");
-
-        String title = "";
-        String category = "Uncategorized";
-        String source = "File";
-        long timestamp = System.currentTimeMillis();
-
-        // Read metadata if exists
-        if (Files.exists(metaPath)) {
-            try {
-                String metaJson = Files.readString(metaPath);
-                JsonObject metaObject = gson.fromJson(metaJson, JsonObject.class);
-
-                if (metaObject.has("title")) {
-                    title = metaObject.get("title").getAsString();
-                }
-                if (metaObject.has("category")) {
-                    category = metaObject.get("category").getAsString();
-                }
-                if (metaObject.has("source")) {
-                    source = metaObject.get("source").getAsString();
-                }
-                if (metaObject.has("timestamp")) {
-                    timestamp = metaObject.get("timestamp").getAsLong();
-                }
-
-                //Debug: Print loaded documents
-                System.out.println("=== LOADED DOCUMENTS ===");
-
-            } catch (Exception e) {
-                System.err.println("Error parsing metadata for: " + txtPath);
-                e.printStackTrace();
-            }
-        }
-
-        // If title wasn't in metadata, use filename without extension
-        if (title.isEmpty()) {
-            String fileName = txtPath.getFileName().toString();
-            title = fileName.substring(0, fileName.lastIndexOf('.'));
-        }
-
-        // Read ALL file content
-        String fullContent = Files.readString(txtPath);
-
-        // Create relative path for display
-        String relativePath = txtPath.toString().replace("\\", "/");
-
-        return new Document(title, category, source, relativePath, timestamp, fullContent);
+        categoryComboBox.getSelectionModel().select("All");
+        statusComboBox.getSelectionModel().select("All");
     }
 
     // ----------------------------
@@ -241,46 +139,21 @@ public class DocumentsController extends BaseController {
                 .addListener((obs, oldDoc, newDoc) -> showPreview(newDoc));
     }
 
-    //Shows preview of the document selected from the table through ListView
     private void showPreview(Document doc) {
         if (doc == null) {
             previewListView.getItems().clear();
             return;
         }
 
-        ObservableList<String> previewItems = FXCollections.observableArrayList(
+        previewListView.setItems(FXCollections.observableArrayList(
                 "Title: " + doc.getTitle(),
                 "Category: " + doc.getCategory(),
                 "Source: " + doc.getSource(),
                 "Path: " + doc.getPath(),
-                "Timestamp: " + new Date(doc.getTimestamp()),
+                "Description " + doc.getDescription(),
+                "Timestamp: " + doc.getTimestamp(),
                 "",
-                "Preview:"
-                //""
-        );
-
-        if (doc.getContent() != null && !doc.getContent().isEmpty()) {
-
-            String content = doc.getContent();
-            String[] contentLines = content.split("\n");
-            int linesToShow = Math.min(10, contentLines.length);
-            StringBuilder singleLine = new StringBuilder();
-            for (int i = 0; i < linesToShow; i++) {
-                singleLine.append(contentLines[i]).append(" ");  // Add space instead of newline
-            }
-
-            previewItems.add(singleLine.toString().trim());
-
-            if (contentLines.length > 10) {
-                previewItems.add("... (more content)");
-            }
-        } else {
-            previewItems.add("No content available");
-        }
-
-        previewListView.setItems(previewItems);
+                "Preview content goes here..."
+        ));
     }
-
-
 }
-
