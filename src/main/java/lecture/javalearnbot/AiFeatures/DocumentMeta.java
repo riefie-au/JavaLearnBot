@@ -9,7 +9,7 @@ public class DocumentMeta {
     public String category;
     public String source;
     public String path;
-    public long timestamp;
     public String description;
+    public long timestamp;
 
 }
