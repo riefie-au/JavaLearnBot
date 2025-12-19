@@ -7,9 +7,9 @@ public class Document {
     private final String source;
     private final String path;
     private final long timestamp;
-    private final String content;
+    private final String description;
 
-    public Document(String title, String category, String source, String path, long timestamp, String content) {
+    public Document(String title, String category, String source, String path, String description, long timestamp) {
         this.documentID = generateDocumentId(title,timestamp);
         this.title = title;
         this.category = category;
@@ -17,7 +17,6 @@ public class Document {
         this.path = path;
         this.description = description;
         this.timestamp = timestamp;
-        this.content =  content;
     }
 
     public String getDocumentID() {
@@ -44,7 +43,9 @@ public class Document {
         return category;
     }
 
-    public String getContent() { return content; }
+    public String getDescription() {
+        return description;
+    }
 
     //generateDocumentId is meant to generate a unique id based on the document name and timestamp it was created
     private String generateDocumentId (String title, long timestamp) {
