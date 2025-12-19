@@ -1,0 +1,13 @@
+Multithreading in Java allows concurrent execution of two or more parts of a program for maximum utilization of CPU.
+
+Thread Creation: There are two main ways to create threads in Java:
+1. Extending the Thread class
+2. Implementing the Runnable interface
+
+Thread States: A thread can be in one of these states: NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, or TERMINATED.
+
+Synchronization: When multiple threads access shared resources, synchronization is needed to prevent thread interference. This can be achieved using synchronized methods or synchronized blocks.
+
+Thread Pools: The Executor framework provides thread pool management through ExecutorService, which manages a pool of worker threads and handles thread lifecycle.
+
+Common issues in multithreading include deadlock, race conditions, and thread starvation.
