@@ -16,7 +16,7 @@
                         <Font name="System Bold" size="64.0" />
                     </font>
                 </Label>
-                <Button fx:id="beginChatButton" mnemonicParsing="false" onAction="#onBeginChatClick" styleClass="chat-btn" text="Begin Chat">
+                <Button fx:id="beginChatButton" mnemonicParsing="false" onAction="#onBeginChatClick" styleClass="home-btn" text="Begin Chat">
                     <font>
                         <Font size="16.0" />
                     </font>
