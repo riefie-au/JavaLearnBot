@@ -18,11 +18,7 @@ import java.util.List;
 /*
 The Goal of this class is to store ev
 
-
  */
-
-
-
 
 public class EvaluationStore {
     //Path to evaluation directory

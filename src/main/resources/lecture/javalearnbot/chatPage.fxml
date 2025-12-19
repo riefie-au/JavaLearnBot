@@ -22,9 +22,6 @@
                 <Insets left="20.0" right="20.0" top="15.0" />
             </padding>
             <children>
-            <Button mnemonicParsing="false" onAction="#onExportButtonClick" text="Export" />
-            <ComboBox fx:id="labelBox" prefWidth="150.0" />
-            <ComboBox fx:id="scoreBox" prefWidth="150.0" />
                 <Label text="What is your Java question?" textFill="WHITE">
                     <font>
                         <Font size="20.0" />
@@ -59,6 +56,29 @@
                             </Label>
                             <TextArea fx:id="resultArea" prefHeight="220" prefWidth="745.0" promptText="AI Response will appear here..." style="-fx-background-radius: 100px; -fx-border-radius: 100px; -fx-background-color: #202022;" wrapText="true" />
                         </VBox>
+                  <HBox prefHeight="30.0" prefWidth="745.0">
+                     <children>
+                        <Label />
+                        <Button mnemonicParsing="false" onAction="#onExportButtonClick" text="Export answer and question">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </Button>
+                        <ComboBox fx:id="scoreBox" prefWidth="150.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                        <ComboBox fx:id="labelBox" prefWidth="150.0">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                     </children>
+                  </HBox>
 
                         <VBox prefHeight="236.0" prefWidth="745.0" spacing="5.0">
                             <Label text="Rewrites" textFill="WHITE">
