@@ -15,6 +15,7 @@ public class Document {
         this.category = category;
         this.source = source;
         this.path = path;
+        this.description = description;
         this.timestamp = timestamp;
         this.content =  content;
     }

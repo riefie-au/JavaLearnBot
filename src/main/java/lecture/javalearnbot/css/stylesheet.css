@@ -105,3 +105,18 @@
 .scroll-pane, .scroll-pane .viewport {
     -fx-background-color: transparent;
 }
+
+.chat-btn {
+
+    -fx-background-color: white;
+    -fx-text-fill: #161616;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-font-weight: bold;
+    -fx-max-height: 10px;
+}
+/* Hover on Button styling */
+.chat-btn:hover {
+    -fx-background-color: #202022;
+    -fx-text-fill: white;
+}

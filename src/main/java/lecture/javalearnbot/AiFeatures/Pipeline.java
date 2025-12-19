@@ -1,13 +1,16 @@
 package lecture.javalearnbot.AiFeatures;
 
+import com.google.gson.Gson;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.model.openai.OpenAiEmbeddingModel;
 import lecture.javalearnbot.ChatController;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
-
+import java.time.LocalDateTime;
 
 
 //Main Pipeline class where main methods are stored. pom.xml dependencies for open,ai and langchain have to be added
@@ -30,7 +33,8 @@ public class Pipeline {
     private final int topK = 5;
     private final ChunkStorage chunkStore = new ChunkStorage();
     private final Segmenter segmenter = new Segmenter(800, 80);
-
+    private final Gson gson = new Gson();
+    private final LocalDateTime time = LocalDateTime.now();
 
     public Pipeline() {
         String OPENAI_API_KEY = System.getenv("MY_API_KEY");
@@ -68,8 +72,8 @@ public class Pipeline {
     }
 
     public String GenerateAnswer (String question, List<Hit> hits, List<String> rewrites) {
-    StringBuilder ctx = new StringBuilder();
-    int i = 1;
+        StringBuilder ctx = new StringBuilder();
+        int i = 1;
         for (Hit hit : hits) {
             // Add metadata about where the chunk came from
             ctx.append("Index: = [")
@@ -149,21 +153,36 @@ Return only the questions. No numbering, no extra text.
         }
 
         try {
-            var files = java.nio.file.Files.walk(docs.toPath()) //converts file object to path, walk will visit every file and folder inside it
-                    .filter(p -> !java.nio.file.Files.isDirectory(p)) //skips directories
+            var files = Files.walk(docs.toPath()) //converts file object to path, walk will visit every file and folder inside it
+                    .filter(p -> !Files.isDirectory(p)) //skips directories
                     .filter(p -> p.toString().endsWith(".txt") || p.toString().endsWith(".docs"))
-                    .map(java.nio.file.Path::toFile)
+                    .map(Path::toFile)
                     .toList();
             // keep only files ending with .txt or docs, convert each path object to a string and collect all of them into a string list
 
             for(File file : files){
-                String text = java.nio.file.Files.readString(file.toPath());
+                String title = file.getName();
+                String category = "general";
+                String description = "No description";
+                File metaFile = new File(docs,file.getName()+".meta");
+
+                //check if the metadata file for that file exists
+                if(metaFile.exists()){
+                    String json = Files.readString(metaFile.toPath());
+                    DocumentMeta meta = gson.fromJson(json,DocumentMeta.class);
+                    title = meta.title;
+                    category = meta.category;
+                    description = meta.description;
+
+                }
+
+                String text = Files.readString(file.toPath());
                 List<String> chunkTexts = segmenter.segment(text);
 
                 //creating document object for each file found
                 Document doc = new Document(
-                        file.getName(), //document title
-                        "general",      //category placeholder
+                        title, //document title
+                        category,      //category placeholder
                         "local",        //source
                         file.getPath(), //path reference
                         file.lastModified(), //timestamp
@@ -197,23 +216,56 @@ Return only the questions. No numbering, no extra text.
 
 
 
+    //purpose of ingest is to take a file from the user, copy it into the directory, then create
+    //an associated metadata file for it, then passing
+    public void ingest(File file, String title, String category, String description) throws IOException {
+        if (file == null || !file.exists()) {
+            return;
+        }
+        try {
+            File target = new File(docs, title); //copy the file into the docs folder
+            if (!target.exists()) {
+                Files.copy(file.toPath(), target.toPath());
+            }
+            File metadataFile = new File(docs, file.getName() + ".meta.json"); //create the metadata file
+            if (!metadataFile.exists()) {
+                String metadataJson = String.format("""
+                        {
+                        "docTitle": "%s",
+                        "category": "%s",
+                        "description": "%s",
+                        "lastModified":  "%s"
+                        }
+                        
+                        """, title, category,description,time.toString());
+                Files.writeString(metadataFile.toPath(), metadataJson);
+            }
 
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-
-//    public <ListHit> rerankAndDiversify(List<Hit> hits) {
-//        if (hits == null || hits.isEmpty()) {
-//            hits.sort((a,b) -> Double.compare(a.getScore(), b.getScore())); //sort hitlist by highest score.
-//        }
-//    }
-
-
-
-
-    public ChunkStorage getChunkStore() {
-        return chunkStore;
     }
 
 
+//        public void indexSingleFile (File file, String title,String category) throws IOException {
+//            String text = Files.readString(file.toPath()); //read the file
+//            List<String> chunkTexts = segmenter.segment(text);
+//
+//            Document doc = new Document(
+//                    title != null ? title : file.getName(),
+//                    category != null ? category : "general",
+//                    "local",
+//                    file.getPath(),
+//                    file.lastModified()
+//            );
+//            int index = 0;
+//            for (String ChunkText : chunkTexts) {
+//                float[] vector = embeddings.embed(ChunkText).content().vector();
+//                ChunkStorage.DocumentChunk chunk = new ChunkStorage.DocumentChunk(doc, ChunkText, vector, index++);
+//                chunkStore.add(chunk);
+//            }
+//        }
 
 
     //load docs folder from projects resources folder and makes it accessible as a file object in java
@@ -227,7 +279,15 @@ Return only the questions. No numbering, no extra text.
 //        }
 //    }
 
-
+    public ChunkStorage getChunkStore() {
+        return chunkStore;
+    }
+    private static class DocumentMeta {
+        String title;
+        String category;
+        String source;
+        String description;
+    }
 }
 
 

@@ -1,63 +1,103 @@
 package lecture.javalearnbot.AiFeatures;
 
+import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvValidationException;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.FileWriter;
+
+/*
+The Goal of this class is to store ev
+
+
+ */
+
+
+
 
 public class EvaluationStore {
-    private final List<EvaluationRecord> records = new ArrayList<>();
-    private final Path evaluationDirectory = Path.of(".evaluations"); //this is a path object pointing to evaluations
+    //Path to evaluation directory
+    private static final Path evaluationDirectory = Path.of(".evaluations");
+    //obtaining the evaluations .csv file and storing it in a bariable
+    private static final File evaluationFile = evaluationDirectory.resolve("evaluations.csv").toFile();
 
-    public EvaluationStore() {
+
+    //creating the evaluation directory and if the evaluationFile doesnt exist create a new file
+    static {
         try {
-            Files.createDirectories(evaluationDirectory); //creating a directory inside evalatuions
+            Files.createDirectories(evaluationDirectory);
+            if (!evaluationFile.exists()) {
+                evaluationFile.createNewFile();
+                // write the headers of the evaluatikon file into the the CSV
+                try (CSVWriter writer = new CSVWriter(new FileWriter(evaluationFile))) {
+                    writer.writeNext(new String[]{"timestamp","question","answer","score","label"});
+                }
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void add (EvaluationRecord r) {
-        records.add(r); //adding an evaluationRecord object into the list of records
-    }
 
-    public void exportAsCSV() {
-        File file = evaluationDirectory.resolve("evaluations.csv").toFile(); //makes the file object point to evaluations CSV with was created from the constructor
-        boolean isNewFile = !file.exists();
+    //Goal is to loadEvaluations is to return an evaluationLogEntry list in order to load it into the table in the Evaluations Page
+    public static List<EvaluationLogEntry> loadEvaluations() {
+        //the list that we want to return
+        List<EvaluationLogEntry> list = new ArrayList<>();
 
-        try (CSVWriter writer = new CSVWriter(new FileWriter(file,true))) { //create a csvWriter object that wraps a filewriter
-            if (isNewFile) {
-                String[] header = {"timestamp", "question", "answer", "rewrites", "score", "label", "notes"};
-                writer.writeNext(header);
-            }
 
-                for (EvaluationRecord r : records) {
-                    String[] row = {
-                            r.getTimestamp().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
-                            r.getQuestion(),
-                            r.getAnswer(),
-                            r.getRewrites().toString(),
-                            String.valueOf(r.getScore()),
-                            r.getLabel(),
-                            r.getNotes()
-                    };
-                    writer.writeNext(row);
+        //try with resource so we dont have to close the reader
+        try (CSVReader reader = new CSVReader(new FileReader(evaluationFile))) {
+            String[] cell;
+            boolean firstLine = true; //set first line as true so it doesnt read the first line
+            while ((cell = reader.readNext()) != null) {
+                if (firstLine)
+                {
+                    firstLine = false; //after reading first line, set the boolean to null
+                    continue;
                 }
-                records.clear();
+
+                //store the values read from cells in the specific String
+                String timestampStr = cell[0];
+                String question = cell[1];
+                String answer = cell[2];
+                int score = Integer.parseInt(cell[3]);
+                String label = cell[4];
+
+                //use the info from the CSV to create the evaluationLogEntry object and use the evaluate
+                //method to add the score and label
+                EvaluationLogEntry eval = new EvaluationLogEntry(question, answer);
+                eval.evaluate(label, score);
+
+                //add it to the list
+                list.add(eval);
             }
-        catch (IOException e) {throw new RuntimeException(e);
+        } catch (IOException | CsvValidationException e) {
+            e.printStackTrace();
         }
-
-
-
-
-
+        return list; //return it to be loaded in the EvaluationController
     }
 
+    public static void saveEvaluation(EvaluationLogEntry eval) {
+        try (CSVWriter writer = new CSVWriter(new FileWriter(evaluationFile, true))) {
+            String[] row = new String[]{
+                    eval.getTimestamp().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
+                    eval.getQuestion(),
+                    eval.getAnswer(),
+                    String.valueOf(eval.getScore()),
+                    eval.getLabel()
+            };
+            writer.writeNext(row);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

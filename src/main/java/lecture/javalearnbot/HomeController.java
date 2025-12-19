@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -27,11 +28,11 @@ public class HomeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("chatpage.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            Scene currentScene = stage.getScene();
+            BorderPane mainLayout = (BorderPane) currentScene.getRoot();
+            mainLayout.setCenter(root);
 
-            System.out.println("Switched to chatpage.fxml");
+            System.out.println("Switched center view to chatpage.fxml");
 
         } catch (IOException e) {
             e.printStackTrace();

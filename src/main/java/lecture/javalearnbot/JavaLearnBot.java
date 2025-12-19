@@ -3,10 +3,12 @@ package lecture.javalearnbot;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class JavaLearnBot extends Application {
     @Override
@@ -18,6 +20,8 @@ public class JavaLearnBot extends Application {
         NavigationController nav = loader.getController();
         nav.toHome();
         Scene scene = new Scene(root);
+        String css = Objects.requireNonNull(getClass().getResource("css/stylesheet.css")).toExternalForm();
+        scene.getStylesheets().add(css);
         stage.setTitle("Chat Page");
         stage.setScene(scene);
         stage.show();
