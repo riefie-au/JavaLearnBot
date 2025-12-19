@@ -14,73 +14,95 @@ import javafx.event.ActionEvent;
 
 public class NavigationController {
     @FXML
-    private BorderPane mainLayout;
+    private BorderPane mainLayout; //Because borderpane is used, centre of each fxml scene is labeled as mainLayout to be called by navigation controller and switch scenes
 
     @FXML
-    private TextField globalSearch;
+    private TextField globalSearch; //text field search bar that will navigate to different tabs based on user input
 
-    // Handles navigation between different FXML pages in JavaLearnBot. All controllers use this class to switch scenes.
+    // Handles navigation between each fxml page.
     public void goTo(String fxmlName) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlName)); // load FXML layout
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlName)); // loads fxml layout as fxmlName is being called
             Parent view = loader.load();
 
-            Object controller = loader.getController(); //To retrieve controller associated with FXML
-            if (controller instanceof BaseController) { // If page controller inherits from BaseController, will link this NavigationController to enable page switching.
+            Object controller = loader.getController(); //to recieve controller associated with fxml
+            if (controller instanceof BaseController) { // controllers inherited by BaseController will be enabled by NavigationController to allow page switching
                 ((BaseController) controller).setNavigationController(this);
             }
             mainLayout.setCenter(view);
 
         }
-        catch (Exception e) { // Prints error if an FXML file fails to load
+        catch (Exception e) { // prints error if fxml fails to load
             System.err.println("Error loading FXML: " + fxmlName);
             e.printStackTrace();
         }
     }
 
-    @FXML public void toHome(ActionEvent event) { toHome(); }
-    public void toHome() { goTo("homePage.fxml"); }
 
-    @FXML public void toChatBot(ActionEvent event) { toChatBot(); }
-    public void toChatBot() { goTo("chatPage.fxml"); }
+    //Action events to allow page switching
+    @FXML public void toHome(ActionEvent event) { //for the navigation buttons
+        toHome();
+    }
+    public void toHome() { //for the search bar
+        goTo("homePage.fxml");
+    }
 
-    @FXML public void toDocuments(ActionEvent event) { toDocuments(); }
-    public void toDocuments() { goTo("documentPage.fxml"); }
+    @FXML public void toChatBot(ActionEvent event) {
+        toChatBot();
+    }
+    public void toChatBot() {
+        goTo("chatPage.fxml");
+    }
 
-    @FXML public void toEvaluationDashboard(ActionEvent event) { toEvaluationDashboard(); }
-    public void toEvaluationDashboard() { goTo("evaluationDashboardPage.fxml"); }
+    @FXML public void toDocuments(ActionEvent event) {
+        toDocuments();
+    }
+    public void toDocuments() {
+        goTo("documentPage.fxml");
+    }
 
-    @FXML public void toAdmin(ActionEvent event) { toAdmin(); }
-    public void toAdmin() { goTo("adminPage.fxml"); }
+    @FXML public void toEvaluationDashboard(ActionEvent event) {
+        toEvaluationDashboard();
+    }
+    public void toEvaluationDashboard() {
+        goTo("evaluationDashboardPage.fxml");
+    }
+
+    @FXML public void toAdmin(ActionEvent event) {
+        toAdmin();
+    }
+    public void toAdmin() {
+        goTo("adminPage.fxml");
+    }
 
     public void toRegister() {
     }
 
     public void toLogin() {
     }
-    //Predefined navigation shortcuts for each pages
+
 
     @FXML
     public void globalSearch(ActionEvent event) {
-        String query = globalSearch.getText().trim().toLowerCase();
+        String search = globalSearch.getText().trim().toLowerCase(); //receives user input in lowercase
 
-        if (query.isEmpty()) {
+        if (search.isEmpty()) {
             return;
         }
 
-        // Search logic to map keywords to your existing navigation methods
-        if (query.contains("home") || query.contains("main")) {
+        // searches for navigation
+        if (search.contains("home") || search.contains("main")) {
             toHome();
-        } else if (query.contains("chat") || query.contains("bot")) {
+        } else if (search.contains("chat") || search.contains("bot")) {
             toChatBot();
-        } else if (query.contains("doc") || query.contains("file")) {
+        } else if (search.contains("doc") || search.contains("file")) {
             toDocuments();
-        } else if (query.contains("eval") || query.contains("dash")) {
+        } else if (search.contains("eval") || search.contains("dash")) {
             toEvaluationDashboard();
-        } else if (query.contains("admin") || query.contains("setting")) {
+        } else if (search.contains("admin") || search.contains("setting")) {
             toAdmin();
         } else {
-            System.out.println("No page found for: " + query);
+            System.out.println("No page found for: " + search);
         }
     }
 }
