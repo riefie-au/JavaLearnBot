@@ -166,7 +166,8 @@ Return only the questions. No numbering, no extra text.
                         "general",      //category placeholder
                         "local",        //source
                         file.getPath(), //path reference
-                        file.lastModified() //timestamp
+                        file.lastModified(), //timestamp
+                        text            //pass the full text context
                 );
 
                 int index = 0;
