@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="700" prefWidth="900" spacing="20" style="-fx-background-color: #1b1b1d;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lecture.javalearnbot.Controllers.DocumentsController">
+<VBox prefHeight="700" prefWidth="900" spacing="20" style="-fx-background-color: #1b1b1d;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lecture.javalearnbot.Controllers.DocumentsController">
 
     <padding>
         <Insets bottom="20" left="30" right="30" top="30" />
@@ -29,7 +38,7 @@
         <Label text="Filter by category:" textFill="WHITE" GridPane.rowIndex="1" />
         <ComboBox fx:id="categoryComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-        <Label text="Filter by status:" textFill="WHITE" GridPane.rowIndex="2" />
+        <Label text="Filter by source:" textFill="WHITE" GridPane.rowIndex="2" />
         <ComboBox fx:id="statusComboBox" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <rowConstraints>
          <RowConstraints />

@@ -26,3 +26,4 @@ In programming, inheritance can be categorized into several types:
    ``` 
 
 These types of inheritance allow for various ways to structure classes and share functionality in object-oriented programming [1][2].","10","Correct"
+"2025-12-21T04:42:32.9549171","what is java","Java is an object-oriented programming language developed by Sun Microsystems. It is platform-independent at both the source and binary levels, thanks to the Java Virtual Machine (JVM). Java is extensively used for building large-scale enterprise applications, Android apps, and web servers. Its strong typing, automatic memory management, and comprehensive API contribute to its stability and scalability [1][3].","3","Incorrect"

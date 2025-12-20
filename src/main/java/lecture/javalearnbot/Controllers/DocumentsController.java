@@ -13,6 +13,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import lecture.javalearnbot.Utility.EventBus;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -30,7 +34,7 @@ public class DocumentsController extends BaseController {
     @FXML private TableColumn<Document, String> colCategory;
     @FXML private TableColumn<Document, String> colSource;
     @FXML private TableColumn<Document, String> colPath;
-    @FXML private TableColumn<Document, Number> colTimestamp;
+    @FXML private TableColumn<Document, String> colTimestamp;
     @FXML private ListView<String> previewListView;
 
     // --- Constants ---
@@ -79,9 +83,11 @@ public class DocumentsController extends BaseController {
                 new ReadOnlyStringWrapper(data.getValue().getPath())
         );
 
-        colTimestamp.setCellValueFactory(data ->
-                new ReadOnlyLongWrapper(data.getValue().getTimestamp())
-        );
+        colTimestamp.setCellValueFactory(data -> {
+            long ts = data.getValue().getTimestamp();
+            String formatted = TIMESTAMP_FORMATTER.format(Instant.ofEpochMilli(ts));
+            return new ReadOnlyStringWrapper(formatted);
+        });
     }
 
     // ----------------------------
@@ -353,6 +359,10 @@ public class DocumentsController extends BaseController {
             return "Error reading file: " + e.getMessage();
         }
     }
+
+    private static final DateTimeFormatter TIMESTAMP_FORMATTER =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                    .withZone(ZoneId.systemDefault());
 
     // Show Preview of the documents clicked on
     private void showPreview(Document doc) {

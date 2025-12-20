@@ -1,7 +1,8 @@
 # JavaLearnBot
 
 JavaLearnBot is a JavaFX-based educational chatbot application designed to assist users with programming-related questions.  
-It integrates a Retrieval-Augmented Generation (RAG) pipeline to provide contextual, document-based answers using AI models.
+It integrates a Retrieval-Augmented Generation (RAG) pipeline to provide contextual, document-based answers using AI models. To watch a video demo
+of the system please click this Youtube link https://www.youtube.com/watch?v=NeU2f3PzEE0
 
 ---
 
