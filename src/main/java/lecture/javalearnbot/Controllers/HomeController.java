@@ -25,7 +25,7 @@ public class HomeController {
     @FXML
     void onBeginChatClick(ActionEvent event){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("chatpage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/lecture/javalearnbot/chatpage.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene currentScene = stage.getScene();
