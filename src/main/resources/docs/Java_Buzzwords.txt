@@ -1,0 +1,72 @@
+The Java Buzzwords:
+No discussion of the genesis of Java is complete without a look at the Java buzzwords.
+Although the fundamental forces that necessitated the invention of Java are portability and
+security, other factors also played an important role in molding the final form of the language.
+The key considerations were summed up by the Java team in the Following list of buzzwords:
+Simple
+Secure
+Portable
+Object-oriented
+Robust
+Multithreaded
+Architecture-neutral
+Interpreted
+High performance
+Distributed
+Dynamic
+Simple
+Java was designed to be easy for the professional programmer to learn and use
+effectively. Assuming that you have some programming experience, you will not find Java hard
+to master. If you already understand the basic concepts of object-oriented programming, learning
+Java will be even easier. Best of all, if you are an experienced C++ programmer, moving to Java
+will require very little effort. Because Java inherits the C/C++ syntax and many of the objectoriented features of C++, most programmers have little trouble learning Java..
+Object-Oriented
+Although influenced by its predecessors, Java was not designed to be source-code
+compatible with any other language. Borrowing liberally from many seminal object-software
+environments of the last few decades, Java manages to strike a balance between the everything is an
+object‖ paradigm and the programming.
+Robust
+The multi platformed environment of the Web places extraordinary demands on a
+program, because the program must execute reliably in a variety of systems. Thus, the ability to
+create robust programs was given a high priority in the design of Java.
+To better understand how Java is robust, consider two of the main reasons for
+program failure: memory management mistakes and mishandled exceptional conditions (that is,
+run-time errors). Memory management can be a difficult, tedious ask in traditional programming
+environments. For example, in C/C++, the pro grammer must manually allocate and free all
+dynamic memory. This sometimes leads to problems, because programmers will either forget to
+free memory that has been previously allocated or, worse, try to free some memory that another
+part of their code is still using. Java virtually eliminates these problems by managing memory
+allocation and deallocation for you.
+Multithreaded
+Java was designed to meet the real-world requirement of creating interactive, networked
+programs. To accomplish this, Java supports multithreaded programming, which allows you to
+write programs that do many things simultaneously. The Java run-time system comes with an
+elegant yet sophisticated solution for multiprocess .synchronization that enables you to construct
+smoothly running interactive systems.
+Architecture-Neutral
+A central issue for the Java designers was that of code longevity and portability. One of
+the main problems facing programmers is that no guarantee exists that if you write a program
+today, it will run tomorrow—even on the same machine. Operating system up grades, processor
+upgrades, and changes in core system resources can all combine to make a program malfunction.
+The Java designers made several hard decisions in the Java language and the Java Virtual
+Machine in an attempt to alter this situation forever.‖ To a great extent, this goal was accomplished.
+Interpreted and High Performance
+As described earlier, Java enables the creation of cross-platform programs by compiling
+into an intermediate representation called Java bytecode. This code can be interpreted on any
+system that provides a Java Virtual Machine. Most previous attempts at cross platform solutions
+have done so at the expense of performance. Other interpreted systems, such as BASIC, Tcl, and
+PERL, suffer from almost insurmountable performance deficits. Java, however, was designed to
+perform well on very low-power CPUs.
+Distributed
+Java is designed for the distributed environment of the Internet, because it handles
+TCP/IP protocols. In fact, accessing a resource using a URL is not much different from accessing
+a file. The original version of Java (Oak) included features for intra address-space messaging.
+This allowed objects on two different computers to execute procedures remotely. Java revived
+these interfaces in a package called Remote MethodInvocation (RMI). This feature brings an
+unparalleled level of abstraction to client/server programming.
+Dynamic
+Java programs carry with them substantial amounts of run-time type information that is
+used to verify and resolve accesses to objects at run time. This makes it possible to dynamically
+link code in a safe and expedient manner. This is crucial to the robustness of the applet
+environment, in which small fragments of bytecode may be dynamically updated on a running
+system.

@@ -1,0 +1,124 @@
+DATA TYPES
+Java defines eight simple (or elemental) types of data: byte, short, int, long, char, float,double,
+and boolean. These can be put in four groups:
+Integers This group includes byte, short, int, and long, which are for whole valued signed numbers.
+Floating-point numbers This group includes float and double, which represent numbers with
+fractional precision.
+Characters This group includes char, which represents symbols in a character set, like letters
+and numbers.
+Boolean This group includes boolean, which is a special type for representing true/false
+values.
+Integers
+Java defines four integer types: byte, short, int, and long. All of these are signed,
+positive and negative values. Java does not support unsigned, positive-only integers. Many other
+Computer languages, including C/C++, support both signed and unsigned integers.
+Name Width Range
+long 64 –9,223,372,036,854,775,808to 9,223,372,036,854,775,807
+int 32 –2,147,483,648 to 2,147,483,647
+short 16 –32,768 to 32,767
+byte 8 –128 to 127
+byte
+The smallest integer type is byte. This is a signed 8-bit type that has a range from –128to
+127. Variables of type byte are especially useful when you’re a network or file. They are also usefulnotbe
+when directly compatible-intypeswith. Java’s other built
+Syntax: byte b, c;
+short
+short is a signed 16-bit type. It has a range from –32,768 to 32,767. It is probably the
+least-used Java type, since it is defined as having its high byte first (called big-endian format).
+This type is mostly applicable to 16-bit computers, which are becoming increasingly scarce.
+Here are some examples of short variable
+declarations: short s;
+short t;
+int
+The most commonly used integer type is int. It is a signed 32-bit type that has a range
+from –2,147,483,648 to 2,147,483,647. In addition to other uses, variables of type int are
+commonly employed to control loops and to index arrays. Any time you have an integer
+expression involving bytes, shorts, ints, and literal numbers, the entire expression Is promoted
+to int before the calculation is done.
+long
+long is a signed 64-bit type and is useful for those occasions where an int type is notlarge
+enough to hold the desired value. The range of a long is quite large. This makesit useful when
+big, whole numbers are needed. For example, here is a program thatcomputes the number of
+miles that light will travel in a specified number of days.
+Floating-Point Types
+Floating-point numbers, also known as real numbers, are used when evaluating expressions that
+require fractional precision. For example, calculations such as square root, or transcendentals
+such as sine and cosine, result in a value whose precision requires a floating-point type.
+Their width and ranges are shown here:
+Name Width Bits Approximate Range
+double 64 4.9e–324 to 1.8e+308
+float
+float
+32
+The type float specifies a single-precision value that uses 32 bits of storage. Single
+precision is faster on some processors and takes half as much space as double precision, but will
+become imprecise when the values are either very large or very small. Variables of type float are
+useful when you need a fractional component, but don’t require example, float can be useful when
+representing dollars and cents.
+Here are some example float variable
+declarations: float hightemp, lowtemp;
+double
+Double precision, as denoted by the double keyword, uses 64 bits to store a value.
+Double precision is actually faster than single precision on some modern processors that have
+been optimized for high-speed mathematical calculations.
+Here is a short program that uses double variables to compute the area of a circle:
+// Compute the area of a circle.
+class Area {
+public static void main(String args[]) {
+double pi, r, a;
+r = 10.8; // radius of circle
+pi = 3.1416; // pi, approximately
+a = pi * r * r; // compute area
+System.out.println("Area of circle is " + a);
+}
+}
+Characters
+In Java, the data type used to store characters is char. However, C/C++ programmers
+beware: char in Java is not the same as char in C or C++. In C/C++, char is an integertype that
+is 8 bits wide. This is not the case in Java. Instead, Java uses Unicode to representcharacters..
+There are no negative chars. The standard set of characters known asASCII still ranges from 0 to
+127 as always, and the extended 8-bit character set, ISO-Latin-1,ranges from 0 to 255.
+Booleans
+Java has a simple type, called boolean, for logical values. It can have only one of
+twopossible values, true or false. This is the type returned by all relational operators, suc has a <
+b. boolean is also the type required by the conditional expressions that govern the control
+statements such as if and for.
+Here is a program that demonstrates the boolean type:
+There are three interesting things to notice about this program. First, as
+you can see,when a boolean value is output by println( ), ―true‖ or ―false‖ Second,the value of a boolean
+variable is sufficient, by itself, to control the if statement. Thereis
+no need to write an if statement like this:
+if(b == true) ...
+Third, the outcome of a relational operator, such as <, is a boolean value. This is why
+the expression 10 > 9 displays the value ―true.‖ Further, around 10 > 9 is necessary because the + operator
+has a higher precedence than the >.
+Variables
+The variable is the basic unit of storage in a Java program. A variable is defined by the
+combination of an identifier, a type, and an optional initializer. In addition, all variables have a
+scope, which defines their visibility, and a lifetime. These elementsare examined next.
+Declaring a Variable
+In Java, all variables must be declared before they can be used. The basic form of
+a variable declaration is shown here:
+type identifier [ = value][, identifier [= value] ...] ;
+The type is one of Java’s atomic types, or the nam interface types are discussed later in Part I of this
+book.) The identifier is the name of the variable.
+Here are several examples of variable declarations of various types. Note that
+some include an initialization.
+int a, b, c; // declares three ints, a, b, and c.
+int d = 3, e, f = 5; // declares three more ints, initializing
+// d and f.
+byte z = 22; // initializes z.
+double pi = 3.14159; // declares an approximation of pi.
+char x = 'x'; // the variable x has the value 'x'.
+The Scope and Lifetime of Variables
+So far, all of the variables used have been declared at the start of the main( ) method.
+However, Java allows variables to be declared within any block. As explained in Chapter 2, a
+block is begun with an opening curly brace and ended by a closing curlybrace. A block defines a
+scope. Thus, each time you start a new block, you are creating a new scope. As you probably
+know from your previous programming experience, a scope determines what objects are visible
+to other parts of your program. It also determines the lifetime of those objects.
+Most other computer languages define two general categories of scopes: global and local.
+However, these traditional scopes do not fit scope defined by a method begins with its opening
+curly brace.
+To understand the effect of nested scopes, consider the following
+program: // Demonstrate block scope.

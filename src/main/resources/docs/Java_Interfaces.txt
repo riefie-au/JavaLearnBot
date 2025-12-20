@@ -1,0 +1,166 @@
+Difference between classes and interfaces:
+A class is a template for an
+abject. (or)
+A class is a way of binding variables and methods in a single unit. With the class it is possible to
+create object for that object. With the one class we can extend an another class.
+A interface is collection of undefined method. Means all the methods are not contain any body.
+We have to provide the body for that interface. with the interface it is not possible to create
+object. For the declared interface we have to implement that interface.
+Defining Interfaces:
+Interface is a collection of method declarations and constants that one or more classes of
+non
+objects will use.
+We can implement multiple inheritance using interface.
+Because interface consists only signatures followed by semi colon and parameter list they
+are implicitly abstract.
+Variables can be declared and initialized inside interface they are implicitly final and
+static.
+An interface method can’t be final or stat
+An interface can be extended from another interface.
+Declaration of interface:
+Access interface name
+{
+Return type member-name1(parametelist);
+Return type member-name2(parametelist);
+.
+.
+.
+Type finalvariablename=initialization;
+}
+o There will be no default implementation for methods specified in an interface.
+o Each class that include interface must implements all methods.
+o All the methods and variables are implicitly public if interface itself is declared as public.
+Implementing Interfaces:
+Once an interface has been defined, one or more classes can implement that interface. To
+implement an interface, include the implements clause in a class definition, and then create the
+methods defined by the interface. The general form of a class that
+includes the implements clause looks like this:
+access class classname [extends superclass]
+[implements interface [,interface...]] {
+// class-body
+}
+Here, access is either public or not used. If a class implements more than one interface,
+the interfaces are separated with a comma. If a class implements two interfaces that declare the
+same method, then the same method will be used by clients of either
+interface. The methods that implement an interface must be declared public. Also, the
+type signature of the implementing method must match exactly the type signature
+specified in the interface definition.
+Applying Interfaces:
+To understand the power of interfaces, let chapters you developed a class called Stack that implemented
+a simple fixed-size stack.
+However, there are many ways to implement a stack. For example, the stack can be of a fixed
+size or it can be ―growable.‖ The stack can and so on. No matter how the stack is implemented, the
+interface to the
+stack remains the same. That is, the methods push( ) and pop( ) define the interface to the
+stack independently of the details of the implementation. Because the interface to a stack is
+separate from its implementation, it is easy to define a stack interface, leaving it
+to each implementation to define the specific
+First, here is the interface that defines an integer stack. Put this in a file called
+IntStack.java. This interface will be used by both stack implementations.
+// Define an integer stack
+interface. interface IntStack {
+void push(int item); // store an item
+int pop(); // retrieve an item
+}
+Variables in Interfaces:
+When you include that interface in a class interface), all of those variable names will be in scope as
+constants. This is similar to
+using a header file in C/C++ to create a large number of #defined constants or const
+declarations. If an interface contains no methods, then any class that includes such an
+interface doesn’tplementanythingactually.Itisasifthatclass wereimimporting the
+constant variables into the class name space as final variables.
+import java.util.Random;
+interface SharedConstants
+{ int NO = 0;
+int YES = 1;
+int MAYBE = 2;
+int LATER = 3;
+int SOON = 4;
+int NEVER = 5;
+}
+class Question implements SharedConstants
+{ Random rand = new Random();
+int ask() {
+int prob = (int) (100 * rand.nextDouble());
+if (prob < 30)
+return NO; // 30%
+else if (prob < 60)
+return YES; // 30%
+else if (prob < 75)
+return LATER; //
+15% else if (prob <
+98) return SOON; //
+13% else
+return NEVER; // 2%
+} }
+class AskMe implements SharedConstants
+{ static void answer(int result) {
+switch(result) {
+case NO:
+System.out.println("No");
+break;
+case YES:
+System.out.println(―yes‖); break;
+case MAYBE:
+System.out.println("Maybe");
+break;
+case LATER:
+System.out.println("Later");
+break;
+case SOON:
+System.out.println("Soon");
+break;
+case NEVER:
+System.out.println("Never");
+break;
+}}
+public static void main(String args[]) {
+Question q = new Question();
+answer(q.ask());
+answer(q.ask());
+answer(q.ask());
+answer(q.ask());
+}}
+Interfaces Can Be Extended:
+One interface can inherit another by use of the keyword extends. The syntax is the same
+as for inheriting classes. When a class implements an interface that inherits
+another interface, it must provide implementations for all methods defined within
+the interface inheritance chain. Following is an example:
+// One interface can extend
+another. interface A {
+void meth1();
+void meth2();
+}
+// B now includes meth1() and meth2() -- it adds
+meth3(). interface B extends A {
+void meth3();
+}
+// This class must implement all of A and B
+class MyClass implements B {
+public void meth1() {
+System.out.println("Implement meth1().");
+}
+public void meth2() {
+System.out.println("Implement meth2().");
+}
+public void meth3() {
+System.out.println("Implement meth3().");
+}
+}
+class IFExtend {
+public static void main(String arg[]) {
+MyClass ob = new MyClass();
+ob.meth1();
+ob.meth2();
+ob.meth3();
+}
+}
+As an experiment you might want to try removing the implementation for meth1( )
+in MyClass. This will cause a compile-time error. As stated earlier, any class that
+implements an interface must implement all methods defined by that interface,
+including any that are inherited from other interfaces.
+Unit-III
+Exception Handling –Dealing with errors- benefits of exception handling- the classification of
+exceptions –exception hierarchy- checked exceptions and unchecked exceptions- usage of trycatch-throw-throws and finally-rethrowing exceptions- exception specification- built in
+exceptions- creating own exception sub classes.
+Multithreading –Differences between multiple processes an

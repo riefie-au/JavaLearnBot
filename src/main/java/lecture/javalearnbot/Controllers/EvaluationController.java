@@ -36,10 +36,8 @@ public class EvaluationController extends BaseController {
 
     private final ObservableList<ChatLogEntry> chatLogData = FXCollections.observableArrayList();
     private final ObservableList<EvaluationLogEntry> evaluationData = FXCollections.observableArrayList();
-
     private final String[] labelOptions = {"Correct", "Incorrect", "Needs Review"};
     private final Integer[] scoreOptions = {1,2,3,4,5,6,7,8,9,10};
-
     private final LogStore logStore = new LogStore();
 
 

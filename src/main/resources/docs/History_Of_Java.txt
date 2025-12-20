@@ -1,0 +1,20 @@
+HISTORY OF JAVA
+Java was conceived by James Gosling, Patrick Naughton, Chris Warth, Ed Frank, and
+Mike Sheridan at Sun Microsystems, Inc. in 1991. It took 18 months to develop the first
+Working version. This language was initially
+Between the initial implementation of Oak in the fall of 1992 and the public Announcement of
+Java in the spring of 1995, many more people contributed to the designand evolution of the
+language. Bill Joy, Arthur van Hoff, Jonathan Payne, Frank Yellin, and Tim Lind Holm were key
+contributors to the maturing of the original prototype.
+The trouble With C and C++ (and most other languages) is that they are designed to be
+compiled For a specific target. Although it is possible to compile a C++ program for just about
+Any type of CPU, to do so requires a full C++ compiler targeted for that CPU. The Problem is
+that compilers are expensive and time-consuming to create. An easier—and more costefficient—solution was needed. In an attempt to find such a solution,Gosling and others began
+work on a portable, platform-independent language thatcould be used to produce code that would
+run on a variety of CPUs under differing Environments. This effort ultimately led to the creation
+of Java.
+As mentioned earlier, Java derives much of its character from C and C++. This is by
+intent. The Java designers knew that using the familiar syntax of C and echoing the objectoriented features of C++ would make their language appealing to the legions of experienced
+C/C++ programmers. In addition to the surface similarities, Java shares some of the other
+attributes that helped make C and C++ successful. First, Java was designed, tested, and refined
+by real, working programmers.

@@ -19,61 +19,42 @@ import java.util.concurrent.TimeoutException;
 
 public class ChatController extends BaseController // Controller for Chat page, handles AI query submission, clearing results, and exception handling.
 {
-    @FXML
-    private TextField queryField; // Text field where user types their question.
-    @FXML
-    private TextArea resultArea; // Field where AI response is displayed.
-    @FXML
-    private TextArea rewriteArea; // Field where AI response is displayed.
-    @FXML
-    private TextArea retrievedDocs;
+    @FXML private TextField queryField; // Text field where user types their question.
+    @FXML private TextArea resultArea; // Field where AI response is displayed.
+    @FXML private TextArea rewriteArea; // Field where AI response is displayed.
+    @FXML private TextArea retrievedDocs;
+    @FXML private TableView<ChatLogEntry> logTable; //table that displays rows of logEntry Objects
+    @FXML private TableColumn<ChatLogEntry, String> timestampCol;  //LogEntry is the type of row object as its one object per row, String is the type of value displayed in the column
+    @FXML private TableColumn<ChatLogEntry, String> questionCol;
+    @FXML private TableColumn<ChatLogEntry, String> answerCol;
+    @FXML private ComboBox<Integer> scoreBox;
+    @FXML private ComboBox<String> labelBox;
 
-    @FXML
-    private TableView<ChatLogEntry> logTable; //table that displays rows of logEntry Objects
-    @FXML
-    private TableColumn<ChatLogEntry, String> timestampCol;  //LogEntry is the type of row object as its one object per row, String is the type of value displayed in the column
-    @FXML
-    private TableColumn<ChatLogEntry, String> questionCol;
-    @FXML
-    private TableColumn<ChatLogEntry, String> answerCol;
-    @FXML
-    private ComboBox<Integer> scoreBox;
-    @FXML
-    private ComboBox<String> labelBox;
-    private final String[] labelOptions = {"Correct", "Incorrect", "Needs Review"};
-    private final Integer[] scoreOptions = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-
-
-    private final ObservableList<ChatLogEntry> logData = FXCollections.observableArrayList();
-    //special list from javafx, that changes the list automatically, so when u do something like logData.add it automatically updates
-
-
+    private final ObservableList<ChatLogEntry> logData = FXCollections.observableArrayList(); //special list from javafx, that changes the list automatically, so when u do something like logData.add it automatically updates
     private final Pipeline pipeline = new Pipeline();
     private final DocumentIngestor indexer = new DocumentIngestor(pipeline.getEmbeddingModel(), pipeline.getChunkStore());
     private final EvaluationStore evaluationStore = new EvaluationStore();
     private final LogStore logStore = new LogStore();
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private final String[] labelOptions = {"Correct", "Incorrect", "Needs Review"};
+    private final Integer[] scoreOptions = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
     @FXML
     private void initialize() {
-        setupTableColumns();
-        loadTableData();
+        setupTableColumns(); //setting up the table columns for the log table
+        loadTableData(); //loading data into the table
         setupRowSelectionListener();
-        startIndexingThread();
-        populateBoxes();
+        startIndexingThread(); //start indexing process on a thread
+        populateBoxes(); //populate combo boxes with labelOptions and scoreOptions
     }
 
     private void setupTableColumns() {
         timestampCol.setCellValueFactory(d ->
-                new SimpleStringProperty(d.getValue().getTimestamp().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
-        );
+                new SimpleStringProperty(d.getValue().getTimestamp().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
         questionCol.setCellValueFactory(d ->
-                new SimpleStringProperty(d.getValue().getQuestion())
-        );
+                new SimpleStringProperty(d.getValue().getQuestion()));
         answerCol.setCellValueFactory(d ->
-                new SimpleStringProperty(d.getValue().getAnswer())
-        );
-
+                new SimpleStringProperty(d.getValue().getAnswer()));
         logTable.setFixedCellSize(50); //set fixed size to 50 due to answers being potentially too long
     }
 
@@ -167,7 +148,7 @@ public class ChatController extends BaseController // Controller for Chat page, 
                 }
                 retrievedDocs.setText(retrievedDocsBuilder.toString());
                 String retrievedDocsText = retrievedDocsBuilder.toString();
-                //
+
                 //logManager.addLog(query,answer);
                 ChatLogEntry entry = new ChatLogEntry(query, answer, rewrittenText, retrievedDocsText); //create a new logEntry object
                 logData.add(entry);  //add it to the observable list, this updates the table view
