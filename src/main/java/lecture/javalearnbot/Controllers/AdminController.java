@@ -5,6 +5,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -16,7 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ComboBox;
 import lecture.javalearnbot.RAG.Pipeline;
 import lecture.javalearnbot.Utility.EventBus;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -37,7 +38,7 @@ public class AdminController extends BaseController {
     @FXML private TableColumn<Document, String> lastModifiedColumn;
     @FXML private Label fileStatusLabel;
 
-
+    private FilteredList<Document> filteredDocuments;
     private final ObservableList<Document> adminData = FXCollections.observableArrayList();
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private File selectedFile;
@@ -74,7 +75,7 @@ public class AdminController extends BaseController {
             EventBus.ALL_DOCUMENTS.setAll(adminData);
         }
 
-        // Auto-fill form when row selected
+        // Auto-fill the form when row selected
         adminTable.getSelectionModel().selectedItemProperty().addListener((obs, oldDoc, newDoc) -> {
             if (newDoc != null) {
                 titleField.setText(newDoc.getTitle());
@@ -82,6 +83,13 @@ public class AdminController extends BaseController {
                 descriptionField.setText(newDoc.getDescription());
             }
         });
+
+        setupFilters();
+        categoryComboBox.getItems().addAll("All", "OOP", "Inheritance", "Polymorphism", "Core", "Advanced", "Java 8+", "Database");
+        categoryComboBox.setValue("All");
+        statusComboBox.getItems().addAll("All", "File");
+        statusComboBox.setValue("All");
+
     }
 
     // ==================== DELETE DOCUMENT ====================
@@ -435,6 +443,48 @@ public class AdminController extends BaseController {
                 description,
                 System.currentTimeMillis()
         );
-        EventBus.addDocument(newDoc);
+        EventBus.addDocument(newDoc);}
+
+    private void setupFilters() {
+        // Wrap EventBus data
+        filteredDocuments = new FilteredList<>(EventBus.ALL_DOCUMENTS, d -> true);
+
+        // Listen to search field
+        docSearchField.textProperty().addListener((obs, oldVal, newVal) -> updatePredicate());
+
+        // Listen to category filter
+        categoryComboBox.valueProperty().addListener((obs, oldVal, newVal) -> updatePredicate());
+
+        // Listen to status filter
+        statusComboBox.valueProperty().addListener((obs, oldVal, newVal) -> updatePredicate());
+        // Enable sorting
+        SortedList<Document> sortedData = new SortedList<>(filteredDocuments);
+        sortedData.comparatorProperty().bind(adminTable.comparatorProperty());
+        adminTable.setItems(sortedData);
     }
+
+    private void updatePredicate() {
+        filteredDocuments.setPredicate(doc -> {
+            // Search text
+            String searchText = docSearchField.getText();
+            if (searchText != null && !searchText.isBlank()) {
+                if (!doc.getTitle().toLowerCase().contains(searchText.toLowerCase())) {
+                    return false;}}
+
+            // Category filter
+            String selectedCategory = categoryComboBox.getValue();
+            if (selectedCategory != null && !selectedCategory.equals("All")) {
+                if (!doc.getCategory().equals(selectedCategory)) {
+                    return false;}}
+
+            // Status filter (using source)
+            String selectedStatus = statusComboBox.getValue();
+            if (selectedStatus != null && !selectedStatus.equals("All")) {
+                if (!doc.getSource().equals(selectedStatus)) {
+                    return false;}}
+            return true;
+        }
+        );
+    }
+
 }
