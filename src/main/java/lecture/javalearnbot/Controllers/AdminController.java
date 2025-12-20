@@ -35,6 +35,8 @@ public class AdminController extends BaseController {
     @FXML private TableColumn<Document, String> categoryColumn;
     @FXML private TableColumn<Document, String> descriptionColumn;
     @FXML private TableColumn<Document, String> lastModifiedColumn;
+    @FXML private Label fileStatusLabel;
+
 
     private final ObservableList<Document> adminData = FXCollections.observableArrayList();
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -332,6 +334,7 @@ public class AdminController extends BaseController {
         if (file != null) {
             selectedFile = file;
             titleField.setText(file.getName().replace(".txt", ""));
+            fileStatusLabel.setText("File selected: " + file.getName());
         }
     }
 
@@ -353,6 +356,13 @@ public class AdminController extends BaseController {
 
         ingestDocument(selectedFile, title, category, description);
         loadAdminDataFromDocs();
+
+        // Reset file selection UI
+        selectedFile = null;
+        fileStatusLabel.setText("No file selected");
+        titleField.clear();
+        descriptionField.clear();
+        categoryComboBox.setValue(null);
     }
 
     private void loadAdminDataFromDocs() {

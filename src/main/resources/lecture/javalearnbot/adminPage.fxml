@@ -44,7 +44,7 @@
                                 <HBox alignment="CENTER_LEFT" spacing="15.0">
                                     <children>
                                         <Button onAction="#onChooseFile" styleClass="btn" text="📄 Choose File" />
-                                        <Label text="No file selected" textFill="#999999" />
+                                        <Label text="No file selected" textFill="#999999" fx:id="fileStatusLabel"/>
                                     </children>
                                 </HBox>
 
