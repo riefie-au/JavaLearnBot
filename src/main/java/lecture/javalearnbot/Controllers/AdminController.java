@@ -26,17 +26,30 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class AdminController extends BaseController {
-    @FXML private TextField titleField;
-    @FXML private TextField docSearchField;
-    @FXML private ComboBox<String> categoryComboBox;
-    @FXML private ComboBox<String> statusComboBox;
-    @FXML private TextArea descriptionField;
-    @FXML private TableView<Document> adminTable;
-    @FXML private TableColumn<Document, String> titleColumn;
-    @FXML private TableColumn<Document, String> categoryColumn;
-    @FXML private TableColumn<Document, String> descriptionColumn;
-    @FXML private TableColumn<Document, String> lastModifiedColumn;
-    @FXML private Label fileStatusLabel;
+    @FXML
+    private TextField titleField;
+    @FXML
+    private TextField docSearchField;
+    @FXML
+    private ComboBox<String> categoryComboBox;
+    @FXML
+    private ComboBox<String> categoryFilterComboBox;
+    @FXML
+    private ComboBox<String> statusFilterComboBox;
+    @FXML
+    private TextArea descriptionField;
+    @FXML
+    private TableView<Document> adminTable;
+    @FXML
+    private TableColumn<Document, String> titleColumn;
+    @FXML
+    private TableColumn<Document, String> categoryColumn;
+    @FXML
+    private TableColumn<Document, String> descriptionColumn;
+    @FXML
+    private TableColumn<Document, String> lastModifiedColumn;
+    @FXML
+    private Label fileStatusLabel;
 
     private FilteredList<Document> filteredDocuments;
     private final ObservableList<Document> adminData = FXCollections.observableArrayList();
@@ -84,11 +97,11 @@ public class AdminController extends BaseController {
             }
         });
 
+        categoryFilterComboBox.getItems().addAll("All", "OOP", "Inheritance", "Polymorphism", "Core", "Advanced", "Java 8+", "Database");
+        categoryFilterComboBox.setValue("All");
+        statusFilterComboBox.getItems().addAll("All", "File");
+        statusFilterComboBox.setValue("All");
         setupFilters();
-        categoryComboBox.getItems().addAll("All", "OOP", "Inheritance", "Polymorphism", "Core", "Advanced", "Java 8+", "Database");
-        categoryComboBox.setValue("All");
-        statusComboBox.getItems().addAll("All", "File");
-        statusComboBox.setValue("All");
 
     }
 
@@ -453,10 +466,10 @@ public class AdminController extends BaseController {
         docSearchField.textProperty().addListener((obs, oldVal, newVal) -> updatePredicate());
 
         // Listen to category filter
-        categoryComboBox.valueProperty().addListener((obs, oldVal, newVal) -> updatePredicate());
+        categoryFilterComboBox.valueProperty().addListener((obs, oldVal, newVal) -> updatePredicate());
 
         // Listen to status filter
-        statusComboBox.valueProperty().addListener((obs, oldVal, newVal) -> updatePredicate());
+        statusFilterComboBox.valueProperty().addListener((obs, oldVal, newVal) -> updatePredicate());
         // Enable sorting
         SortedList<Document> sortedData = new SortedList<>(filteredDocuments);
         sortedData.comparatorProperty().bind(adminTable.comparatorProperty());
@@ -472,13 +485,13 @@ public class AdminController extends BaseController {
                     return false;}}
 
             // Category filter
-            String selectedCategory = categoryComboBox.getValue();
+            String selectedCategory = categoryFilterComboBox.getValue();
             if (selectedCategory != null && !selectedCategory.equals("All")) {
                 if (!doc.getCategory().equals(selectedCategory)) {
                     return false;}}
 
             // Status filter (using source)
-            String selectedStatus = statusComboBox.getValue();
+            String selectedStatus = statusFilterComboBox.getValue();
             if (selectedStatus != null && !selectedStatus.equals("All")) {
                 if (!doc.getSource().equals(selectedStatus)) {
                     return false;}}

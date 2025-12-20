@@ -14,6 +14,7 @@ import lecture.javalearnbot.RAG.Pipeline;
 import lecture.javalearnbot.RAG.RagHelperClasses.Hit;
 import lecture.javalearnbot.RAG.RagHelperClasses.Result;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeoutException;
 
@@ -148,9 +149,9 @@ public class ChatController extends BaseController // Controller for Chat page, 
                 }
                 retrievedDocs.setText(retrievedDocsBuilder.toString());
                 String retrievedDocsText = retrievedDocsBuilder.toString();
-
+                //
                 //logManager.addLog(query,answer);
-                ChatLogEntry entry = new ChatLogEntry(query, answer, rewrittenText, retrievedDocsText); //create a new logEntry object
+                ChatLogEntry entry = new ChatLogEntry(LocalDateTime.now(),query, answer, rewrittenText, retrievedDocsText); //create a new logEntry object
                 logData.add(entry);  //add it to the observable list, this updates the table view
                 logStore.add(entry); //add it to the buffer in LogStore
                 logStore.saveToCSV(); //save whatever is in the buffer to the CSV logs.

@@ -57,7 +57,6 @@ public class DocumentsController extends BaseController {
             });
             return row;
         });
-
     }
 
     // ----------------------------

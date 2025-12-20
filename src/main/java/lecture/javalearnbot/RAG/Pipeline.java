@@ -11,7 +11,8 @@ public class Pipeline {
     private final QueryRewriteService rewriter;
     private final Retriever retriever;
     private final AnswerGenerator answerGenerator;
-    private int amountOfRewrites = 5;
+    private int amountOfRewrites = 3;
+    private int amountOfRetrievalChunks = 5;
     private final OpenAiEmbeddingModel embeddingModel;
     private final ChunkStorage chunkStore ;
 
@@ -21,7 +22,7 @@ public class Pipeline {
         this.chunkStore = new ChunkStorage();
         this.embeddingModel = llm.getEmbeddings();
         this.rewriter = new QueryRewriteService(llm.getChat());
-        this.retriever = new Retriever(chunkStore, llm.getEmbeddings(), amountOfRewrites);
+        this.retriever = new Retriever(chunkStore, llm.getEmbeddings(), amountOfRetrievalChunks);
         this.answerGenerator = new AnswerGenerator(llm.getChat());
     }
 

@@ -61,9 +61,9 @@
                                     <children>
                                         <Label text="Document Title:" textFill="WHITE" />
                                         <TextField fx:id="titleField" promptText="Enter title" GridPane.columnIndex="1" />
-                                        <Label text="Category:" GridPane.rowIndex="1" textFill="WHITE" />
+                                        <Label text="Category:" textFill="WHITE" GridPane.rowIndex="1" />
                                         <ComboBox fx:id="categoryComboBox" maxWidth="1.7976931348623157E308" promptText="Select Category" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                        <Label text="Description" GridPane.rowIndex="2" textFill="WHITE" />
+                                        <Label text="Description" textFill="WHITE" GridPane.rowIndex="2" />
                                         <TextArea fx:id="descriptionField" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     </children>
                                 </GridPane>
@@ -82,9 +82,9 @@
 
                         <HBox spacing="15.0">
                             <children>
-                                <TextField promptText="Search documents..." HBox.hgrow="ALWAYS" />
-                                <ComboBox prefWidth="150.0" promptText="Filter Category" />
-                                <ComboBox prefWidth="150.0" promptText="Filter Status" />
+                                <TextField fx:id="docSearchField" promptText="Search documents..." HBox.hgrow="ALWAYS" />
+                                <ComboBox fx:id="categoryFilterComboBox" prefWidth="150.0" promptText="Filter Category" />
+                                <ComboBox fx:id="statusFilterComboBox" prefWidth="150.0" promptText="Filter Status" />
                             </children>
                         </HBox>
 
@@ -102,11 +102,9 @@
 
                         <HBox spacing="15.0">
                             <children>
-                                <Button fx:id="editButton" onAction="#onEditMetadata"
-                                        styleClass="btn" text="📝 Edit Metadata" />
+                                <Button fx:id="editButton" onAction="#onEditMetadata" styleClass="btn" text="📝 Edit Metadata" />
                                 <Region HBox.hgrow="ALWAYS" />
-                                <Button fx:id="deleteButton" onAction="#onDeleteDocument"
-                                        styleClass="btn-danger" text="🗑 Delete Document" />
+                                <Button fx:id="deleteButton" onAction="#onDeleteDocument" styleClass="btn-danger" text="🗑 Delete Document" />
                             </children>
                         </HBox>
 

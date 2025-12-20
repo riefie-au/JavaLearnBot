@@ -1,11 +1,14 @@
 package lecture.javalearnbot.Log;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class ChatLogEntry extends LogEntry {
     public final String rewrites;
     public final String retrievedChunks;
 
 
-    public ChatLogEntry(String question, String answer, String rewrites, String retrievedChunks) {
+    public ChatLogEntry(LocalDateTime timestamp,String question, String answer, String rewrites, String retrievedChunks) {
         super(question,answer);
         this.rewrites = rewrites;
         this.retrievedChunks = retrievedChunks;

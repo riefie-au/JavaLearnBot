@@ -4,6 +4,7 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
 import java.io.FileReader;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
@@ -15,8 +16,7 @@ import java.nio.file.Path;
 
 public class LogStore {
     private final List<ChatLogEntry> buffer = new ArrayList<>();
-    private final Path logDir =
-            Path.of(System.getProperty("user.home"), ".javalearnbot", "logs");
+    private final Path logDir = Path.of(".logs");
     private final File csvFile = logDir.resolve("chat_log.csv").toFile(); //makes csvFile point to the directory of LogDir and chat_log.csv
 
     public LogStore() { //constructor that creates a  log directory
@@ -68,12 +68,12 @@ public class LogStore {
                     skipHeader = false;
                     continue;
                 }
-                String timestamp = next[0];
-                String question  = next[1];
-                String answer    = next[2];
+                LocalDateTime timestamp = LocalDateTime.parse(next[0]);
+                String question = next[1];
+                String answer = next[2];
                 String rewrites = next.length > 3 ? next[3] : "";
                 String retrievedDocs = next.length > 4 ? next[4] : "";
-                list.add(new ChatLogEntry(question, answer,rewrites, retrievedDocs));
+                list.add(new ChatLogEntry(timestamp, question, answer, rewrites, retrievedDocs));
             }
 
         } catch (Exception e) {
@@ -81,6 +81,10 @@ public class LogStore {
         }
 
         return list;
+    }
+
+    public void clearBuffer() {
+        buffer.clear();
     }
 
 

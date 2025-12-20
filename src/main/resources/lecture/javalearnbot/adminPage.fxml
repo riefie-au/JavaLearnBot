@@ -83,8 +83,8 @@
                         <HBox spacing="15.0">
                             <children>
                                 <TextField fx:id="docSearchField" promptText="Search documents..." HBox.hgrow="ALWAYS" />
-                                <ComboBox fx:id="categoryComboBox" prefWidth="150.0" promptText="Filter Category" />
-                                <ComboBox fx:id="statusComboBox" prefWidth="150.0" promptText="Filter Status" />
+                                <ComboBox fx:id="categoryFilterComboBox" prefWidth="150.0" promptText="Filter Category" />
+                                <ComboBox fx:id="statusFilterComboBox" prefWidth="150.0" promptText="Filter Status" />
                             </children>
                         </HBox>
 
