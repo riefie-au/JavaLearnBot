@@ -11,19 +11,24 @@ import java.util.Objects;
 
 public class JavaLearnBot extends Application {
     @Override
+
+    //Starts the application
     public void start(Stage stage) throws IOException {
 
-        //ChatPageUI
-        FXMLLoader loader = new FXMLLoader(JavaLearnBot.class.getResource("navigationBar.fxml"));
+
+        FXMLLoader loader = new FXMLLoader(JavaLearnBot.class.getResource("navigationBar.fxml")); //loads navigation bar FXML file
         BorderPane root = loader.load();
-        NavigationController nav = loader.getController();
+        NavigationController nav = loader.getController(); //gets the navigation controller
         nav.toHome();
         Scene scene = new Scene(root);
+
+        //connects the css styling to the java application
         String css = Objects.requireNonNull(getClass().getResource("css/stylesheet.css")).toExternalForm();
         scene.getStylesheets().add(css);
-        stage.setTitle("Chat Page");
-        stage.setScene(scene);
-        stage.show();
+
+        stage.setTitle("Java Learn Bot"); //sets the title of the window
+        stage.setScene(scene); //puts the content (scene) into the window
+        stage.show(); //make window visable to user
     }
 
     public static void main(String[] args) {
