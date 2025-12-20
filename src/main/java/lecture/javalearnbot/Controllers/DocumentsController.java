@@ -43,10 +43,21 @@ public class DocumentsController extends BaseController {
     @FXML
     public void initialize() {
         setupColumns();
-        loadDocumentsFromResources(); // FIRST: Load documents from files
+        loadDocumentsFromResources(); // Load documents from files
         setupFilters();
         setupSelectionListener();
-        setupEventBusSync(); // THEN: Setup EventBus listener
+        setupEventBusSync(); //  Setup EventBus listener
+        documentsTable.setRowFactory(tv -> {
+            TableRow<Document> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && !row.isEmpty()) {
+                    Document doc = row.getItem();
+                    openFullDocument(doc);
+                }
+            });
+            return row;
+        });
+
     }
 
     // ----------------------------
@@ -380,4 +391,34 @@ public class DocumentsController extends BaseController {
 
         previewListView.setItems(FXCollections.observableArrayList(previewItems));
     }
+
+    private void openFullDocument(Document doc) {
+        try {
+            Path path = Paths.get(doc.getPath());
+
+            if (!Files.exists(path)) {
+                showError("File Not Found", "Cannot find file:\n" + doc.getPath());
+                return;
+            }
+
+            String content = Files.readString(path);
+
+            TextArea textArea = new TextArea(content);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            textArea.setPrefWidth(700);
+            textArea.setPrefHeight(500);
+
+            Dialog<Void> dialog = new Dialog<>();
+            dialog.setTitle("Viewing: " + doc.getTitle());
+            dialog.getDialogPane().setContent(textArea);
+            dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+
+            dialog.showAndWait();
+
+        } catch (IOException e) {
+            showError("Error", "Failed to open file:\n" + e.getMessage());
+        }
+    }
+
 }
