@@ -54,17 +54,17 @@ public class ChunkStorage {
         return topKChunks; // the list of topK most relevant ScoredChunks returned back to the user.
     }
 
-    // calculates cosine similarity between two vectors
+    // calculates cosine similarity between two vectors.
     private static double cosine(float[] a, float[] b) {
         double dot = 0, na = 0, nb = 0;
         int n = Math.min(a.length, b.length);
         for (int i = 0; i < n; i++) {
-            dot += a[i] * b[i];     // dot product of a and b
-            na += a[i] * a[i];      // magnitude squared of a
-            nb += b[i] * b[i];      // magnitude squared of b
-        }
-        double denom = Math.sqrt(na) * Math.sqrt(nb); // product of magnitudes
-        return denom == 0 ? 0 : dot / denom;           // cosine similarity formula
+            dot+= a[i]*b[i];
+            na+= a[i]*a[i];
+            nb+= b[i]*b[i];}
+
+        double denom = Math.sqrt(na) * Math.sqrt(nb);
+        return denom == 0 ? 0 : dot / denom;
     }
 
     // helper class to keep data about chunks that have been scored
