@@ -1,3 +1,5 @@
+Notice!!! If no api key is present when application is ran, please insert the new API key in the field MY_API_KEY within config.properties in the resources folder 
+
 # JavaLearnBot
 
 JavaLearnBot is a JavaFX-based educational chatbot application designed to assist users with programming-related questions.  
