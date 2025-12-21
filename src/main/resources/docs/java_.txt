@@ -1,0 +1,75 @@
+JAVA INHERITANCE
+
+1.  Introduction Inheritance is one of the core concepts of
+    Object-Oriented Programming (OOP) in Java. It allows one class to
+    acquire the properties (fields) and behaviors (methods) of another
+    class. The class that is inherited from is called the superclass
+    (parent), and the class that inherits is called the subclass
+    (child).
+
+2.  Purpose of Inheritance
+
+-   Code reusability
+-   Improved code organization
+-   Easier maintenance
+-   Supports polymorphism
+
+3.  Basic Syntax Inheritance in Java is implemented using the ‘extends’
+    keyword.
+
+Example: class Parent { void display() { System.out.println(“This is the
+parent class”); } }
+
+class Child extends Parent { void show() { System.out.println(“This is
+the child class”); } }
+
+4.  Types of Inheritance in Java Java supports the following types of
+    inheritance using classes:
+
+-   Single Inheritance One subclass inherits from one superclass.
+
+-   Multilevel Inheritance A class is derived from another derived
+    class.
+
+-   Hierarchical Inheritance Multiple subclasses inherit from one
+    superclass.
+
+Note: Java does NOT support multiple inheritance using classes (but it
+supports it using interfaces).
+
+5.  The ‘super’ Keyword The ‘super’ keyword is used to:
+
+-   Access superclass variables
+-   Call superclass methods
+-   Call superclass constructors
+
+Example: super.display();
+
+6.  Method Overriding Method overriding occurs when a subclass provides
+    a specific implementation of a method already defined in its
+    superclass.
+
+Rules: - Method name and parameters must be the same - Access level
+cannot be more restrictive - @Override annotation is recommended
+
+7.  Access Modifiers and Inheritance
+
+-   public: accessible everywhere
+-   protected: accessible in same package or subclass
+-   default: accessible in same package only
+-   private: NOT inherited
+
+8.  Advantages of Inheritance
+
+-   Reduces code duplication
+-   Enhances extensibility
+-   Improves readability
+
+9.  Disadvantages of Inheritance
+
+-   Tight coupling between classes
+-   Misuse can lead to fragile designs
+
+10. Conclusion Inheritance is a powerful feature in Java that promotes
+    reusability and supports OOP principles. It should be used carefully
+    to maintain clean and flexible code.
